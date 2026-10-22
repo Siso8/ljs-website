@@ -1,1 +1,4 @@
 **/.git
+wrangler.jsonc
+worker.js
+schema.sql
