@@ -1,0 +1,9 @@
+PHOTOS STILL TO COME
+Replace each file below with the real photo, keeping the exact same file name (JPG).
+No code changes needed.
+
+img/b-santini.jpg   Santini Riyadh project tile (portrait 4:5)
+img/l-mahmoud.jpg   Mahmoud, Director of Retail (square, head and shoulders)
+
+ARABIC
+All Arabic text is in i18n-ar.js (English sentence -> Arabic). Have a native speaker review it before launch.
