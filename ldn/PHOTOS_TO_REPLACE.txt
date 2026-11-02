@@ -1,0 +1,5 @@
+ALL PHOTOS ARE IN PLACE.
+To swap any photo later, replace the file in img/ keeping the exact same file name.
+
+ARABIC
+All Arabic text is in i18n-ar.js (English sentence -> Arabic). Have a native speaker review it before launch.
