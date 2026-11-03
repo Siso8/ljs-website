@@ -332,12 +332,12 @@ var X = {
 Object.assign(I18N.ar, X.ar); Object.assign(I18N.en, X.en);
 I18N.en.brandname = "LJ's Burger & Fried Chicken";
 var MENU = [
-  {en:"Signature Smash", ar:"سيجنتشر سماش", p:489, den:"Seasoned double beef patties, American cheese, grilled onions, crispy shallots, pickled cucumber, jalapeños & LJ's secret sauce. Potato bun.", dar:"قرصتين لحم متبلين، جبنة أمريكي، بصل مشوي، شالوت مقرمش، خيار مخلل، هالبينو وصوص إل جيز السري. عيش بطاطس."},
-  {en:"Steak House Smash", ar:"ستيك هاوس سماش", p:599, den:"Double beef patties, blue cheese, fried onions, pickled cucumber, BBQ sauce & truffle mayo. Potato bun.", dar:"قرصتين لحم، جبنة زرقا، بصل مقلي، خيار مخلل، صوص باربكيو ومايونيز بالترافل. عيش بطاطس."},
-  {en:"Smokey Buffalo Chicken Smash", ar:"سموكي بافلو تشيكن سماش", p:419, den:"Double chicken patties, smoked cheddar, smoked mayo, spicy buffalo sauce, fried onions, pickled cucumber.", dar:"قرصتين فراخ، شيدر مدخن، مايونيز مدخن، صوص بافلو حار، بصل مقلي، خيار مخلل."},
-  {en:"LJ's Smash Burger", ar:"إل جيز سماش برجر", p:319, den:"Double beef patties, grilled onions, crispy shallots, pickled cucumber, jalapeños & LJ's secret sauce.", dar:"قرصتين لحم، بصل مشوي، شالوت مقرمش، خيار مخلل، هالبينو وصوص إل جيز السري."},
-  {en:"Nashville Hot", ar:"ناشفيل هوت", p:349, den:"", dar:""},
-  {en:"Loaded Fries", ar:"لوديد فرايز", p:249, den:"", dar:""}
+  {en:"Signature Smash", ar:"سيجنتشر سماش", p:315, den:"Seasoned double beef patties, American cheese, grilled onions, crispy shallots, pickled cucumber, jalapeños & LJ's secret sauce. Potato bun.", dar:"قرصتين لحم متبلين، جبنة أمريكي، بصل مشوي، شالوت مقرمش، خيار مخلل، هالبينو وصوص إل جيز السري. عيش بطاطس."},
+  {en:"Steak House Smash", ar:"ستيك هاوس سماش", p:345, den:"Double beef patties, blue cheese, fried onions, pickled cucumber, BBQ sauce & truffle mayo. Potato bun.", dar:"قرصتين لحم، جبنة زرقا، بصل مقلي، خيار مخلل، صوص باربكيو ومايونيز بالترافل. عيش بطاطس."},
+  {en:"Smokey Buffalo Chicken Smash", ar:"سموكي بافلو تشيكن سماش", p:295, den:"Double chicken patties, smoked cheddar, smoked mayo, spicy buffalo sauce, fried onions, pickled cucumber.", dar:"قرصتين فراخ، شيدر مدخن، مايونيز مدخن، صوص بافلو حار، بصل مقلي، خيار مخلل."},
+  {en:"LJ's Smash Burger", ar:"إل جيز سماش برجر", p:285, den:"Double beef patties, grilled onions, crispy shallots, pickled cucumber, jalapeños & LJ's secret sauce.", dar:"قرصتين لحم، بصل مشوي، شالوت مقرمش، خيار مخلل، هالبينو وصوص إل جيز السري."},
+  {en:"Fried Chicken Burger", ar:"فرايد تشيكن برجر", p:275, den:"", dar:""},
+  {en:"Loaded Beef Fries", ar:"لوديد بيف فرايز", p:185, den:"", dar:""}
 ];
 var LANG = 'ar';
 function egp(n){ return LANG==='ar' ? n.toLocaleString('ar-EG')+' ج.م' : 'EGP '+n.toLocaleString('en-US'); }
@@ -588,6 +588,7 @@ Promise.all([fontsReady,photosReady]).then(function(){paintLabel(labL);paintLabe
 loop();
 })();
 </script>
+
 
 </body>
 </html>
