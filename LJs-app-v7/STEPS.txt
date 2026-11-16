@@ -1,0 +1,28 @@
+LJ'S APP v7 - WHAT TO DO
+
+WHAT'S NEW
+- Day and evening now look the same: both use the rotating burger (smaller).
+  Day: Order lunch + Love Birds. Evening: Order dinner + Order the birds.
+- It switches by itself on Alexandria time: day 6 am to 6 pm, evening 6 pm to 6 am.
+  The moon/sun button still switches by hand, until the next 6 am / 6 pm.
+- "This week at LJ's" shows 7 days starting with Today. Swipe sideways, tap a day
+  or "See all" for the full day-by-day list.
+- The app now remembers where you were (screen, scroll, bag, points) for 30 minutes,
+  and a finger swipe no longer counts as a tap. This is the fix for being thrown back.
+- NEW: Back of House page at ljsburger.com/boh to send or schedule messages.
+
+PUT IT LIVE (GitHub, repo "ljs-website", account Siso8)
+1. github.com > sign in as Siso8 > open "ljs-website".
+2. Open the "app" folder > "Add file" > "Upload files" > drag in app/index.html
+   from this folder > "Commit changes".
+3. Go back to the main page of the repo (click "ljs-website" at the top).
+   "Add file" > "Upload files" > drag in the whole "boh" FOLDER > "Commit changes".
+4. Wait 1-2 minutes. Check: ljsburger.com/app and ljsburger.com/boh
+
+TRY THE MESSAGES (same phone or same computer)
+1. Open ljsburger.com/boh in one tab, ljsburger.com/app in another.
+2. In Back of House pick "Burger happy hour" and tap "Send now".
+3. Go to the app tab: the notification drops in, and a LIVE offer card sits
+   at the top of Home until it ends.
+Note: in this prototype the message only reaches the app in the SAME browser.
+Sending to everyone's phone needs the real push service.

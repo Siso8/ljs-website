@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>if(location.hostname.indexOf("www.")===0&&!/[?&]nw=1/.test(location.search)){location.replace(location.protocol+"//"+location.hostname.slice(4)+location.pathname+(location.search?location.search+"&":"?")+"nw=1"+location.hash)}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1F1F1F">
+<title>LJ's Back of House · Messages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#F04E23;--cream:#F4EBD9;--char:#1F1F1F;--bg:#F4EBD9;--surface:#FBF6EC;--surface-2:#EFE3CC;--ink:#1F1F1F;--mute:#6E655A;--line:rgba(31,31,31,.12);--display:'Titan One',system-ui,sans-serif;--body:'Lexend',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+.top{position:sticky;top:0;z-index:20;background:var(--char);color:var(--cream);display:flex;align-items:center;gap:14px;padding:calc(12px + env(safe-area-inset-top,0px)) 22px 12px}
+.top svg{width:52px;color:var(--orange)}
+.top h1{font-family:var(--display);font-weight:400;font-size:20px;margin:0;letter-spacing:.4px;line-height:1}
+.top small{display:block;font-size:11.5px;color:rgba(244,235,217,.65);margin-top:3px;font-family:var(--body)}
+.top .sp{flex:1}
+.clock{font-size:12px;color:rgba(244,235,217,.75);text-align:right;font-variant-numeric:tabular-nums}
+.clock b{display:block;font-size:18px;color:var(--cream);font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
+.demo{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:18px;background:#FFF4D6;border:1px solid #E8C15A;font-size:13px;line-height:1.5;margin-bottom:20px}
+.demo b{font-weight:700}
+.demo a{color:var(--orange);font-weight:600}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.pv{position:static!important}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:20px}
+h2{font-family:var(--display);font-weight:400;font-size:24px;margin:0 0 4px;letter-spacing:.3px}
+.lead{margin:0 0 16px;color:var(--mute);font-size:13px}
+.tpls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tpl{padding:8px 13px;border-radius:99px;background:var(--surface-2);font-size:12.5px;font-weight:600;border:1.5px solid transparent}
+.tpl.on{border-color:var(--orange);background:#fff;color:var(--orange)}
+.f{display:block;margin-bottom:14px}
+.f>span{display:flex;justify-content:space-between;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;font-weight:600;color:var(--mute);margin-bottom:6px}
+.f>span em{font-style:normal;text-transform:none;letter-spacing:0;font-weight:500}
+.f>span em.over{color:var(--orange);font-weight:700}
+input[type=text],input[type=datetime-local],select,textarea{width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-size:15px;outline:none;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--orange)}
+textarea{resize:vertical;min-height:78px;line-height:1.45}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+.codebox{display:flex;gap:8px}
+.codebox input{text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+.mini{flex:none;padding:0 14px;border-radius:14px;background:var(--surface-2);font-size:13px;font-weight:600}
+.seg{display:flex;background:var(--surface-2);border-radius:14px;padding:4px;gap:4px}
+.seg button{flex:1;padding:9px 6px;border-radius:11px;font-size:13px;font-weight:600;color:var(--mute)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.when{display:none;margin-top:10px}.when.on{display:block}
+.hint{font-size:11.5px;color:var(--mute);margin-top:6px;line-height:1.45}
+.send{display:flex;gap:10px;align-items:center;margin-top:6px}
+.btn{height:50px;padding:0 22px;border-radius:99px;font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.o{background:var(--orange);color:#fff;flex:1}
+.btn.o:disabled{opacity:.45;cursor:not-allowed}
+.btn.g{background:var(--surface-2)}
+.err{color:var(--orange);font-size:12.5px;font-weight:600;min-height:18px;margin-top:8px}
+/* preview */
+.pv{position:sticky;top:96px}
+.phone{width:300px;margin:0 auto;border-radius:44px;padding:9px;background:#0a0908;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.lock{border-radius:36px;height:520px;overflow:hidden;position:relative;background:radial-gradient(120% 70% at 50% 0%,#FF7240,#F04E23 45%,#7a2a10);color:#fff;padding:54px 12px 12px}
+.lock .t{text-align:center;font-weight:600;font-size:13px;opacity:.9}
+.lock .big{text-align:center;font-size:64px;font-weight:600;line-height:1;letter-spacing:-1px;margin:2px 0 26px;font-variant-numeric:tabular-nums}
+.note{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-radius:20px;background:rgba(245,240,232,.92);color:#1F1F1F;backdrop-filter:blur(14px);font-size:12.5px;line-height:1.3;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.note .pi{width:34px;height:34px;border-radius:9px;background:var(--orange);color:var(--cream);display:grid;place-items:center;flex:none}
+.note .pi svg{width:24px}
+.note .pb{flex:1;min-width:0}
+.note .ph{display:flex;justify-content:space-between;font-size:10.5px;color:#6E655A}
+.note .ph b{letter-spacing:.6px}
+.note .pb>b{display:block;font-size:13px;margin-top:1px;overflow-wrap:anywhere}
+.note .pt{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.offer{position:absolute;left:12px;right:12px;bottom:12px;border-radius:24px;background:#F4EBD9;color:#1F1F1F;padding:16px;text-align:center}
+.offer small{display:block;font-size:10.5px;color:#6E655A}
+.offer .oc{font-family:var(--display);font-size:30px;color:var(--orange);letter-spacing:2px;margin:2px 0;line-height:1.1;overflow-wrap:anywhere}
+.offer .ov{font-size:11px;color:#6E655A}
+.pvl{text-align:center;font-size:11.5px;color:var(--mute);margin-top:12px}
+/* queue */
+.q{margin-top:26px}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.filters{display:flex;gap:6px}
+.filters button{padding:7px 12px;border-radius:99px;font-size:12px;font-weight:600;background:var(--surface-2);color:var(--mute)}
+.filters button.on{background:var(--char);color:var(--cream)}
+.list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.it{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 16px;border-radius:20px;background:var(--surface);border:1px solid var(--line)}
+@media (max-width:640px){.it{grid-template-columns:1fr}.acts{justify-content:flex-start!important}}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.8px;padding:5px 10px;border-radius:99px;background:var(--surface-2);color:var(--mute);justify-self:start}
+.st.live{background:var(--orange);color:#fff}
+.st.live i{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.st.sched{background:#E3ECF7;color:#2A5A8C}
+.st.rep{background:#EAF3E6;color:#3C6B2F}
+.it b{display:block;font-size:15px}
+.it p{margin:2px 0 6px;font-size:13px;color:var(--mute);line-height:1.4}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;color:var(--mute)}
+.meta span b{display:inline;font-size:11.5px;color:var(--ink);font-weight:600}
+.acts{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.acts button{padding:8px 12px;border-radius:12px;font-size:12.5px;font-weight:600;background:var(--surface-2)}
+.acts button.x{color:var(--orange)}
+.empty{padding:26px;text-align:center;color:var(--mute);font-size:13px;border:1.5px dashed var(--line);border-radius:20px}
+.toast{position:fixed;left:50%;bottom:28px;z-index:50;transform:translate(-50%,20px);opacity:0;background:var(--char);color:var(--cream);padding:12px 18px;border-radius:14px;font-size:14px;font-weight:500;transition:all .3s;pointer-events:none;max-width:90vw}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.foot{margin-top:26px;font-size:12px;color:var(--mute);line-height:1.6}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="lj" viewBox="0 0 700 450"><path fill="currentColor" d="M237.05,331.48l-21.01,94.18c-2.53,11.35-12.6,19.42-24.22,19.42H36.76c-15.89,0-27.68-14.72-24.22-30.22l23.82-106.8,37.57-168.45,23.68-106.14c2.53-11.35,12.6-19.41,24.22-19.41h79.26c15.89,0,27.68,14.72,24.22,30.22l-21.27,95.33-32.35,145.03c-2.68,12.02,6.46,23.42,18.77,23.42h27.81c12.31,0,21.45,11.41,18.77,23.42Z"/><path fill="currentColor" d="M483.54,14.06c15.89,0,27.68,14.72,24.22,30.22l-21.26,95.33-37.57,168.45-3.68,16.48c-15.71,70.44-78.21,120.54-150.39,120.54h-20.41c-15.89,0-27.68-14.72-24.22-30.22l20.47-91.75c1.96-8.79,9.76-15.05,18.77-15.05h0c17.14,0,31.98-11.89,35.71-28.62l23.41-104.64c4.6-17.12,1.43-23.42-18.77-23.42h-21.56c-15.89,0-27.68-14.72-24.22-30.22l19.5-87.68c2.53-11.35,12.6-19.41,24.22-19.41h155.79Z"/><path fill="currentColor" d="M609.55,206.39c-9.83-2.99-20.02-4.5-30.29-4.5-20.66,0-41.01,6.31-57.32,17.77-28.52,20.06-41.09,56.97-30.56,89.77,5.41,16.86,26.5,29.48,38.6,35.51,9.47,4.72,18.42,9.17,22.74,14.92.83,1.12,1.43,2.48,1.77,4.04,1.08,4.89-.28,11.47-3.46,16.75-2.18,3.63-5.91,4.98-9.98,3.62-4.48-1.49-4.85-4.46-3.71-12.55.13-.86.17-1.76.1-2.89-.45-6.21-5.94-11.08-12.48-11.08h-39.53c-9.96,0-18.37,7.47-19.15,17.01l-1.3,15.96c-1.29,20.82,12.7,40.07,34.81,47.91,12.25,4.33,24.79,6.44,38.67,6.44,4.63,0,9.4-.23,14.36-.7,39.23-3.72,69.2-30.17,76.38-67.39.93-4.86,1.58-9.49,1.92-13.77,3.35-41.85-21-53.12-42.49-63.06-10.13-4.68-20.6-9.52-25.8-17.41l-.13-.2c-1.19-2.29-1.17-9.42,1.34-14.9,1.59-3.5,3.79-5.6,6.54-6.26,2.55-.62,5.19-.17,6.75,1.16,1.89,1.6,2.49,4.35,1.99,9.18-.55,5.33-1.13,10.85,2.2,14.27,1.86,1.9,4.64,2.8,8.18,2.74l41.79-.1h.2c14.81-.58,16.25-16.97,17.11-26.75l.14-1.52c2.5-27.09-10.74-45.26-39.38-53.97Z"/><path fill="currentColor" d="M693.51,92.37c0,8.4-8.73,15.33-11.19,22.91-2.55,7.86.35,18.57-4.41,25.12-4.81,6.61-15.93,7.13-22.54,11.94-6.54,4.76-10.45,15.2-18.31,17.75-7.58,2.46-16.85-3.61-25.25-3.61s-17.67,6.07-25.25,3.61c-7.86-2.55-11.77-12.99-18.31-17.75-6.61-4.81-17.73-5.33-22.54-11.94-4.76-6.54-1.85-17.26-4.41-25.12-2.46-7.58-11.19-14.51-11.19-22.91s8.73-15.33,11.19-22.91c2.55-7.86-.35-18.57,4.41-25.12,4.81-6.61,15.93-7.13,22.54-11.94,6.54-4.76,10.45-15.2,18.31-17.75,7.58-2.46,16.85,3.61,25.25,3.61s17.67-6.07,25.25-3.61c7.86,2.55,11.77,12.99,18.31,17.75,6.61,4.81,17.73,5.33,22.54,11.94,4.76,6.54,1.85,17.26,4.41,25.12,2.46,7.58,11.19,14.51,11.19,22.91Z"/></symbol></svg>
+
+<header class="top">
+  <svg viewBox="0 0 700 450"><use href="#lj"/></svg>
+  <div><h1>Back of House</h1><small>Messages to app users · LJ’s Stanley Bridge</small></div>
+  <div class="sp"></div>
+  <div class="clock"><b id="clk">--:--</b>Alexandria time</div>
+</header>
+
+<main class="wrap">
+  <div class="demo"><span>⚠︎</span><span><b>Prototype.</b> Messages sent here reach the LJ’s app open <b>in this same browser</b> (open <a href="/app/" target="ljsapp">ljsburger.com/app</a> in another tab or window to watch them land). The real build sends push notifications to every phone with the app, and this page goes behind a staff login.</span></div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>New message</h2>
+      <p class="lead">Start from a template or write your own. Everything can be changed.</p>
+      <div class="tpls" id="tpls"></div>
+
+      <label class="f"><span>Title <em id="cTitle"></em></span><input type="text" id="title" maxlength="60" placeholder="Happy hour on the flat-top"></label>
+      <label class="f"><span>Message <em id="cBody"></em></span><textarea id="body" maxlength="200" placeholder="Next hour only: every burger 50% off. Show this message at the counter."></textarea></label>
+
+      <div class="row">
+        <label class="f"><span>Offer code <em>optional</em></span><div class="codebox"><input type="text" id="code" maxlength="12" placeholder="SMASH50"><button class="mini" id="genCode" type="button">New code</button></div></label>
+        <label class="f"><span>Valid for</span><select id="mins">
+          <option value="30">30 minutes</option><option value="60" selected>1 hour</option><option value="120">2 hours</option><option value="180">3 hours</option><option value="360">6 hours</option><option value="720">12 hours</option><option value="1440">All day (24 hours)</option></select></label>
+      </div>
+      <div class="row">
+        <label class="f"><span>Who gets it</span><select id="aud"><option value="all">All app users</option><option value="hot">Hot and Gold members</option><option value="gold">Gold members only</option></select></label>
+        <label class="f"><span>Tapping it opens</span><select id="link">
+          <option value="smash">Smash burgers</option><option value="kfc">Korean fried chicken</option><option value="love">Love Birds</option><option value="sides">Fries &amp; sides</option><option value="matcha">Matcha bar</option><option value="menu">The full menu</option><option value="club">The Club</option><option value="none">Just the message</option></select></label>
+      </div>
+
+      <div class="f"><span>When</span>
+        <div class="seg" id="whenSeg"><button type="button" data-w="now" class="on">Send now</button><button type="button" data-w="later">Schedule</button></div>
+        <div class="when" id="whenLater">
+          <div class="row">
+            <label class="f" style="margin:0"><span>Date and time (Alexandria)</span><input type="datetime-local" id="at"></label>
+            <label class="f" style="margin:0"><span>Repeat</span><select id="repeat"><option value="none">Once</option><option value="daily">Every day</option><option value="weekly">Every week</option></select></label>
+          </div>
+          <div class="hint" id="whenHint"></div>
+        </div>
+      </div>
+
+      <div class="send"><button class="btn o" id="sendBtn" type="button">Send now to all app users</button></div>
+      <div class="err" id="err"></div>
+    </section>
+
+    <aside class="pv">
+      <div class="phone"><div class="lock">
+        <div class="t" id="pvDate">Monday 16 November</div>
+        <div class="big" id="pvTime">6:00</div>
+        <div class="note"><span class="pi"><svg viewBox="0 0 700 450"><use href="#lj"/></svg></span><span class="pb"><span class="ph"><b>LJ’S</b><span>now</span></span><b id="pvTitle">Title</b><span class="pt" id="pvBody">Message</span></span></div>
+        <div class="offer" id="pvOffer"><small>Show this code at the counter</small><div class="oc" id="pvCode">CODE</div><div class="ov" id="pvValid"></div></div>
+      </div></div>
+      <div class="pvl">Live preview: lock screen and the offer screen in the app</div>
+    </aside>
+  </div>
+
+  <section class="q">
+    <div class="qhead"><h2>Messages</h2><div class="filters" id="filters"><button data-f="all" class="on">All</button><button data-f="live">Live</button><button data-f="sched">Scheduled</button><button data-f="done">Ended</button></div></div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <p class="foot">Times are Alexandria time. A message reaches app users when it starts and stays on their home screen as a live offer until it ends. Codes are checked by staff at the counter. In the real build each code can be limited to one use per customer.</p>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const TZ = 'Africa/Cairo', MSG_KEY = 'ljs_boh_messages';
+  const load = () => { try { return JSON.parse(localStorage.getItem(MSG_KEY)) || []; } catch (e) { return []; } };
+  const save = list => { try { localStorage.setItem(MSG_KEY, JSON.stringify(list)); return true; } catch (e) { return false; } };
+  const tFmt = ms => new Intl.DateTimeFormat('en-GB', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: TZ }).format(new Date(ms));
+  const dFmt = ms => new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: TZ }).format(new Date(ms));
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  /* Alexandria wall time <-> real time */
+  const parts = ms => Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: TZ, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).formatToParts(new Date(ms)).map(p => [p.type, p.value]));
+  const wallToMs = v => { const [d, t] = v.split('T'), [y, m, dd] = d.split('-').map(Number), [h, mi] = t.split(':').map(Number);
+    const guess = Date.UTC(y, m - 1, dd, h, mi), p = parts(guess), asUTC = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute);
+    return guess - (asUTC - guess); };
+  const msToWall = ms => { const p = parts(ms); return `${p.year}-${p.month}-${p.day}T${String(+p.hour % 24).padStart(2, '0')}:${p.minute}`; };
+  const AUD = { all: 'All app users', hot: 'Hot and Gold', gold: 'Gold only' };
+  const LINK = { smash: 'Smash burgers', kfc: 'Korean fried chicken', love: 'Love Birds', sides: 'Fries & sides', matcha: 'Matcha bar', menu: 'Full menu', club: 'The Club', none: 'Just the message' };
+  const MINS = m => m >= 1440 ? 'all day' : m >= 60 ? (m / 60) + (m === 60 ? ' hour' : ' hours') : m + ' min';
+
+  const TPL = [
+    { n: 'Burger happy hour', title: 'Happy hour on the flat-top', body: 'Next hour only: every burger 50% off. Come in and show this message at the counter.', code: 'SMASH50', mins: 60, link: 'smash' },
+    { n: 'Free dip', title: 'Free dip, any order', body: 'Order anything before closing and get a free dip. Show this code when you pay.', code: 'FREEDIP', mins: 180, link: 'sides' },
+    { n: 'Love Birds last call', title: 'Love Birds, last call', body: 'The Duck One and The Pigeon One are opening-month only. Get yours tonight.', code: '', mins: 360, link: 'love' },
+    { n: 'Rainy day', title: 'Too wet for the Corniche?', body: '20% off pick-up orders for the next 2 hours. Show this code at the counter.', code: 'RAIN20', mins: 120, link: 'menu' },
+    { n: 'Gold members', title: 'Gold early access', body: 'Our new drop lands tomorrow. Gold members can order it today, before anyone else.', code: '', mins: 720, link: 'menu', aud: 'gold' },
+    { n: 'Blank', title: '', body: '', code: '', mins: 60, link: 'menu' },
+  ];
+  let mode = 'now', tplIx = 0, filter = 'all';
+  $('#tpls').innerHTML = TPL.map((t, i) => `<button class="tpl ${i ? '' : 'on'}" data-t="${i}" type="button">${t.n}</button>`).join('');
+  function applyTpl(i) {
+    const t = TPL[i]; tplIx = i;
+    $('#title').value = t.title; $('#body').value = t.body; $('#code').value = t.code; $('#mins').value = String(t.mins); $('#link').value = t.link; $('#aud').value = t.aud || 'all';
+    document.querySelectorAll('.tpl').forEach(b => b.classList.toggle('on', +b.dataset.t === i));
+    upd();
+  }
+  $('#tpls').onclick = e => { const b = e.target.closest('[data-t]'); if (b) applyTpl(+b.dataset.t); };
+  $('#genCode').onclick = () => {
+    const base = ($('#title').value.toUpperCase().match(/[A-Z]+/g) || ['LJS']).sort((a, b) => b.length - a.length)[0].slice(0, 5);
+    const abc = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let r = ''; for (let i = 0; i < 3; i++) r += abc[Math.floor(Math.random() * abc.length)];
+    $('#code').value = base + r; upd();
+  };
+  $('#whenSeg').onclick = e => { const b = e.target.closest('[data-w]'); if (!b) return; mode = b.dataset.w;
+    document.querySelectorAll('#whenSeg button').forEach(x => x.classList.toggle('on', x === b)); $('#whenLater').classList.toggle('on', mode === 'later');
+    if (mode === 'later' && !$('#at').value) { const n = Date.now() + 3600000; $('#at').value = msToWall(n - n % 900000 + 900000); }
+    upd(); };
+  ['title', 'body', 'code', 'mins', 'aud', 'link', 'at', 'repeat'].forEach(id => $('#' + id).addEventListener('input', upd));
+
+  function startMs() { return mode === 'now' ? Date.now() : ($('#at').value ? wallToMs($('#at').value) : NaN); }
+  function upd() {
+    const ti = $('#title').value, bo = $('#body').value, code = $('#code').value.trim().toUpperCase(), mins = +$('#mins').value;
+    $('#cTitle').textContent = ti.length + ' / 50'; $('#cTitle').classList.toggle('over', ti.length > 50);
+    $('#cBody').textContent = bo.length + ' / 150'; $('#cBody').classList.toggle('over', bo.length > 150);
+    $('#pvTitle').textContent = ti || 'Title'; $('#pvBody').textContent = bo || 'Your message';
+    $('#pvOffer').style.display = code ? '' : 'none'; $('#pvCode').textContent = code;
+    const st = startMs();
+    $('#pvValid').textContent = isFinite(st) ? `Valid until ${tFmt(st + mins * 60000)}` : '';
+    const ref = isFinite(st) ? st : Date.now();
+    $('#pvTime').textContent = tFmt(ref).replace(/\s?[ap]m/i, ''); $('#pvDate').textContent = new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: TZ }).format(new Date(ref));
+    const aud = AUD[$('#aud').value].toLowerCase(), rep = $('#repeat').value;
+    if (mode === 'now') $('#sendBtn').textContent = `Send now to ${aud}`;
+    else {
+      $('#sendBtn').textContent = 'Schedule message';
+      $('#whenHint').textContent = isFinite(st) ? `${rep === 'daily' ? 'Every day from' : rep === 'weekly' ? 'Every ' + new Intl.DateTimeFormat('en-GB', { weekday: 'long', timeZone: TZ }).format(new Date(st)) + ' from' : 'Goes out'} ${dFmt(st)} at ${tFmt(st)}, live for ${MINS(mins)}.` : 'Pick a date and time.';
+    }
+    $('#err').textContent = '';
+  }
+
+  $('#sendBtn').onclick = () => {
+    const title = $('#title').value.trim(), body = $('#body').value.trim(), code = $('#code').value.trim().toUpperCase().replace(/[^A-Z0-9-]/g, '');
+    const start = startMs(), repeat = mode === 'later' ? $('#repeat').value : 'none';
+    if (!title || !body) { $('#err').textContent = 'Add a title and a message.'; return; }
+    if (title.length > 50 || body.length > 150) { $('#err').textContent = 'Too long for a phone notification. Shorten the title (50) or message (150).'; return; }
+    if (!isFinite(start)) { $('#err').textContent = 'Pick a date and time.'; return; }
+    if (mode === 'later' && repeat === 'none' && start < Date.now() - 60000) { $('#err').textContent = 'That time has passed. Pick a time in the future.'; return; }
+    const m = { id: 'm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), title, body, code, start, mins: +$('#mins').value, repeat, aud: $('#aud').value, link: $('#link').value, created: Date.now() };
+    const list = load(); list.unshift(m);
+    if (!save(list)) { $('#err').textContent = 'This browser blocked saving. Turn off private browsing and try again.'; return; }
+    toast(mode === 'now' ? 'Sent. It’s on the app now.' : `Scheduled for ${dFmt(start)} at ${tFmt(start)}`);
+    render();
+  };
+
+  /* status of a message right now */
+  function occ(m, now = Date.now()) {
+    let st = m.start;
+    if ((m.repeat === 'daily' || m.repeat === 'weekly') && now > st) { const step = (m.repeat === 'daily' ? 1 : 7) * 86400000; st += Math.floor((now - st) / step) * step; }
+    return { start: st, end: st + m.mins * 60000 };
+  }
+  function status(m) {
+    const now = Date.now();
+    if (m.cancelled) return { k: 'done', label: 'STOPPED' };
+    const o = occ(m, now);
+    if (o.start <= now && now < o.end) return { k: 'live', label: 'LIVE', o };
+    if (m.repeat !== 'none') { const step = (m.repeat === 'daily' ? 1 : 7) * 86400000, next = o.start > now ? o.start : o.start + step; return { k: 'sched', label: m.repeat === 'daily' ? 'DAILY' : 'WEEKLY', rep: true, next }; }
+    if (o.start > now) return { k: 'sched', label: 'SCHEDULED', next: o.start };
+    return { k: 'done', label: 'ENDED' };
+  }
+  function render() {
+    const list = load();
+    const rows = list.map(m => ({ m, s: status(m) })).filter(x => filter === 'all' || x.s.k === filter);
+    $('#list').innerHTML = rows.length ? rows.map(({ m, s }) => `<div class="it">
+      <span class="st ${s.k === 'live' ? 'live' : s.rep ? 'rep' : s.k === 'sched' ? 'sched' : ''}">${s.k === 'live' ? '<i></i>' : ''}${s.label}</span>
+      <div><b>${esc(m.title)}</b><p>${esc(m.body)}</p><div class="meta">
+        ${m.code ? `<span>Code <b>${esc(m.code)}</b></span>` : ''}
+        <span>${s.k === 'live' ? `Ends <b>${tFmt(s.o.end)}</b>` : s.next ? `${s.rep ? 'Next' : 'Starts'} <b>${dFmt(s.next)}, ${tFmt(s.next)}</b>` : `Ran <b>${dFmt(m.start)}, ${tFmt(m.start)}</b>`}</span>
+        <span>For <b>${MINS(m.mins)}</b></span><span>To <b>${AUD[m.aud]}</b></span><span>Opens <b>${LINK[m.link]}</b></span></div></div>
+      <div class="acts">${s.k === 'live' || s.k === 'sched' ? `<button class="x" data-stop="${m.id}">${s.k === 'live' ? 'End now' : 'Cancel'}</button>` : ''}<button data-copy="${m.id}">Use again</button><button data-del="${m.id}">Delete</button></div></div>`).join('')
+      : `<div class="empty">${filter === 'all' ? 'No messages yet. Send your first one above.' : 'Nothing here.'}</div>`;
+  }
+  $('#filters').onclick = e => { const b = e.target.closest('[data-f]'); if (!b) return; filter = b.dataset.f; document.querySelectorAll('#filters button').forEach(x => x.classList.toggle('on', x === b)); render(); };
+  $('#list').onclick = e => {
+    const list = load(), id = (e.target.closest('[data-stop],[data-copy],[data-del]') || {}).dataset; if (!id) return;
+    if (id.stop) { const m = list.find(x => x.id === id.stop); m.cancelled = true; save(list); toast('Stopped. It’s gone from the app.'); }
+    if (id.del) { save(list.filter(x => x.id !== id.del)); toast('Deleted'); }
+    if (id.copy) { const m = list.find(x => x.id === id.copy); $('#title').value = m.title; $('#body').value = m.body; $('#code').value = m.code; $('#mins').value = String(m.mins); $('#aud').value = m.aud; $('#link').value = m.link; document.querySelectorAll('.tpl').forEach(b => b.classList.remove('on')); window.scrollTo({ top: 0, behavior: 'smooth' }); upd(); toast('Loaded into the form. Change anything, then send.'); }
+    render();
+  };
+  window.addEventListener('storage', e => { if (e.key === MSG_KEY) render(); });
+  let tt; function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('on'), 2600); }
+  const clk = () => { $('#clk').textContent = tFmt(Date.now()); };
+  clk(); setInterval(() => { clk(); render(); }, 15000);
+  applyTpl(0); render();
+  window.__boh = { load, wallToMs, msToWall, status };
+})();
+</script>
+</body>
+</html>
