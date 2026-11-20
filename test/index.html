@@ -149,6 +149,14 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
   .steps{grid-template-columns:1fr 1fr 1fr}
   .brand span{display:none}
 }
+.stage{display:none}
+@media (max-width:759px){
+  /* phones: scene first, full screen and uncovered; then its text card */
+  .st.has-stage{display:block;min-height:0;padding:0 14px 28px}
+  .stage{display:block;height:calc(100svh - var(--hh))}
+  .stage-long{height:calc(185svh - var(--hh))}
+  .st.has-stage .panel{width:100%}
+}
 @media (min-width:760px){
   .st-menu{min-height:300svh;align-items:flex-start}
   .st-menu .panel{position:sticky;top:calc(var(--hh) + 28px)}
@@ -205,7 +213,8 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
     </div>
   </section>
 
-  <section class="st st-menu th-dark wide">
+  <section class="st st-menu th-dark wide has-stage">
+    <div class="stage stage-long" aria-hidden="true"></div>
     <div class="panel">
       <h2 class="d" data-i18n="x.mt">في المنيو</h2>
       <div class="menu" id="menu"></div>
@@ -213,7 +222,8 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
     </div>
   </section>
 
-  <section class="st st-club th-light wide">
+  <section class="st st-club th-light wide has-stage">
+    <div class="stage" aria-hidden="true"></div>
     <div class="panel">
       <h2 class="d" data-i18n="how.title">نادي LJ's</h2>
       <p class="lead" style="margin-bottom:20px" data-i18n="how.lead"></p>
@@ -231,14 +241,16 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
     </div>
   </section>
 
-  <section class="st st-perks th-orange">
+  <section class="st st-perks th-orange has-stage">
+    <div class="stage" aria-hidden="true"></div>
     <div class="panel">
       <div class="perk"><h3 class="d" data-i18n="bday.title"></h3><p data-i18n="bday.sub"></p></div>
       <div class="perk"><h3 class="d" data-i18n="fm.title"></h3><p data-i18n="fm.sub"></p></div>
     </div>
   </section>
 
-  <section class="st st-join th-dark" id="join">
+  <section class="st st-join th-dark has-stage" id="join">
+    <div class="stage" aria-hidden="true"></div>
     <div class="panel">
       <h2 class="d" data-i18n="join.title"></h2>
       <p class="lead" data-i18n="join.lead"></p>
@@ -515,7 +527,18 @@ for(var si=0;si<N;si++){var z=-si*GAP;camPts.push(new THREE.Vector3(Math.sin(si*
 var camCurve=new THREE.CatmullRomCurve3(camPts),lookCurve=new THREE.CatmullRomCurve3(lookPts);
 
 var sections=[].slice.call(document.querySelectorAll('main .st'));
-function scrollT(){var c=innerHeight/2;for(var i=0;i<sections.length;i++){var r=sections[i].getBoundingClientRect();if(c<r.bottom||i===sections.length-1){var f=(c-r.top)/r.height;return Math.max(0,Math.min(N-1,i+f-.5));}}return 0;}
+/* phones: a timeline from page position to camera position; each scene arrives while its stage scrolls in, then holds while its text passes */
+var KF=[];
+function buildKF(){KF=[];if(!mobile())return;var vh=innerHeight,hh=document.querySelector('header').offsetHeight,maxY=Math.max(0,document.documentElement.scrollHeight-vh);
+  function top(el){return el.getBoundingClientRect().top+scrollY;}
+  var lastY=0,lastT=0;KF.push([0,0]);
+  function add(y,v){y=Math.min(Math.max(y,lastY),maxY);if(y<=lastY&&KF.length>1){KF[KF.length-1][1]=v;lastT=v;return;}KF.push([y,v]);lastY=y;lastT=v;}
+  for(var i=1;i<sections.length;i++){var a=sections[i].querySelector('.stage')||sections[i],A=top(a),arrT=i===3?2.62:i;
+    add(A-vh,lastT);add(A-hh,arrT);
+    if(i===3)add(A+a.offsetHeight-vh,3.38);}
+  if(lastY<maxY)KF.push([maxY+1,lastT]);}
+function kfT(){var y=scrollY;if(y<=KF[0][0])return KF[0][1];for(var i=1;i<KF.length;i++){if(y<=KF[i][0]){var a=KF[i-1],b=KF[i],d=b[0]-a[0];return d>0?a[1]+(b[1]-a[1])*(y-a[0])/d:b[1];}}return KF[KF.length-1][1];}
+function scrollT(){if(mobile()&&KF.length>1)return kfT();var c=innerHeight/2;for(var i=0;i<sections.length;i++){var r=sections[i].getBoundingClientRect();if(c<r.bottom||i===sections.length-1){var f=(c-r.top)/r.height;return Math.max(0,Math.min(N-1,i+f-.5));}}return 0;}
 var t=scrollT();
 
 /* text side vs object side */
@@ -523,11 +546,13 @@ var ZOOM=1;
 function size(){var w=innerWidth,h=innerHeight;ZOOM=mobile()?1.85:(w/h<1.15?1.35:1);scene.fog.near=20*ZOOM;scene.fog.far=Math.min(58*ZOOM,14*ZOOM+44);
   renderer.setPixelRatio(Math.min(devicePixelRatio,mobile()?1.6:2));renderer.setSize(w,h,false);camera.aspect=w/h;
   var rtl=document.documentElement.dir==='rtl';
+  lastVO=null;
   if(mobile()) camera.setViewOffset(w,h,0,h*.21,w,h); else camera.setViewOffset(w,h,(rtl?1:-1)*w*.21,0,w,h);
   camera.updateProjectionMatrix();
   var big=mobile()?1:1.12; s3.scale.setScalar(big); s5.scale.setScalar(big); s6.scale.setScalar(big);}
-addEventListener('resize',size);
-addEventListener('langchange',function(){size();paintLabel(labL);paintLabel(labA);paintCoins();});
+addEventListener('resize',function(){size();buildKF();});
+if(window.ResizeObserver)new ResizeObserver(function(){buildKF();}).observe(document.querySelector('main'));
+addEventListener('langchange',function(){size();buildKF();paintLabel(labL);paintLabel(labA);paintCoins();});
 
 var mx=0,my=0,pmx=0,pmy=0;
 addEventListener('pointermove',function(e){if(e.pointerType==='mouse'){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;}});
@@ -540,7 +565,7 @@ function camT(t){ if(t<2) return t; if(t<2.62) return 2+(t-2)/.62; if(t<3.38) re
 var vis=[1,1,1,1,1,1,1];
 function fadeStation(g,v){g.visible=v>.01;if(!g.visible)return;g.traverse(function(m){if(!m.material||m.userData.menu||m.userData.steam)return;if(m.userData.op0==null){m.userData.op0=m.material.opacity;m.material.transparent=true;}m.material.opacity=m.userData.op0*v;});}
 
-var bgA=new THREE.Color(),bgB=new THREE.Color(),clock=new THREE.Clock(),visible=true,intro=0;
+var bgA=new THREE.Color(),bgB=new THREE.Color(),clock=new THREE.Clock(),visible=true,intro=0,lastVO=null;
 document.addEventListener('visibilitychange',function(){visible=!document.hidden;});
 function loop(){
   requestAnimationFrame(loop);
@@ -552,6 +577,7 @@ function loop(){
   camera.position.copy(camCurve.getPointAt(u)).sub(lp).multiplyScalar(ZOOM).add(lp);
   if(!REDUCE){camera.position.x+=pmx*1.1;camera.position.y-=pmy*.6;}
   camera.lookAt(lp);
+  if(mobile()){var vo=Math.round(innerHeight*(.21-.17*sstep((t-2.2)/.45)));if(vo!==lastVO){lastVO=vo;camera.setViewOffset(innerWidth,innerHeight,0,vo,innerWidth,innerHeight);camera.updateProjectionMatrix();}}
   var i0=Math.floor(tc),i1=Math.min(N-1,i0+1),f=tc-i0;
   stations.forEach(function(g,i){var dz=camera.position.z-(-i*GAP);vis[i]=sstep((dz-3)/7);fadeStation(g,vis[i]);});
   var lv=sstep((tc-.45)/.3)*(1-sstep((tc-1.45)/.3))*vis[1];labL.visible=labA.visible=lv>.01;labL.material.opacity=labA.material.opacity=lv;
@@ -585,7 +611,8 @@ function loop(){
 size();
 var fontsReady=document.fonts?Promise.race([Promise.all([document.fonts.load('60px "Titan One"'),document.fonts.load('60px "Lalezar"')]),new Promise(function(r){setTimeout(r,2500)})]):Promise.resolve();
 var photosReady=new Promise(function(r){mgr.onLoad=r;setTimeout(r,7000);});
-Promise.all([fontsReady,photosReady]).then(function(){paintLabel(labL);paintLabel(labA);paintCoins();loaded=true;done();});
+Promise.all([fontsReady,photosReady]).then(function(){paintLabel(labL);paintLabel(labA);paintCoins();loaded=true;done();buildKF();});
+buildKF();
 loop();
 })();
 </script>
