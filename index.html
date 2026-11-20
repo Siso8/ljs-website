@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LJ's Burger & Fried Chicken — انضم لنادي بيج بايت</title>
+<title>LJ's Burger & Fried Chicken — انضم لنادي LJ's</title>
+<meta name="description" content="سماش برجر وفراخ مقلية سبايسي من لندن، قريباً في الإسكندرية. انضم لنادي LJ's قبل الافتتاح وخد خصم ٢٠٪ على أول طلب.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LJ's Burger &amp; Fried Chicken">
+<meta property="og:title" content="LJ's Burger &amp; Fried Chicken — قريباً في الإسكندرية">
+<meta property="og:description" content="سماش برجر وفراخ مقلية سبايسي من لندن. انضم لنادي LJ's قبل الافتتاح وخد خصم ٢٠٪ على أول طلب.">
+<meta property="og:url" content="https://www.ljsburger.com/">
+<meta property="og:locale" content="ar_EG">
+<meta property="og:locale:alternate" content="en_GB">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Lalezar&family=Cairo:wght@400;600;700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -123,6 +131,10 @@ body.en .field input{font-family:var(--sans)}
 .submit{width:100%;background:var(--orange);color:#fff;border:0;border-radius:999px;padding:16px;font-family:var(--sans);font-weight:700;font-size:15px;cursor:pointer;margin-top:6px;transition:.25s}
 .submit:hover{background:#d83d16}
 .submit:disabled{opacity:.6;cursor:wait}
+.optin{display:flex;align-items:center;gap:10px;font-size:13.5px;margin:2px 0 10px;cursor:pointer}
+.optin input{width:18px;height:18px;margin:0;accent-color:#F04E23;flex:none}
+.consent{font-size:12px;color:rgba(31,31,31,.55);margin:0 0 14px}
+.consent a{color:inherit;text-decoration:underline}
 .formnote{text-align:center;font-size:11.5px;color:rgba(31,31,31,.45);margin-top:14px}
 .err{display:none;background:#fde8e4;color:#b2340a;border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:14px}
 .success{display:none;text-align:center}
@@ -181,7 +193,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span><span data-i18n="h.eyebrow">قريباً في الإسكندرية</span></div>
     <h1 data-i18n="h.title">بدأنا في لندن.<br>هنفتح في <b>إسكندرية.</b></h1>
-    <p data-i18n="h.sub">سماش برجر وفراخ مقلية سبايسي. انضم لنادي بيج بايت دلوقتي واحجز خصم أول طلب قبل ما نفتح.</p>
+    <p data-i18n="h.sub">سماش برجر وفراخ مقلية سبايسي. انضم لنادي LJ's دلوقتي واحجز خصم أول طلب قبل ما نفتح.</p>
     <button class="cta" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">
       <span data-i18n="h.cta">انضم للنادي دلوقتي</span>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -192,7 +204,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
 <section class="sec">
   <div class="wrap">
     <div class="eyebrow2" data-i18n="how.eyebrow">إزاي بيشتغل</div>
-    <h2 data-i18n="how.title">نادي بيج بايت</h2>
+    <h2 data-i18n="how.title">نادي LJ's</h2>
     <p class="lead" data-i18n="how.lead">عضوية واحدة، ونقاطك بتتجمع أوتوماتيك من أول طلب. اكسب نقاط، اترقّى، واستبدلها بأكل ببلاش.</p>
     <div class="howit">
       <div class="card"><div class="n" data-i18n="how.n1">١</div><b data-i18n="how.c1b">اكسب</b><p data-i18n="how.c1p">نقطة على كل ١٠٠ جنيه تصرفها</p></div>
@@ -233,7 +245,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
     <div class="birthday">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21h16v-8a3 3 0 00-3-3H7a3 3 0 00-3 3v8zM4 16h16M12 7V4M8 7V5M16 7V5"/></svg>
       <h3 data-i18n="bday.title">في عيد ميلادك...</h3>
-      <p data-i18n="bday.sub"><b>سيجنتشر سماش ببلاش.</b> من غير ما تصرف جنيه، في أي درجة كنت.</p>
+      <p data-i18n="bday.sub"><b>هدية مننا ليك.</b> في أي درجة كنت، والهدية بتكبر مع درجتك.</p>
     </div>
   </div>
 </section>
@@ -243,7 +255,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
     <div class="founding">
       <span class="tag" data-i18n="fm.tag">عرض الافتتاح فقط</span>
       <h3 data-i18n="fm.title">انضم دلوقتي، قبل ما نفتح</h3>
-      <p data-i18n="fm.sub">لما تنضم قبل الافتتاح، بتاخد شارة "عضو مؤسس" معاك على طول، وسيجنتشر سماش ببلاش في أول زيارة ليك.</p>
+      <p data-i18n="fm.sub">لما تنضم قبل الافتتاح، بتاخد شارة "عضو مؤسس" معاك على طول، وخصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.</p>
     </div>
   </div>
 </section>
@@ -251,13 +263,15 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
 <section class="sec" id="join">
   <div class="wrap">
     <h2 data-i18n="join.title">يلا بينا</h2>
-    <p class="lead" data-i18n="join.lead">اسمك ورقمك وتاريخ ميلادك، وتبقى عضو مؤسس في نادي بيج بايت.</p>
+    <p class="lead" data-i18n="join.lead">اسمك ورقمك وتاريخ ميلادك، وتبقى عضو مؤسس في نادي LJ's.</p>
     <div class="formcard">
       <div class="err" id="formErr"></div>
       <form id="joinForm">
         <div class="field"><label for="fname" data-i18n="join.name">الاسم</label><input id="fname" required placeholder="" data-i18n-ph="join.namePh"></div>
         <div class="field"><label for="fphone" data-i18n="join.phone">رقم الموبايل</label><input id="fphone" required inputmode="tel" placeholder="+20 1xx xxx xxxx"></div>
         <div class="field"><label for="fbday" data-i18n="join.bday">تاريخ الميلاد</label><input id="fbday" type="date" required></div>
+        <label class="optin"><input type="checkbox" id="foffers"><span data-i18n="join.offers">ابعتولي عروض LJ's</span></label>
+        <p class="consent" data-i18n="join.consent">بالانضمام انت موافق على <a href="/privacy/">سياسة الخصوصية</a>.</p>
         <button class="submit" type="submit" id="submitBtn" data-i18n="join.submit">انضم للنادي</button>
       </form>
       <div class="success" id="successBox">
@@ -265,7 +279,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
         <h3 data-i18n="join.okTitle">أهلاً بيك في النادي</h3>
         <p data-i18n="join.okSub">انت دلوقتي عضو مؤسس. رقم عضويتك:</p>
         <div class="ref" id="refCode">LJ-0000</div>
-        <p data-i18n="join.okNote">مستنيك خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه، وسيجنتشر سماش ببلاش في أول زيارة ليك.</p>
+        <p data-i18n="join.okNote">مستنيك خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.</p>
       </div>
       <div class="formnote" id="formNote" data-i18n="join.note">بياناتك محفوظة عندنا بس، مش هنبعتلك غير رسايل عن LJ's.</div>
     </div>
@@ -276,8 +290,8 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
   <div class="wrap">
     <div class="word">LJ's</div>
     <div class="social">
-      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
-      <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2.2 1.9 3.7 4.1 3.9v2.9c-1.5.1-2.9-.4-4.1-1.2v6.6c0 3.3-2.7 5.8-5.9 5.6-3-.2-5.3-2.7-5.3-5.7 0-3.1 2.6-5.7 5.8-5.6v3c-1.5-.2-2.8.9-2.9 2.4-.1 1.5 1 2.8 2.5 2.9 1.5.1 2.8-1 2.9-2.5V3h2.9z"/></svg></a>
+      <a href="#" aria-label="Instagram" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+      <a href="#" aria-label="TikTok" style="display:none"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2.2 1.9 3.7 4.1 3.9v2.9c-1.5.1-2.9-.4-4.1-1.2v6.6c0 3.3-2.7 5.8-5.9 5.6-3-.2-5.3-2.7-5.3-5.7 0-3.1 2.6-5.7 5.8-5.6v3c-1.5-.2-2.8.9-2.9 2.4-.1 1.5 1 2.8 2.5 2.9 1.5.1 2.8-1 2.9-2.5V3h2.9z"/></svg></a>
     </div>
     <small data-i18n="foot.copy">© ٢٠٢٦ إل جيز برجر وفراخ مقلية · الإسكندرية، مصر</small>
   </div>
@@ -292,9 +306,9 @@ var I18N = {
   ar: {
     brandname: "إل جيز برجر وفراخ مقلية",
     "h.eyebrow":"قريباً في الإسكندرية", "h.title":"بدأنا في لندن.<br>هنفتح في <b>إسكندرية.</b>",
-    "h.sub":"سماش برجر وفراخ مقلية سبايسي. انضم لنادي بيج بايت دلوقتي واحجز خصم أول طلب قبل ما نفتح.",
+    "h.sub":"سماش برجر وفراخ مقلية سبايسي. انضم لنادي LJ's دلوقتي واحجز خصم أول طلب قبل ما نفتح.",
     "h.cta":"انضم للنادي دلوقتي",
-    "how.eyebrow":"إزاي بيشتغل", "how.title":"نادي بيج بايت",
+    "how.eyebrow":"إزاي بيشتغل", "how.title":"نادي LJ's",
     "how.lead":"عضوية واحدة، ونقاطك بتتجمع أوتوماتيك من أول طلب. اكسب نقاط، اترقّى، واستبدلها بأكل ببلاش.",
     "how.n1":"١","how.c1b":"اكسب","how.c1p":"نقطة على كل ١٠٠ جنيه تصرفها",
     "how.n2":"٢","how.c2b":"اترقّى","how.c2p":"كل ما تطلب أكتر، تترقّى لدرجة أعلى",
@@ -305,21 +319,21 @@ var I18N = {
     "t2.name":"زبون دايم","t2.unlock":"١٥٠٠ جنيه في السنة","t2.rate":"١٠٪ نقاط زيادة","t2.perks":"كل اللي فات، وكمان: تجرّب الأصناف الجديدة قبل الناس · يوم نقاط مضاعفة كل شهر",
     "t3.name":"متولّع","t3.unlock":"٤٠٠٠ جنيه في السنة","t3.rate":"٢٠٪ نقاط زيادة","t3.perks":"كل اللي فات، وكمان: أولوية الاستلام · تكبير الطلب ببلاش · خصم ١٠٪ على منتجات LJ's",
     "t4.name":"أسطورة","t4.unlock":"٨٠٠٠ جنيه في السنة","t4.rate":"٣٠٪ نقاط زيادة","t4.perks":"كل اللي فات، وكمان: اسمك على حيط الأساطير · أول من يجرب أي صنف جديد · وجبة ببلاش لحد من صحابك مرة كل سنة",
-    "bday.title":"في عيد ميلادك...", "bday.sub":"<b>سيجنتشر سماش ببلاش.</b> من غير ما تصرف جنيه، في أي درجة كنت.",
+    "bday.title":"في عيد ميلادك...", "bday.sub":"<b>هدية مننا ليك.</b> في أي درجة كنت، والهدية بتكبر مع درجتك.",
     "fm.tag":"عرض الافتتاح فقط", "fm.title":"انضم دلوقتي، قبل ما نفتح",
-    "fm.sub":"لما تنضم قبل الافتتاح، بتاخد شارة \"عضو مؤسس\" معاك على طول، وسيجنتشر سماش ببلاش في أول زيارة ليك.",
-    "join.title":"يلا بينا", "join.lead":"اسمك ورقمك وتاريخ ميلادك، وتبقى عضو مؤسس في نادي بيج بايت.",
-    "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.submit":"انضم للنادي",
-    "join.okTitle":"أهلاً بيك في النادي","join.okSub":"انت دلوقتي عضو مؤسس. رقم عضويتك:","join.okNote":"مستنيك خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه، وسيجنتشر سماش ببلاش في أول زيارة ليك.",
+    "fm.sub":"لما تنضم قبل الافتتاح، بتاخد شارة \"عضو مؤسس\" معاك على طول، وخصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
+    "join.title":"يلا بينا", "join.lead":"اسمك ورقمك وتاريخ ميلادك، وتبقى عضو مؤسس في نادي LJ's.",
+    "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.submit":"انضم للنادي","join.offers":"ابعتولي عروض LJ's","join.consent":"بالانضمام انت موافق على <a href='/privacy/'>سياسة الخصوصية</a>.",
+    "join.okTitle":"أهلاً بيك في النادي","join.okSub":"انت دلوقتي عضو مؤسس. رقم عضويتك:","join.okNote":"مستنيك خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
     "join.note":"بياناتك محفوظة عندنا بس، مش هنبعتلك غير رسايل عن LJ's.",
     "foot.copy":"© ٢٠٢٦ إل جيز برجر وفراخ مقلية · الإسكندرية، مصر"
   },
   en: {
     brandname: "LJ's Burger & Fried Chicken",
     "h.eyebrow":"Opening soon in Alexandria", "h.title":"Created in London.<br>Opening in <b>Alexandria.</b>",
-    "h.sub":"Smash burgers and hot chicken. Join the Big Bite Club now and lock in your first-order discount before we open.",
+    "h.sub":"Smash burgers and hot chicken. Join LJ's Club now and lock in your first-order discount before we open.",
     "h.cta":"Join the club now",
-    "how.eyebrow":"How it works", "how.title":"The Big Bite Club",
+    "how.eyebrow":"How it works", "how.title":"LJ's Club",
     "how.lead":"One membership, earning automatically from your first order. Rack up points, climb tiers, redeem free food along the way.",
     "how.n1":"1","how.c1b":"Earn","how.c1p":"1 point per 100 EGP spent",
     "how.n2":"2","how.c2b":"Climb","how.c2p":"Order more, unlock higher tiers",
@@ -330,12 +344,12 @@ var I18N = {
     "t2.name":"Regular","t2.unlock":"1,500 EGP / year","t2.rate":"+10% points","t2.perks":"Everything above, plus: early access to new menu items · one double-points day a month",
     "t3.name":"Obsessed","t3.unlock":"4,000 EGP / year","t3.rate":"+20% points","t3.perks":"Everything above, plus: priority pickup · free size-up on any order · 10% off merch",
     "t4.name":"Legend","t4.unlock":"8,000 EGP / year","t4.rate":"+30% points","t4.perks":"Everything above, plus: name on the Legends wall · first to try every new item · one free meal for a friend, once a year",
-    "bday.title":"On your birthday...", "bday.sub":"<b>A free Signature Smash.</b> No spend required, at any tier.",
+    "bday.title":"On your birthday...", "bday.sub":"<b>A treat on us.</b> At every tier, and it gets bigger as you climb.",
     "fm.tag":"Opening offer only", "fm.title":"Join now, before we open",
-    "fm.sub":"Anyone who joins before opening gets a permanent Founding Member badge, plus a free Signature Smash on your first visit.",
-    "join.title":"Let's do this", "join.lead":"Your name, number, and birthday — and you're a Founding Member of the Big Bite Club.",
-    "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.submit":"Join the club",
-    "join.okTitle":"Welcome to the club","join.okSub":"You're a Founding Member now. Your membership number:","join.okNote":"20% off your first order over EGP 300 is waiting for you, plus a free Signature Smash on your first visit.",
+    "fm.sub":"Anyone who joins before opening gets a permanent Founding Member badge, plus 20% off your first order over EGP 300.",
+    "join.title":"Let's do this", "join.lead":"Your name, number, and birthday — and you're a Founding Member of LJ's Club.",
+    "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.submit":"Join the club","join.offers":"Send me LJ's offers","join.consent":"By joining, you agree to our <a href='/privacy/'>privacy policy</a>.",
+    "join.okTitle":"Welcome to the club","join.okSub":"You're a Founding Member now. Your membership number:","join.okNote":"20% off your first order over EGP 300 is waiting for you.",
     "join.note":"Your details stay with us — we'll only ever message you about LJ's.",
     "foot.copy":"© 2026 LJ's Burger & Fried Chicken · Alexandria, Egypt"
   }
@@ -375,7 +389,7 @@ document.getElementById('joinForm').addEventListener('submit', async function(e)
     var res = await fetch('/api/join', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ name: name, phone: phone, birthday: bday, lang: LANG })
+      body: JSON.stringify({ name: name, phone: phone, birthday: bday, lang: LANG, offers: document.getElementById('foffers').checked, source: 'website' })
     });
     var data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Something went wrong');
