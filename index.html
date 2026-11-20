@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LJ's Burger & Fried Chicken — انضم لنادي LJ's</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#F4EBD9">
 <meta name="description" content="سماش برجر وفراخ مقلية سبايسي من لندن، قريباً في الإسكندرية. انضم لنادي LJ's قبل الافتتاح وخد خصم ٢٠٪ على أول طلب.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LJ's Burger &amp; Fried Chicken">
@@ -19,13 +21,14 @@
 :root{
   --hh:88px; --orange:#F04E23; --char:#1F1F1F; --char2:#141312; --cream:#F4EBD9; --paper:#FBF7EE;
   --ease:cubic-bezier(.16,1,.3,1);
-  --disp:'Titan One',system-ui,sans-serif; --sans:'Lexend',system-ui,sans-serif;
+  --disp:'Titan One','Lalezar',system-ui,sans-serif; --sans:'Lexend','Cairo',system-ui,sans-serif;
+  --ink:#B9360E; --btn:#D83D16; --muted:rgba(31,31,31,.68);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--char);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--cream);color:var(--char);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body.en{font-family:var(--sans)}
-.disp{font-family:'Lalezar',cursive;letter-spacing:0}
+.disp{font-family:var(--disp);letter-spacing:0}
 body.en .disp{font-family:var(--disp);letter-spacing:-.01em}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -39,10 +42,10 @@ header{position:sticky;top:0;z-index:50;background:rgba(244,235,217,.92);backdro
 .brand{display:flex;align-items:center;gap:10px}
 .brand{gap:12px;min-width:0}
 .brand svg{height:56px;width:auto;flex-shrink:0;color:var(--orange)}
-.brand span{font-family:'Lalezar',cursive;font-size:17px;line-height:1.15;color:var(--char);max-width:150px}
+.brand span{font-family:var(--disp);font-size:17px;line-height:1.15;color:var(--char);white-space:nowrap}
 body.en .brand span{font-family:var(--disp);font-size:14px;line-height:1.15}
 .lang{display:flex;gap:4px;background:rgba(31,31,31,.06);border-radius:999px;padding:3px}
-.lang button{background:none;border:0;font-family:var(--sans);font-weight:700;font-size:12px;padding:8px 14px;border-radius:999px;cursor:pointer;color:rgba(31,31,31,.5)}
+.lang button{background:none;border:0;font-family:var(--sans);font-weight:700;font-size:13px;padding:8px 14px;min-width:44px;min-height:36px;border-radius:999px;cursor:pointer;color:rgba(31,31,31,.65)}
 .lang button.on{background:var(--char);color:#fff}
 
 /* ===== HERO ===== */
@@ -56,8 +59,8 @@ body.en .brand span{font-family:var(--disp);font-size:14px;line-height:1.15}
 .pitch .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(244,235,217,.1);border:1px solid rgba(244,235,217,.25);border-radius:999px;padding:8px 18px;margin-bottom:22px}
 .pitch .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 0 rgba(240,78,35,.6);animation:pulse 2.2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(240,78,35,.55)}70%{box-shadow:0 0 0 7px rgba(240,78,35,0)}100%{box-shadow:0 0 0 0 rgba(240,78,35,0)}}
-.pitch .eyebrow span{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.06em;color:var(--cream)}
-.pitch h1{font-family:'Lalezar',cursive;color:var(--cream);font-size:clamp(30px,8vw,46px);line-height:1.15;margin-bottom:14px}
+.pitch .eyebrow span{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--cream)}
+.pitch h1{font-family:var(--disp);color:var(--cream);font-size:clamp(30px,8vw,46px);line-height:1.15;margin-bottom:14px}
 body.en .pitch h1{font-family:var(--disp);font-weight:400;line-height:1.05}
 .pitch h1 b{color:var(--orange)}
 .pitch p{color:rgba(244,235,217,.78);max-width:46ch;margin:0 auto 30px;font-size:16px}
@@ -70,24 +73,25 @@ body.en .pitch h1{font-family:var(--disp);font-weight:400;line-height:1.05}
 .soundbtn.on{background:var(--orange);border-color:transparent;animation:none}
 .soundbtn:not(.on){animation:soundPulse 2.4s ease-in-out infinite}
 @keyframes soundPulse{0%,100%{box-shadow:0 0 0 0 rgba(240,78,35,.5)}50%{box-shadow:0 0 0 8px rgba(240,78,35,0)}}
-.pitch .cta{margin-top:10px;display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;border:0;border-radius:999px;padding:16px 32px;font-family:var(--sans);font-weight:700;font-size:15px;cursor:pointer;transition:.25s}
-.pitch .cta:hover{background:#d83d16;transform:translateY(-2px)}
+.pitch .cta{margin-top:10px;display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:#fff;border:0;border-radius:999px;padding:16px 32px;font-family:var(--sans);font-weight:700;font-size:16px;cursor:pointer;transition:.25s}
+.pitch .cta:hover{background:var(--ink);transform:translateY(-2px)}
 [dir=rtl] .pitch .cta svg{transform:scaleX(-1)}
 
 /* ===== SECTION GENERIC ===== */
 .sec{padding:56px 0}
-.sec h2{font-family:'Lalezar',cursive;font-size:clamp(26px,6vw,38px);text-align:center;margin-bottom:12px}
+.sec h2{font-family:var(--disp);font-size:clamp(26px,6vw,38px);text-align:center;margin-bottom:12px}
 body.en .sec h2{font-family:var(--disp);font-weight:400}
-.sec .lead{text-align:center;color:rgba(31,31,31,.65);max-width:48ch;margin:0 auto 38px;font-size:15.5px}
-.sec .eyebrow2{text-align:center;color:var(--orange);font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.sec .lead{text-align:center;color:var(--muted);max-width:48ch;margin:0 auto 38px;font-size:16px}
+.sec .eyebrow2{text-align:center;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
 body.en .sec .eyebrow2{letter-spacing:.14em}
 
 /* ===== HOW IT WORKS ===== */
 .howit{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:10px}
 .howit .card{background:var(--paper);border:1px solid rgba(31,31,31,.08);border-radius:18px;padding:20px 14px;text-align:center}
 .howit .card .n{font-family:var(--disp);color:var(--orange);font-size:26px;margin-bottom:8px}
-.howit .card p{font-size:12.5px;color:rgba(31,31,31,.7);line-height:1.5}
-.howit .card b{display:block;font-size:14px;color:var(--char);margin-bottom:4px}
+.howit .card p{font-size:14px;color:var(--muted);line-height:1.5}
+body.en .howit .card p{font-size:13px}
+.howit .card b{display:block;font-size:15px;color:var(--char);margin-bottom:4px}
 
 /* ===== TIERS ===== */
 .tiers{display:flex;flex-direction:column;gap:14px}
@@ -95,28 +99,33 @@ body.en .sec .eyebrow2{letter-spacing:.14em}
 .tier.legend{border-color:var(--orange);background:linear-gradient(135deg,rgba(240,78,35,.07),var(--paper) 60%)}
 .tier__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .tier__name{display:flex;align-items:center;gap:10px}
-.tier__name b{font-family:'Lalezar',cursive;font-size:21px;color:var(--char)}
+.tier__name b{font-family:var(--disp);font-size:21px;color:var(--char)}
 body.en .tier__name b{font-family:var(--disp);font-weight:400;font-size:19px}
 .tier.legend .tier__name b{color:var(--orange)}
-.tier__unlock{font-family:var(--sans);font-size:11px;font-weight:700;color:rgba(31,31,31,.45);text-align:center}
-.tier__rate{display:inline-block;background:var(--char);color:var(--cream);font-family:var(--sans);font-weight:700;font-size:11px;padding:5px 12px;border-radius:999px;margin-bottom:12px}
-.tier.legend .tier__rate{background:var(--orange)}
-.tier__perks{font-size:13.5px;color:rgba(31,31,31,.75);line-height:1.7}
+.tier__unlock{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--muted);text-align:center}
+body.en .tier__unlock{font-size:12px}
+.tier__rate{display:inline-block;background:var(--char);color:var(--cream);font-family:var(--sans);font-weight:700;font-size:13px;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+.tier.legend .tier__rate{background:var(--ink)}
+body.en .tier__rate{font-size:12px}
+.tier__perks{font-size:15px;color:rgba(31,31,31,.78);line-height:1.7}
+body.en .tier__perks{font-size:14px}
 
 /* ===== BIRTHDAY CALLOUT ===== */
-.birthday{background:var(--char);color:var(--cream);border-radius:22px;padding:34px 26px;text-align:center;margin-top:24px}
+.birthday{background:var(--char);color:var(--cream);border-radius:22px;padding:34px 26px;text-align:center;margin-top:14px}
 .birthday svg{width:46px;height:46px;color:var(--orange);margin:0 auto 14px}
-.birthday h3{font-family:'Lalezar',cursive;font-size:24px;margin-bottom:10px}
+.birthday h3{font-family:var(--disp);font-size:24px;margin-bottom:10px}
 body.en .birthday h3{font-family:var(--disp);font-weight:400}
-.birthday p{color:rgba(244,235,217,.75);font-size:14.5px;max-width:40ch;margin:0 auto}
+.birthday p{color:rgba(244,235,217,.8);font-size:15px;max-width:40ch;margin:0 auto}
 .birthday b{color:var(--orange)}
 
 /* ===== FOUNDING MEMBER BANNER ===== */
-.founding{background:linear-gradient(135deg,var(--orange),#d83d16);border-radius:22px;padding:30px 24px;color:#fff;text-align:center;margin-top:24px}
-.founding .tag{font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;margin-bottom:10px;display:block}
-.founding h3{font-family:'Lalezar',cursive;font-size:23px;margin-bottom:10px}
+.founding{background:linear-gradient(135deg,var(--btn),var(--ink));border-radius:22px;padding:30px 24px;color:#fff;text-align:center;margin-top:14px}
+.sec.tight{padding-top:0}
+.sec.tight-b{padding-bottom:0}
+.founding .tag{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;opacity:.92;margin-bottom:10px;display:block}
+.founding h3{font-family:var(--disp);font-size:23px;margin-bottom:10px}
 body.en .founding h3{font-family:var(--disp);font-weight:400}
-.founding p{font-size:14px;opacity:.92;max-width:42ch;margin:0 auto}
+.founding p{font-size:15px;max-width:42ch;margin:0 auto}
 
 /* ===== SIGNUP FORM ===== */
 #join{background:var(--char2)}
@@ -124,37 +133,59 @@ body.en .founding h3{font-family:var(--disp);font-weight:400}
 #join .lead{color:rgba(244,235,217,.65)}
 .formcard{background:var(--paper);border-radius:24px;padding:30px 26px;max-width:420px;margin:0 auto}
 .field{margin-bottom:16px}
-.field label{display:block;font-family:var(--sans);font-weight:600;font-size:12.5px;color:rgba(31,31,31,.6);margin-bottom:7px}
-.field input{width:100%;border:1.5px solid rgba(31,31,31,.15);border-radius:12px;padding:13px 16px;font-family:'Cairo',sans-serif;font-size:15px;background:#fff;outline:none;transition:.2s}
+.field label{display:block;font-family:var(--sans);font-weight:600;font-size:14px;color:var(--muted);margin-bottom:7px}
+body.en .field label{font-size:13px}
+.field input,.field select{width:100%;border:1.5px solid rgba(31,31,31,.15);border-radius:12px;padding:13px 16px;font-family:var(--sans);font-size:16px;background:#fff;color:var(--char);outline:none;transition:.2s}
+.field select{padding:13px 6px;appearance:auto}
+.dob{display:grid;grid-template-columns:1.15fr 1.45fr 1.2fr;gap:8px}
+#fphone{direction:ltr}
+[dir=rtl] #fphone{text-align:right}
 body.en .field input{font-family:var(--sans)}
-.field input:focus{border-color:var(--orange)}
-.submit{width:100%;background:var(--orange);color:#fff;border:0;border-radius:999px;padding:16px;font-family:var(--sans);font-weight:700;font-size:15px;cursor:pointer;margin-top:6px;transition:.25s}
-.submit:hover{background:#d83d16}
+.field input:focus,.field select:focus{border-color:var(--orange)}
+.submit{width:100%;background:var(--btn);color:#fff;border:0;border-radius:999px;padding:16px;font-family:var(--sans);font-weight:700;font-size:16px;cursor:pointer;margin-top:6px;transition:.25s}
+.submit:hover{background:var(--ink)}
 .submit:disabled{opacity:.6;cursor:wait}
-.optin{display:flex;align-items:center;gap:10px;font-size:13.5px;margin:2px 0 10px;cursor:pointer}
+.optin{display:flex;align-items:center;gap:10px;font-size:14px;margin:2px 0 10px;cursor:pointer}
 .optin input{width:18px;height:18px;margin:0;accent-color:#F04E23;flex:none}
-.consent{font-size:12px;color:rgba(31,31,31,.55);margin:0 0 14px}
+.consent{font-size:13px;color:var(--muted);margin:0 0 14px}
 .consent a{color:inherit;text-decoration:underline}
-.formnote{text-align:center;font-size:11.5px;color:rgba(31,31,31,.45);margin-top:14px}
-.err{display:none;background:#fde8e4;color:#b2340a;border-radius:10px;padding:12px 14px;font-size:13px;margin-bottom:14px}
+.formnote{text-align:center;font-size:13px;color:var(--muted);margin-top:14px}
+.err{display:none;background:#fde8e4;color:#b2340a;border-radius:10px;padding:12px 14px;font-size:14px;margin-bottom:14px}
 .success{display:none;text-align:center}
 .success svg{width:56px;height:56px;color:var(--orange);margin:0 auto 16px}
-.success h3{font-family:'Lalezar',cursive;font-size:22px;margin-bottom:10px}
+.success h3{font-family:var(--disp);font-size:22px;margin-bottom:10px}
 body.en .success h3{font-family:var(--disp);font-weight:400}
-.success p{font-size:14px;color:rgba(31,31,31,.7);margin-bottom:6px}
+.success p{font-size:15px;color:var(--muted);margin-bottom:6px}
 .success .ref{font-family:var(--sans);font-weight:700;color:var(--orange);font-size:18px;letter-spacing:.04em;margin:12px 0}
 
 /* ===== FOOTER ===== */
-footer{background:var(--char2);color:rgba(244,235,217,.55);padding:40px 0 30px;text-align:center}
-footer .word{font-family:'Lalezar',cursive;color:var(--cream);font-size:22px;margin-bottom:10px}
+footer{background:var(--char2);color:rgba(244,235,217,.65);padding:40px 0 30px;text-align:center}
+footer .word{color:var(--orange);display:flex;justify-content:center;margin-bottom:10px}
+footer .word svg{height:52px;width:auto}
 body.en footer .word{font-family:var(--disp);font-weight:400}
 footer .social{display:flex;justify-content:center;gap:12px;margin:18px 0}
 footer .social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(244,235,217,.2);display:grid;place-items:center}
 footer .social svg{width:16px;height:16px}
-footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
+footer small{font-size:13px;letter-spacing:.02em;display:block;margin-top:10px}
+body.en footer small{font-size:12px}
 
 @media(min-width:720px){
   .tiers{display:grid;grid-template-columns:repeat(2,1fr)}
+}
+/* balanced line breaks: no single word left alone */
+h1,h2,h3,.sec .lead,.pitch p,.birthday p,.founding p,.tier__perks{text-wrap:balance}
+/* phones: logo only in the header */
+@media(max-width:519px){.brand span{display:none}}
+/* laptops and up: wider and larger */
+@media(min-width:1024px){
+  .wrap,.hbar{max-width:900px}
+  .pitch p,.sec .lead{font-size:18px}
+  .howit .card p,body.en .howit .card p{font-size:15px}
+  .howit .card b{font-size:17px}
+  .tier__perks,body.en .tier__perks{font-size:16px}
+  .birthday p,.founding p{font-size:17px}
+  .tier{padding:26px 28px}
+  .formcard{max-width:460px}
 }
 </style>
 </head>
@@ -167,8 +198,8 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
       <span data-i18n="brandname">إل جيز برجر وفراخ مقلية</span>
     </div>
     <div class="lang">
-      <button id="langAR" class="on">ع</button>
-      <button id="langEN">EN</button>
+      <button id="langAR" class="on" lang="ar" aria-label="العربية">ع</button>
+      <button id="langEN" lang="en" aria-label="English">EN</button>
     </div>
   </div>
 </header>
@@ -192,7 +223,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
 <section class="pitch">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span><span data-i18n="h.eyebrow">قريباً في الإسكندرية</span></div>
-    <h1 data-i18n="h.title">بدأنا في لندن.<br>هنفتح في <b>إسكندرية.</b></h1>
+    <h1 data-i18n="h.title">بدأنا في لندن.<br>واتولدنا في <b>الإسكندرية.</b></h1>
     <p data-i18n="h.sub">سماش برجر وفراخ مقلية سبايسي. انضم لنادي LJ's دلوقتي واحجز خصم أول طلب قبل ما نفتح.</p>
     <button class="cta" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">
       <span data-i18n="h.cta">انضم للنادي دلوقتي</span>
@@ -214,7 +245,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
   </div>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec tight tight-b">
   <div class="wrap">
     <div class="eyebrow2" data-i18n="tiers.eyebrow">الدرجات</div>
     <h2 data-i18n="tiers.title">كل ما تاكل أكتر، تاخد أكتر</h2>
@@ -226,12 +257,12 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
         <div class="tier__perks" data-i18n="t1.perks">خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه · سيجنتشر سماش ببلاش في شهر عيد ميلادك · كل مكافآت النقاط</div>
       </div>
       <div class="tier">
-        <div class="tier__top"><div class="tier__name"><b data-i18n="t2.name">هوت</b></div><div class="tier__unlock" data-i18n="t2.unlock">من ١٥٠٠ جنيه</div></div>
+        <div class="tier__top"><div class="tier__name"><b data-i18n="t2.name">هوت</b></div><div class="tier__unlock" data-i18n="t2.unlock">من ١٬٥٠٠ جنيه</div></div>
         <span class="tier__rate" data-i18n="t2.rate">١٫٢٥ نقطة / ١٠٠ جنيه</span>
         <div class="tier__perks" data-i18n="t2.perks">كل اللي فات، وكمان: صوص ببلاش مع كل طلب</div>
       </div>
       <div class="tier legend">
-        <div class="tier__top"><div class="tier__name"><b data-i18n="t3.name">جولد</b></div><div class="tier__unlock" data-i18n="t3.unlock">من ٥٠٠٠ جنيه</div></div>
+        <div class="tier__top"><div class="tier__name"><b data-i18n="t3.name">جولد</b></div><div class="tier__unlock" data-i18n="t3.unlock">من ٥٬٠٠٠ جنيه</div></div>
         <span class="tier__rate" data-i18n="t3.rate">١٫٥ نقطة / ١٠٠ جنيه</span>
         <div class="tier__perks" data-i18n="t3.perks">كل اللي فات، وكمان: تجرّب الإصدارات المحدودة قبل الناس · خصم ١٠٪ على منتجات LJ's</div>
       </div>
@@ -245,7 +276,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
   </div>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec tight">
   <div class="wrap">
     <div class="founding">
       <span class="tag" data-i18n="fm.tag">عرض الافتتاح فقط</span>
@@ -262,9 +293,9 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
     <div class="formcard">
       <div class="err" id="formErr"></div>
       <form id="joinForm">
-        <div class="field"><label for="fname" data-i18n="join.name">الاسم</label><input id="fname" required placeholder="" data-i18n-ph="join.namePh"></div>
-        <div class="field"><label for="fphone" data-i18n="join.phone">رقم الموبايل</label><input id="fphone" required inputmode="tel" placeholder="+20 1xx xxx xxxx"></div>
-        <div class="field"><label for="fbday" data-i18n="join.bday">تاريخ الميلاد</label><input id="fbday" type="date" required></div>
+        <div class="field"><label for="fname" data-i18n="join.name">الاسم</label><input id="fname" required autocomplete="name" placeholder="" data-i18n-ph="join.namePh"></div>
+        <div class="field"><label for="fphone" data-i18n="join.phone">رقم الموبايل</label><input id="fphone" required inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+20 1xx xxx xxxx"></div>
+        <div class="field"><label for="fbd" data-i18n="join.bday">تاريخ الميلاد</label><div class="dob"><select id="fbd" required></select><select id="fbm" required></select><select id="fby" required></select></div></div>
         <label class="optin"><input type="checkbox" id="foffers"><span data-i18n="join.offers">ابعتولي عروض LJ's</span></label>
         <p class="consent" data-i18n="join.consent">بالانضمام انت موافق على <a href="/privacy/">سياسة الخصوصية</a>.</p>
         <button class="submit" type="submit" id="submitBtn" data-i18n="join.submit">انضم للنادي</button>
@@ -283,7 +314,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
 
 <footer>
   <div class="wrap">
-    <div class="word">LJ's</div>
+    <div class="word"><svg viewBox="0 0 200 128" fill="currentColor" role="img" aria-label="LJ's"><use href="#tmMini"/></svg></div>
     <div class="social">
       <a href="#" aria-label="Instagram" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
       <a href="#" aria-label="TikTok" style="display:none"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2.2 1.9 3.7 4.1 3.9v2.9c-1.5.1-2.9-.4-4.1-1.2v6.6c0 3.3-2.7 5.8-5.9 5.6-3-.2-5.3-2.7-5.3-5.7 0-3.1 2.6-5.7 5.8-5.6v3c-1.5-.2-2.8.9-2.9 2.4-.1 1.5 1 2.8 2.5 2.9 1.5.1 2.8-1 2.9-2.5V3h2.9z"/></svg></a>
@@ -300,7 +331,7 @@ footer small{font-size:11px;letter-spacing:.04em;display:block;margin-top:10px}
 var I18N = {
   ar: {
     brandname: "إل جيز برجر وفراخ مقلية",
-    "h.eyebrow":"قريباً في الإسكندرية", "h.title":"بدأنا في لندن.<br>هنفتح في <b>إسكندرية.</b>",
+    "h.eyebrow":"قريباً في الإسكندرية", "h.title":"بدأنا في لندن.<br>واتولدنا في <b>الإسكندرية.</b>",
     "h.sub":"سماش برجر وفراخ مقلية سبايسي. انضم لنادي LJ's دلوقتي واحجز خصم أول طلب قبل ما نفتح.",
     "h.cta":"انضم للنادي دلوقتي",
     "how.eyebrow":"إزاي بيشتغل", "how.title":"نادي LJ's",
@@ -311,20 +342,20 @@ var I18N = {
     "tiers.eyebrow":"الدرجات", "tiers.title":"كل ما تاكل أكتر، تاخد أكتر",
     "tiers.lead":"درجتك على حسب اللي صرفته معانا، ومش بتنزل أبداً. والمكافآت بنفس عدد النقاط للكل.",
     "t1.name":"سماش","t1.unlock":"من أول طلب","t1.rate":"نقطة / ١٠٠ جنيه","t1.perks":"خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه · سيجنتشر سماش ببلاش في شهر عيد ميلادك · كل مكافآت النقاط",
-    "t2.name":"هوت","t2.unlock":"من ١٥٠٠ جنيه","t2.rate":"١٫٢٥ نقطة / ١٠٠ جنيه","t2.perks":"كل اللي فات، وكمان: صوص ببلاش مع كل طلب",
-    "t3.name":"جولد","t3.unlock":"من ٥٠٠٠ جنيه","t3.rate":"١٫٥ نقطة / ١٠٠ جنيه","t3.perks":"كل اللي فات، وكمان: تجرّب الإصدارات المحدودة قبل الناس · خصم ١٠٪ على منتجات LJ's",
+    "t2.name":"هوت","t2.unlock":"من ١٬٥٠٠ جنيه","t2.rate":"١٫٢٥ نقطة / ١٠٠ جنيه","t2.perks":"كل اللي فات، وكمان: صوص ببلاش مع كل طلب",
+    "t3.name":"جولد","t3.unlock":"من ٥٬٠٠٠ جنيه","t3.rate":"١٫٥ نقطة / ١٠٠ جنيه","t3.perks":"كل اللي فات، وكمان: تجرّب الإصدارات المحدودة قبل الناس · خصم ١٠٪ على منتجات LJ's",
     "bday.title":"في عيد ميلادك...", "bday.sub":"<b>سيجنتشر سماش ببلاش.</b> في شهر عيد ميلادك، في كل الدرجات.",
     "fm.tag":"عرض الافتتاح فقط", "fm.title":"انضم دلوقتي، قبل ما نفتح",
     "fm.sub":"لما تنضم قبل الافتتاح، بتاخد شارة \"عضو مؤسس\" معاك على طول، وخصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
     "join.title":"يلا بينا", "join.lead":"اسمك ورقمك وتاريخ ميلادك، وتبقى عضو مؤسس في نادي LJ's.",
-    "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.submit":"انضم للنادي","join.offers":"ابعتولي عروض LJ's","join.consent":"بالانضمام انت موافق على <a href='/privacy/'>سياسة الخصوصية</a>.",
+    "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.d":"اليوم","join.m":"الشهر","join.y":"السنة","a.sound":"الصوت","a.play":"تشغيل","doc.title":"LJ's Burger & Fried Chicken — انضم لنادي LJ's","join.submit":"انضم للنادي","join.offers":"ابعتولي عروض LJ's","join.consent":"بالانضمام انت موافق على <a href='/privacy/'>سياسة الخصوصية</a>.",
     "join.okTitle":"أهلاً بيك في النادي","join.okSub":"انت دلوقتي عضو مؤسس. رقم عضويتك:","join.okNote":"مستنيك خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
     "join.note":"بياناتك محفوظة عندنا بس، مش هنبعتلك غير رسايل عن LJ's.",
     "foot.copy":"© ٢٠٢٦ إل جيز برجر وفراخ مقلية · الإسكندرية، مصر"
   },
   en: {
     brandname: "LJ's Burger & Fried Chicken",
-    "h.eyebrow":"Opening soon in Alexandria", "h.title":"Created in London.<br>Opening in <b>Alexandria.</b>",
+    "h.eyebrow":"Opening soon in Alexandria", "h.title":"Created in London.<br>Born in <b>Alexandria.</b>",
     "h.sub":"Smash burgers and hot chicken. Join LJ's Club now and lock in your first-order discount before we open.",
     "h.cta":"Join the club now",
     "how.eyebrow":"How it works", "how.title":"LJ's Club",
@@ -341,7 +372,7 @@ var I18N = {
     "fm.tag":"Opening offer only", "fm.title":"Join now, before we open",
     "fm.sub":"Anyone who joins before opening gets a permanent Founding Member badge, plus 20% off your first order over EGP 300.",
     "join.title":"Let's do this", "join.lead":"Your name, number, and birthday — and you're a Founding Member of LJ's Club.",
-    "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.submit":"Join the club","join.offers":"Send me LJ's offers","join.consent":"By joining, you agree to our <a href='/privacy/'>privacy policy</a>.",
+    "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.d":"Day","join.m":"Month","join.y":"Year","a.sound":"Sound","a.play":"Play","doc.title":"LJ's Burger & Fried Chicken — Join LJ's Club","join.submit":"Join the club","join.offers":"Send me LJ's offers","join.consent":"By joining, you agree to our <a href='/privacy/'>privacy policy</a>.",
     "join.okTitle":"Welcome to the club","join.okSub":"You're a Founding Member now. Your membership number:","join.okNote":"20% off your first order over EGP 300 is waiting for you.",
     "join.note":"Your details stay with us — we'll only ever message you about LJ's.",
     "foot.copy":"© 2026 LJ's Burger & Fried Chicken · Alexandria, Egypt"
@@ -364,6 +395,27 @@ function applyLang(l){
   });
   document.getElementById('langAR').classList.toggle('on', ar);
   document.getElementById('langEN').classList.toggle('on', !ar);
+  document.title = I18N[l]['doc.title'];
+  var sb = document.getElementById('soundBtn'); if (sb) sb.setAttribute('aria-label', I18N[l]['a.sound']);
+  var po = document.getElementById('playOverlay'); if (po) po.setAttribute('aria-label', I18N[l]['a.play']);
+  fillDob();
+  try { localStorage.setItem('lj-lang', l); } catch (e) {}
+}
+var MONTHS = {
+  ar: ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
+  en: ['January','February','March','April','May','June','July','August','September','October','November','December']
+};
+function num(n){ return LANG === 'ar' ? n.toLocaleString('ar-EG', {useGrouping:false}) : String(n); }
+function fillDob(){
+  var d = document.getElementById('fbd'), m = document.getElementById('fbm'), y = document.getElementById('fby');
+  var dv = d.value, mv = m.value, yv = y.value, i, top = new Date().getFullYear() - 13;
+  d.innerHTML = '<option value="">' + I18N[LANG]['join.d'] + '</option>';
+  for (i = 1; i <= 31; i++) d.innerHTML += '<option value="' + i + '">' + num(i) + '</option>';
+  m.innerHTML = '<option value="">' + I18N[LANG]['join.m'] + '</option>';
+  for (i = 0; i < 12; i++) m.innerHTML += '<option value="' + (i + 1) + '">' + MONTHS[LANG][i] + '</option>';
+  y.innerHTML = '<option value="">' + I18N[LANG]['join.y'] + '</option>';
+  for (i = top; i >= 1940; i--) y.innerHTML += '<option value="' + i + '">' + num(i) + '</option>';
+  d.value = dv; m.value = mv; y.value = yv;
 }
 document.getElementById('langAR').onclick = function(){ applyLang('ar'); };
 document.getElementById('langEN').onclick = function(){ applyLang('en'); };
@@ -375,7 +427,8 @@ document.getElementById('joinForm').addEventListener('submit', async function(e)
   errBox.style.display = 'none';
   var name = document.getElementById('fname').value.trim();
   var phone = document.getElementById('fphone').value.trim();
-  var bday = document.getElementById('fbday').value;
+  var dd = document.getElementById('fbd').value, mm = document.getElementById('fbm').value, yy = document.getElementById('fby').value;
+  var bday = (dd && mm && yy) ? yy + '-' + ('0' + mm).slice(-2) + '-' + ('0' + dd).slice(-2) : '';
   if (!name || !phone || !bday) return;
   btn.disabled = true;
   try {
@@ -399,7 +452,11 @@ document.getElementById('joinForm').addEventListener('submit', async function(e)
   }
 });
 
-applyLang('ar');
+(function(){
+  var q = (location.search.match(/[?&]lang=(ar|en)/) || [])[1], saved = null;
+  try { saved = localStorage.getItem('lj-lang'); } catch (e) {}
+  applyLang(q || (saved === 'en' ? 'en' : 'ar'));
+})();
 
 // Some embedded/sandboxed contexts block even muted autoplay. Try it, and if
 // it hasn't actually started shortly after, reveal a manual play button
