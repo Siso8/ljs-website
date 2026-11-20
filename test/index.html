@@ -5,6 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LJ's Burger & Fried Chicken — 3D</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Lalezar&family=Cairo:wght@400;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,8 +13,8 @@
 :root{
   --hh:76px;
   --orange:#F04E23; --ink:#B9360E; --char:#1F1F1F; --cream:#F4EBD9;
-  --dispA:'Lalezar',cursive; --dispE:'Titan One',system-ui,sans-serif;
-  --bodyA:'Cairo',system-ui,sans-serif; --bodyE:'Lexend',system-ui,sans-serif;
+  --dispA:'Titan One','Lalezar',cursive; --dispE:'Titan One',system-ui,sans-serif;
+  --bodyA:'Lexend','Cairo',system-ui,sans-serif; --bodyE:'Lexend',system-ui,sans-serif;
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -120,15 +121,22 @@ body:not(.en) .tier .r{font-family:var(--bodyA)}
 .form{background:var(--cream);color:var(--char);border-radius:24px;padding:26px 24px;margin-top:18px}
 .field{margin-bottom:14px}
 .field label{display:block;font-weight:700;font-size:14px;opacity:.85;margin-bottom:6px}
-.field input{width:100%;border:1.5px solid rgba(31,31,31,.18);border-radius:12px;padding:13px 15px;font:15px var(--bodyA);background:#fff;outline:none}
+.field input{width:100%;border:1.5px solid rgba(31,31,31,.18);border-radius:12px;padding:13px 15px;font:16px var(--bodyA);background:#fff;outline:none}
 body.en .field input{font-family:var(--bodyE)}
-.field input:focus{border-color:var(--orange)}
+.field input:focus,.field select:focus{border-color:var(--orange)}
+.field select{width:100%;border:1.5px solid rgba(31,31,31,.18);border-radius:12px;padding:13px 6px;font:16px var(--bodyA);background:#fff;color:var(--char);outline:none}
+body.en .field select{font-family:var(--bodyE)}
+.dob{display:grid;grid-template-columns:1.15fr 1.45fr 1.2fr;gap:8px}
 .form .btn{width:100%;margin-top:6px}
 .err{display:none;background:#fde3dc;color:#a8300b;border-radius:10px;padding:11px 13px;font-size:13px;margin-bottom:12px}
 .ok{display:none;text-align:center;padding:8px 0}
 .ok h3{font-size:24px;margin-bottom:8px}
 .ok .ref{font:700 20px var(--bodyE);color:var(--orange);margin:10px 0}
 .fnote{font-size:14px;opacity:.8;margin-top:12px;text-align:center}
+.optin{display:flex;align-items:center;gap:10px;font-size:14px;margin:2px 0 8px;cursor:pointer}
+.optin input{width:18px;height:18px;margin:0;accent-color:#F04E23;flex:none}
+.consent{font-size:13px;opacity:.75;margin:0 0 12px}
+.consent a{color:inherit;text-decoration:underline}
 
 footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217,.75);text-align:center;padding:30px 20px 40px;font-size:14px}
 
@@ -174,7 +182,7 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
       <svg viewBox="0 0 200 128" fill="currentColor" role="img" aria-label="LJ's"><use href="#tmMini"/></svg>
       <span data-i18n="brandname">إل جيز برجر وفراخ مقلية</span>
     </div>
-    <div class="lang"><button id="langAR" class="on">ع</button><button id="langEN">EN</button></div>
+    <div class="lang"><button id="langAR" class="on" lang="ar" aria-label="العربية">ع</button><button id="langEN" lang="en" aria-label="English">EN</button></div>
   </div>
 </header>
 
@@ -182,7 +190,7 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
   <section class="st st-hero th-dark">
     <div class="panel">
       <h1 class="d" data-i18n="x.h1">كل برجر قبل ده كان بروفة.</h1>
-      <p class="lead" style="margin-top:18px" data-i18n="x.hsub">إل جيز برجر وفراخ مقلية. بدأنا في لندن، وقريب هنفتح في إسكندرية.</p>
+      <p class="lead" style="margin-top:18px" data-i18n="x.hsub">إل جيز برجر وفراخ مقلية. بدأنا في لندن، وقريب هنفتح في الإسكندرية.</p>
       <a class="btn" href="#join" data-i18n="x.cta">انضم لنادي LJ's</a>
       <p class="hint" data-i18n="x.hint">اسحب لتحت عشان تبدأ الرحلة.</p>
     </div>
@@ -190,7 +198,7 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
 
   <section class="st st-journey th-dark">
     <div class="panel">
-      <h2 class="d" data-i18n="x.jt">من لندن لإسكندرية</h2>
+      <h2 class="d" data-i18n="x.jt">من لندن للإسكندرية</h2>
       <div class="km d" id="km">0 km</div>
       <p class="tagline" data-i18n="x.jl">قطعتين لحم. ولع واحد. وصفر ندم.</p>
     </div>
@@ -259,7 +267,9 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
         <form id="joinForm">
           <div class="field"><label for="fn" data-i18n="join.name"></label><input id="fn" required autocomplete="name" data-i18n-ph="join.namePh"></div>
           <div class="field"><label for="fp" data-i18n="join.phone"></label><input id="fp" required inputmode="tel" autocomplete="tel" placeholder="+20 1xx xxx xxxx" dir="ltr"></div>
-          <div class="field"><label for="fb" data-i18n="join.bday"></label><input id="fb" type="date" required></div>
+          <div class="field"><label for="fbd" data-i18n="join.bday"></label><div class="dob"><select id="fbd" required></select><select id="fbm" required></select><select id="fby" required></select></div></div>
+          <label class="optin"><input type="checkbox" id="foffers"><span data-i18n="join.offers"></span></label>
+          <p class="consent" data-i18n="join.consent"></p>
           <button class="btn" type="submit" id="sub" data-i18n="join.submit"></button>
         </form>
         <div class="ok" id="ok"><h3 class="d" data-i18n="join.okTitle"></h3><p data-i18n="join.okSub"></p><div class="ref" id="ref"></div><p data-i18n="join.okNote"></p></div>
@@ -278,7 +288,7 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
 var I18N = {
   ar: {
     brandname: "إل جيز برجر وفراخ مقلية",
-    "h.eyebrow":"قريباً في الإسكندرية", "h.title":"بدأنا في لندن.<br>هنفتح في <b>إسكندرية.</b>",
+    "h.eyebrow":"قريباً في الإسكندرية", "h.title":"بدأنا في لندن.<br>واتولدنا في <b>الإسكندرية.</b>",
     "h.sub":"سماش برجر وفراخ مقلية سبايسي. انضم لنادي LJ's دلوقتي واحجز خصم أول طلب قبل ما نفتح.",
     "h.cta":"انضم للنادي دلوقتي",
     "how.eyebrow":"إزاي بيشتغل", "how.title":"نادي LJ's",
@@ -289,21 +299,21 @@ var I18N = {
     "tiers.eyebrow":"الدرجات", "tiers.title":"كل ما تاكل أكتر، تاخد أكتر",
     "tiers.lead":"مفيش ميزة بتضيع منك وانت بتترقّى — كل درجة بتزوّد على اللي قبلها.",
     "t1.name":"أول لقمة","t1.unlock":"من أول ما تنضم","t1.rate":"نقطة / ١٠٠ جنيه","t1.perks":"خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه · هدية عيد ميلادك · كل مكافآت النقاط",
-    "t2.name":"زبون دايم","t2.unlock":"١٥٠٠ جنيه في السنة","t2.rate":"١٠٪ نقاط زيادة","t2.perks":"كل اللي فات، وكمان: تجرّب الأصناف الجديدة قبل الناس · يوم نقاط مضاعفة كل شهر",
-    "t3.name":"متولّع","t3.unlock":"٤٠٠٠ جنيه في السنة","t3.rate":"٢٠٪ نقاط زيادة","t3.perks":"كل اللي فات، وكمان: أولوية الاستلام · تكبير الطلب ببلاش · خصم ١٠٪ على منتجات LJ's",
-    "t4.name":"أسطورة","t4.unlock":"٨٠٠٠ جنيه في السنة","t4.rate":"٣٠٪ نقاط زيادة","t4.perks":"كل اللي فات، وكمان: اسمك على حيط الأساطير · أول من يجرب أي صنف جديد · وجبة ببلاش لحد من صحابك مرة كل سنة",
+    "t2.name":"زبون دايم","t2.unlock":"١٬٥٠٠ جنيه في السنة","t2.rate":"١٠٪ نقاط زيادة","t2.perks":"كل اللي فات، وكمان: تجرّب الأصناف الجديدة قبل الناس · يوم نقاط مضاعفة كل شهر",
+    "t3.name":"متولّع","t3.unlock":"٤٬٠٠٠ جنيه في السنة","t3.rate":"٢٠٪ نقاط زيادة","t3.perks":"كل اللي فات، وكمان: أولوية الاستلام · تكبير الطلب ببلاش · خصم ١٠٪ على منتجات LJ's",
+    "t4.name":"أسطورة","t4.unlock":"٨٬٠٠٠ جنيه في السنة","t4.rate":"٣٠٪ نقاط زيادة","t4.perks":"كل اللي فات، وكمان: اسمك على حيط الأساطير · أول من يجرب أي صنف جديد · وجبة ببلاش لحد من صحابك مرة كل سنة",
     "bday.title":"في عيد ميلادك...", "bday.sub":"<b>سيجنتشر سماش ببلاش.</b> هدية مننا ليك، في أي درجة كنت.",
     "fm.tag":"عرض الافتتاح فقط", "fm.title":"انضم دلوقتي، قبل ما نفتح",
     "fm.sub":"لما تنضم قبل الافتتاح، بتاخد شارة \"عضو مؤسس\" معاك على طول، وخصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
     "join.title":"يلا بينا", "join.lead":"اسمك ورقمك وتاريخ ميلادك، وتبقى عضو مؤسس في نادي LJ's.",
-    "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.submit":"انضم للنادي",
+    "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.submit":"انضم للنادي","join.offers":"ابعتولي عروض LJ's","join.consent":"بالانضمام انت موافق على <a href='/privacy/'>سياسة الخصوصية</a>.",
     "join.okTitle":"أهلاً بيك في النادي","join.okSub":"انت دلوقتي عضو مؤسس. رقم عضويتك:","join.okNote":"مستنيك خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
     "join.note":"بياناتك محفوظة عندنا بس، مش هنبعتلك غير رسايل عن LJ's.",
     "foot.copy":"© ٢٠٢٦ إل جيز برجر وفراخ مقلية · الإسكندرية، مصر"
   },
   en: {
     brandname: "LJ's Burger & Fried Chicken",
-    "h.eyebrow":"Opening soon in Alexandria", "h.title":"Created in London.<br>Opening in <b>Alexandria.</b>",
+    "h.eyebrow":"Opening soon in Alexandria", "h.title":"Created in London.<br>Born in <b>Alexandria.</b>",
     "h.sub":"Smash burgers and hot chicken. Join LJ's Club now and lock in your first-order discount before we open.",
     "h.cta":"Join the club now",
     "how.eyebrow":"How it works", "how.title":"LJ's Club",
@@ -321,16 +331,16 @@ var I18N = {
     "fm.tag":"Opening offer only", "fm.title":"Join now, before we open",
     "fm.sub":"Anyone who joins before opening gets a permanent Founding Member badge, plus 20% off your first order over EGP 300.",
     "join.title":"Let's do this", "join.lead":"Your name, number, and birthday — and you're a Founding Member of LJ's Club.",
-    "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.submit":"Join the club",
+    "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.submit":"Join the club","join.offers":"Send me LJ's offers","join.consent":"By joining, you agree to our <a href='/privacy/'>privacy policy</a>.",
     "join.okTitle":"Welcome to the club","join.okSub":"You're a Founding Member now. Your membership number:","join.okNote":"20% off your first order over EGP 300 is waiting for you.",
     "join.note":"Your details stay with us — we'll only ever message you about LJ's.",
     "foot.copy":"© 2026 LJ's Burger & Fried Chicken · Alexandria, Egypt"
   }
 };
 var X = {
-  ar:{ "x.h1":"كل برجر قبل ده كان بروفة.", "x.hsub":"إل جيز برجر وفراخ مقلية. بدأنا في لندن، وقريب هنفتح في إسكندرية.",
+  ar:{ "x.h1":"كل برجر قبل ده كان بروفة.", "x.hsub":"إل جيز برجر وفراخ مقلية. بدأنا في لندن، وقريب هنفتح في الإسكندرية.",
        "x.cta":"انضم لنادي LJ's", "x.hint":"اسحب لتحت عشان تبدأ الرحلة.",
-       "x.jt":"من لندن لإسكندرية", "x.jl":"قطعتين لحم. ولع واحد. وصفر ندم.",
+       "x.jt":"من لندن للإسكندرية", "x.jl":"قطعتين لحم. ولع واحد. وصفر ندم.",
        "x.ft":"الافتتاح جاي قريب", "x.fl":"دوس على السماعة عشان تسمع الصوت.",
        "x.mt":"في المنيو", "x.mn":"أسعار الافتتاح بالجنيه، وهتتأكد في المنيو النهائي.",
        "x.london":"لندن", "x.alex":"إسكندرية", "x.err":"الإرسال ماتمش. اتأكد من النت وجرب تاني." },
@@ -352,7 +362,7 @@ var MENU = [
   {en:"Loaded Beef Fries", ar:"لوديد بيف فرايز", p:185, den:"", dar:""}
 ];
 var LANG = 'ar';
-function egp(n){ return LANG==='ar' ? n.toLocaleString('ar-EG')+' ج.م' : 'EGP '+n.toLocaleString('en-US'); }
+function egp(n){ return LANG==='ar' ? n.toLocaleString('ar-EG')+' جنيه' : 'EGP '+n.toLocaleString('en-US'); }
 function renderMenu(){
   document.getElementById('menu').innerHTML = MENU.map(function(m){
     var d = LANG==='ar'?m.dar:m.den;
@@ -366,9 +376,17 @@ function applyLang(l){
   document.querySelectorAll('[data-i18n]').forEach(function(el){ var v=I18N[l][el.getAttribute('data-i18n')]; if(v!=null) el.innerHTML=v; });
   document.querySelectorAll('[data-i18n-ph]').forEach(function(el){ var v=I18N[l][el.getAttribute('data-i18n-ph')]; if(v!=null) el.placeholder=v; });
   document.getElementById('langAR').classList.toggle('on',ar); document.getElementById('langEN').classList.toggle('on',!ar);
-  renderMenu();
+  renderMenu(); fillDob();
+  document.title=ar?"LJ's Burger & Fried Chicken — انضم لنادي LJ's":"LJ's Burger & Fried Chicken — Join LJ's Club";
+  try{localStorage.setItem('lj-lang',l);}catch(e){}
   window.dispatchEvent(new Event('langchange'));
 }
+var MONTHS={ar:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],en:['January','February','March','April','May','June','July','August','September','October','November','December']};
+function fillDob(){var ar=LANG==='ar',d=document.getElementById('fbd'),m=document.getElementById('fbm'),y=document.getElementById('fby');if(!d)return;var dv=d.value,mv=m.value,yv=y.value,i,top=new Date().getFullYear()-13,num=function(n){return ar?n.toLocaleString('ar-EG',{useGrouping:false}):String(n);};
+  d.innerHTML='<option value="">'+(ar?'اليوم':'Day')+'</option>';for(i=1;i<=31;i++)d.innerHTML+='<option value="'+i+'">'+num(i)+'</option>';
+  m.innerHTML='<option value="">'+(ar?'الشهر':'Month')+'</option>';for(i=0;i<12;i++)m.innerHTML+='<option value="'+(i+1)+'">'+MONTHS[LANG][i]+'</option>';
+  y.innerHTML='<option value="">'+(ar?'السنة':'Year')+'</option>';for(i=top;i>=1940;i--)y.innerHTML+='<option value="'+i+'">'+num(i)+'</option>';
+  d.value=dv;m.value=mv;y.value=yv;}
 document.getElementById('langAR').onclick=function(){applyLang('ar')};
 document.getElementById('langEN').onclick=function(){applyLang('en')};
 
@@ -376,11 +394,11 @@ document.getElementById('langEN').onclick=function(){applyLang('en')};
 document.getElementById('joinForm').addEventListener('submit', async function(e){
   e.preventDefault();
   var b=document.getElementById('sub'), er=document.getElementById('err'); er.style.display='none';
-  var name=document.getElementById('fn').value.trim(), phone=document.getElementById('fp').value.trim(), bday=document.getElementById('fb').value;
+  var name=document.getElementById('fn').value.trim(), phone=document.getElementById('fp').value.trim(), dd=document.getElementById('fbd').value, mm=document.getElementById('fbm').value, yy=document.getElementById('fby').value, bday=(dd&&mm&&yy)?yy+'-'+('0'+mm).slice(-2)+'-'+('0'+dd).slice(-2):'';
   if(!name||!phone||!bday) return;
   b.disabled=true;
   try{
-    var r=await fetch('/api/join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,phone:phone,birthday:bday,lang:LANG})});
+    var r=await fetch('/api/join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,phone:phone,birthday:bday,lang:LANG,offers:document.getElementById('foffers').checked,source:'website'})});
     var d=await r.json(); if(!r.ok) throw 0;
     document.getElementById('ref').textContent=d.ref_code;
     document.getElementById('joinForm').style.display='none'; document.getElementById('fnote').style.display='none';
@@ -400,7 +418,7 @@ document.getElementById('joinForm').addEventListener('submit', async function(e)
     if(v.paused) v.play().catch(function(){}); };
 })();
 
-applyLang('ar');
+(function(){var q=(location.search.match(/[?&]lang=(ar|en)/)||[])[1],s=null;try{s=localStorage.getItem('lj-lang');}catch(e){}applyLang(q||(s==='en'?'en':'ar'));})();
 </script>
 
 <script>
