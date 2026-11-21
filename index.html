@@ -192,6 +192,20 @@ h1,h2,h3,.sec .lead,.pitch p,.birthday p,.founding p,.tier__perks{text-wrap:bala
   .tier{padding:26px 28px}
   .formcard{max-width:460px}
 }
+
+/* build 8: menu and where */
+.menu8{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}
+.mcat{background:rgba(255,255,255,.06);border:1px solid rgba(127,127,127,.25);border-radius:18px;padding:14px 16px}
+.mcat h3{margin:0 0 8px;font-size:17px}
+.mcat ul{list-style:none;margin:0;padding:0}
+.mcat li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed rgba(127,127,127,.25);font-size:14.5px}
+.mcat li:last-child{border-bottom:0}
+.mcat .pr{white-space:nowrap;font-weight:700;direction:ltr}
+.mcat s{opacity:.5;font-weight:400;margin-inline-end:4px}
+html[lang=ar] [data-mc=en],html[lang=en] [data-mc=ar]{display:none}
+.where8{margin-top:18px;line-height:1.7}
+.where8 a{color:inherit;font-weight:700}
+.tip8{opacity:.8;font-size:14px}
 </style>
 </head>
 <body>
@@ -254,29 +268,43 @@ h1,h2,h3,.sec .lead,.pitch p,.birthday p,.founding p,.tier__perks{text-wrap:bala
   <div class="wrap">
     <div class="eyebrow2" data-i18n="tiers.eyebrow">الدرجات</div>
     <h2 data-i18n="tiers.title">كل ما تاكل أكتر، تاخد أكتر</h2>
-    <p class="lead" data-i18n="tiers.lead">درجتك على حسب اللي صرفته معانا، ومش بتنزل أبداً. والمكافآت بنفس عدد النقاط للكل.</p>
+    <p class="lead" data-i18n="tiers.lead">درجتك على حسب اللي صرفته معانا في آخر ١٢ شهر، ولما توصل لدرجة بتفضل بتاعتك سنة على الأقل. والمكافآت بنفس عدد النقاط للكل.</p>
     <div class="tiers">
       <div class="tier">
         <div class="tier__top"><div class="tier__name"><b data-i18n="t1.name">سماش</b></div><div class="tier__unlock" data-i18n="t1.unlock">من أول طلب</div></div>
         <span class="tier__rate" data-i18n="t1.rate">نقطة / ١٠٠ جنيه</span>
-        <div class="tier__perks" data-i18n="t1.perks">خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه · سيجنتشر سماش ببلاش في شهر عيد ميلادك · كل مكافآت النقاط</div>
+        <div class="tier__perks" data-i18n="t1.perks">خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه (لحد ١٥٠ جنيه) · سيجنتشر سماش ببلاش في أسبوع عيد ميلادك · كل مكافآت النقاط</div>
       </div>
       <div class="tier">
-        <div class="tier__top"><div class="tier__name"><b data-i18n="t2.name">هوت</b></div><div class="tier__unlock" data-i18n="t2.unlock">من ١٬٥٠٠ جنيه</div></div>
+        <div class="tier__top"><div class="tier__name"><b data-i18n="t2.name">هوت</b></div><div class="tier__unlock" data-i18n="t2.unlock">من ١٬٥٠٠ جنيه في السنة</div></div>
         <span class="tier__rate" data-i18n="t2.rate">١٫٢٥ نقطة / ١٠٠ جنيه</span>
-        <div class="tier__perks" data-i18n="t2.perks">كل اللي فات، وكمان: صوص ببلاش مع كل طلب</div>
+        <div class="tier__perks" data-i18n="t2.perks">كل اللي فات، وكمان: صوص ببلاش مرة في الأسبوع</div>
       </div>
       <div class="tier legend">
-        <div class="tier__top"><div class="tier__name"><b data-i18n="t3.name">جولد</b></div><div class="tier__unlock" data-i18n="t3.unlock">من ٥٬٠٠٠ جنيه</div></div>
+        <div class="tier__top"><div class="tier__name"><b data-i18n="t3.name">جولد</b></div><div class="tier__unlock" data-i18n="t3.unlock">من ٥٬٠٠٠ جنيه في السنة</div></div>
         <span class="tier__rate" data-i18n="t3.rate">١٫٥ نقطة / ١٠٠ جنيه</span>
-        <div class="tier__perks" data-i18n="t3.perks">كل اللي فات، وكمان: تجرّب الإصدارات المحدودة قبل الناس · خصم ١٠٪ على منتجات LJ's</div>
+        <div class="tier__perks" data-i18n="t3.perks">كل اللي فات، وكمان: صوص ببلاش مع كل طلب · تجرّب الإصدارات المحدودة قبل الناس · خصم ١٠٪ على منتجات LJ's</div>
       </div>
     </div>
 
     <div class="birthday">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21h16v-8a3 3 0 00-3-3H7a3 3 0 00-3 3v8zM4 16h16M12 7V4M8 7V5M16 7V5"/></svg>
       <h3 data-i18n="bday.title">في عيد ميلادك...</h3>
-      <p data-i18n="bday.sub"><b>سيجنتشر سماش ببلاش.</b> في شهر عيد ميلادك، في كل الدرجات.</p>
+      <p data-i18n="bday.sub"><b>سيجنتشر سماش ببلاش.</b> في أسبوع عيد ميلادك، في كل الدرجات.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="menu">
+  <div class="wrap">
+    <div class="eyebrow2" data-i18n="mn.eyebrow">المنيو</div>
+    <h2 data-i18n="mn.title">أسعار الافتتاح</h2>
+    <p class="lead" data-i18n="mn.lead">أسعار الافتتاح من ١٤ يناير لـ١٣ أبريل ٢٠٢٧. السعر المشطوب هو السعر العادي. بالجنيه المصري.</p>
+    <div class="menu8"><div class="mcat"><h3><span data-mc="en">Love Birds</span><span data-mc="ar">لاف بيردز</span></h3><ul><li><span>The Duck One</span><span class="pr"><s>365</s> 275</span></li><li><span>The Pigeon One</span><span class="pr"><s>385</s> 345</span></li><li><span>Love Birds Box</span><span class="pr"><s>825</s> 790</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Meals for Two</span><span data-mc="ar">وجبات لاتنين</span></h3><ul><li><span>Smash for Two</span><span class="pr">735</span></li><li><span>The Mix-Up</span><span class="pr">625</span></li><li><span>Cluck for Two</span><span class="pr">500</span></li><li><span>Smash &amp; Wings</span><span class="pr">550</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Family Meals for 4</span><span data-mc="ar">وجبات عائلية لـ٤</span></h3><ul><li><span>The Squad Box</span><span class="pr">2,140</span></li><li><span>The Love Nest</span><span class="pr">1,025</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Smash Burgers</span><span data-mc="ar">سماش برجر</span></h3><ul><li><span>Signature Smash</span><span class="pr"><s>315</s> 275</span></li><li><span>Steak House Smash</span><span class="pr"><s>345</s> 300</span></li><li><span>Smokey Buffalo Chicken Smash</span><span class="pr"><s>295</s> 225</span></li><li><span>LJ’s Smash Burger</span><span class="pr"><s>285</s> 235</span></li><li><span>Vegan Smash</span><span class="pr">295</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Korean Fried Chicken &amp; Bao</span><span data-mc="ar">فراخ كوري وباو</span></h3><ul><li><span>Crispy Korean Wings</span><span class="pr"><s>195</s> 150</span></li><li><span>Crispy Korean Tenders</span><span class="pr"><s>215</s> 165</span></li><li><span>Korean Chicken Bao</span><span class="pr"><s>215</s> 165</span></li><li><span>Fried Chicken Burger</span><span class="pr"><s>275</s> 210</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Fries &amp; Sides</span><span data-mc="ar">بطاطس وجانبي</span></h3><ul><li><span>Skin-on Fries</span><span class="pr"><s>75</s> 60</span></li><li><span>Spicy Fries</span><span class="pr"><s>85</s> 65</span></li><li><span>Loaded Beef Fries</span><span class="pr"><s>185</s> 170</span></li><li><span>Sweet Potato Fries</span><span class="pr"><s>110</s> 85</span></li><li><span>Wakame Salad</span><span class="pr">125</span></li><li><span>House Kimchi</span><span class="pr"><s>90</s> 70</span></li><li><span>Spicy Cucumber Salad</span><span class="pr"><s>85</s> 65</span></li><li><span>Extra Sauce</span><span class="pr">25</span></li><li><span>Premium Truffle Mayo</span><span class="pr"><s>35</s> 30</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Matcha Bar</span><span data-mc="ar">ماتشا</span></h3><ul><li><span>Iced Matcha Latte</span><span class="pr"><s>155</s> 120</span></li><li><span>Strawberry Cloud Matcha</span><span class="pr"><s>175</s> 135</span></li><li><span>Vanilla Matcha Latte</span><span class="pr"><s>165</s> 125</span></li><li><span>Dirty Matcha (espresso)</span><span class="pr"><s>185</s> 140</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Iced Coffee</span><span data-mc="ar">قهوة ساقعة</span></h3><ul><li><span>Iced Americano</span><span class="pr"><s>95</s> 75</span></li><li><span>Iced Latte</span><span class="pr"><s>125</s> 95</span></li><li><span>Iced Spanish Latte</span><span class="pr"><s>145</s> 110</span></li><li><span>Iced Caramel Latte</span><span class="pr"><s>150</s> 120</span></li><li><span>Iced Mocha</span><span class="pr"><s>155</s> 120</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Iced Tea &amp; Lemonade</span><span data-mc="ar">شاي ساقع وليمونادة</span></h3><ul><li><span>Peach Iced Tea</span><span class="pr"><s>105</s> 80</span></li><li><span>Passion Fruit Iced Tea</span><span class="pr"><s>115</s> 90</span></li><li><span>Classic Lemonade</span><span class="pr"><s>95</s> 75</span></li><li><span>Strawberry Lemonade</span><span class="pr"><s>115</s> 90</span></li><li><span>Mint Lemonade</span><span class="pr"><s>105</s> 80</span></li></ul></div><div class="mcat"><h3><span data-mc="en">Sundaes</span><span data-mc="ar">صنداي</span></h3><ul><li><span>Vanilla Sundae</span><span class="pr"><s>110</s> 85</span></li><li><span>Chocolate Sundae</span><span class="pr"><s>120</s> 90</span></li><li><span>Caramel Sundae</span><span class="pr"><s>120</s> 90</span></li><li><span>Mixed Sundae (two flavours)</span><span class="pr"><s>135</s> 105</span></li><li><span>Matcha Sundae</span><span class="pr"><s>155</s> 120</span></li></ul></div></div>
+    <div class="where8">
+      <p><b data-i18n="wh.title">فين؟</b> <span data-i18n="wh.place">المحروسة فود كورت، الإسكندرية · افتتاح ١٤ يناير ٢٠٢٧ · المواعيد مع مواعيد الفود كورت</span></p>
+      <p><a href="https://www.google.com/maps/search/?api=1&query=31.254176,29.973921" target="_blank" rel="noopener" data-i18n="wh.map">افتح الخريطة</a> · <a href="/app/" data-i18n="wh.app">اطلب من الأبلكيشن</a></p>
+      <p class="tip8" data-i18n="wh.android">عندك أندرويد؟ افتح ljsburger.com/app واختار "إضافة للشاشة الرئيسية"، ويشتغل زي الأبلكيشن.</p>
     </div>
   </div>
 </section>
@@ -286,7 +314,7 @@ h1,h2,h3,.sec .lead,.pitch p,.birthday p,.founding p,.tier__perks{text-wrap:bala
     <div class="founding">
       <span class="tag" data-i18n="fm.tag">عضو مؤسس · قبل الافتتاح بس</span>
       <h3 data-i18n="fm.title">انضم دلوقتي، قبل ما نفتح</h3>
-      <p data-i18n="fm.sub">لما تنضم قبل الافتتاح، بتاخد شارة "عضو مؤسس" معاك على طول. وكل أعضاء النادي ليهم خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.</p>
+      <p data-i18n="fm.sub">لما تنضم قبل الافتتاح، بتاخد شارة "عضو مؤسس" معاك على طول، ونقط دبل في أول شهر بعد الافتتاح. وكل أعضاء النادي ليهم خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.</p>
     </div>
   </div>
 </section>
@@ -336,6 +364,10 @@ h1,h2,h3,.sec .lead,.pitch p,.birthday p,.founding p,.tier__perks{text-wrap:bala
 var I18N = {
   ar: {
     brandname: "إل جيز برجر وفراخ مقلية",
+    "mn.eyebrow":"المنيو", "mn.title":"أسعار الافتتاح", "mn.lead":"أسعار الافتتاح من ١٤ يناير لـ١٣ أبريل ٢٠٢٧. السعر المشطوب هو السعر العادي. بالجنيه المصري.",
+    "wh.title":"فين؟", "wh.place":"المحروسة فود كورت، الإسكندرية · افتتاح ١٤ يناير ٢٠٢٧ · المواعيد مع مواعيد الفود كورت", "wh.map":"افتح الخريطة", "wh.app":"اطلب من الأبلكيشن",
+    "wh.android":"عندك أندرويد؟ افتح ljsburger.com/app واختار \"إضافة للشاشة الرئيسية\"، ويشتغل زي الأبلكيشن.",
+
     "h.eyebrow":"قريباً في الإسكندرية", "h.title":"بدأنا في لندن.<br>واتولدنا في <b>الإسكندرية.</b>",
     "h.sub":"سماش برجر وفراخ مقلية سبايسي. انضم لنادي LJ's دلوقتي واحجز خصم أول طلب قبل ما نفتح.",
     "h.cta":"انضم للنادي دلوقتي",
@@ -345,13 +377,13 @@ var I18N = {
     "how.n2":"٢","how.c2b":"اترقّى","how.c2p":"كل ما تطلب أكتر، تترقّى لدرجة أعلى",
     "how.n3":"٣","how.c3b":"استبدل","how.c3p":"كل مكافأة بنقاط على قد سعرها، وتستبدلها وقتما تحب",
     "tiers.eyebrow":"الدرجات", "tiers.title":"كل ما تاكل أكتر، تاخد أكتر",
-    "tiers.lead":"درجتك على حسب اللي صرفته معانا، ومش بتنزل أبداً. والمكافآت بنفس عدد النقاط للكل.",
-    "t1.name":"سماش","t1.unlock":"من أول طلب","t1.rate":"نقطة / ١٠٠ جنيه","t1.perks":"خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه · سيجنتشر سماش ببلاش في شهر عيد ميلادك · كل مكافآت النقاط",
-    "t2.name":"هوت","t2.unlock":"من ١٬٥٠٠ جنيه","t2.rate":"١٫٢٥ نقطة / ١٠٠ جنيه","t2.perks":"كل اللي فات، وكمان: صوص ببلاش مع كل طلب",
-    "t3.name":"جولد","t3.unlock":"من ٥٬٠٠٠ جنيه","t3.rate":"١٫٥ نقطة / ١٠٠ جنيه","t3.perks":"كل اللي فات، وكمان: تجرّب الإصدارات المحدودة قبل الناس · خصم ١٠٪ على منتجات LJ's",
-    "bday.title":"في عيد ميلادك...", "bday.sub":"<b>سيجنتشر سماش ببلاش.</b> في شهر عيد ميلادك، في كل الدرجات.",
+    "tiers.lead":"درجتك على حسب اللي صرفته معانا في آخر ١٢ شهر، ولما توصل لدرجة بتفضل بتاعتك سنة على الأقل. والمكافآت بنفس عدد النقاط للكل.",
+    "t1.name":"سماش","t1.unlock":"من أول طلب","t1.rate":"نقطة / ١٠٠ جنيه","t1.perks":"خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه (لحد ١٥٠ جنيه) · سيجنتشر سماش ببلاش في أسبوع عيد ميلادك · كل مكافآت النقاط",
+    "t2.name":"هوت","t2.unlock":"من ١٬٥٠٠ جنيه في السنة","t2.rate":"١٫٢٥ نقطة / ١٠٠ جنيه","t2.perks":"كل اللي فات، وكمان: صوص ببلاش مرة في الأسبوع",
+    "t3.name":"جولد","t3.unlock":"من ٥٬٠٠٠ جنيه في السنة","t3.rate":"١٫٥ نقطة / ١٠٠ جنيه","t3.perks":"كل اللي فات، وكمان: صوص ببلاش مع كل طلب · تجرّب الإصدارات المحدودة قبل الناس · خصم ١٠٪ على منتجات LJ's",
+    "bday.title":"في عيد ميلادك...", "bday.sub":"<b>سيجنتشر سماش ببلاش.</b> في أسبوع عيد ميلادك، في كل الدرجات.",
     "fm.tag":"عضو مؤسس · قبل الافتتاح بس", "fm.title":"انضم دلوقتي، قبل ما نفتح",
-    "fm.sub":"لما تنضم قبل الافتتاح، بتاخد شارة \"عضو مؤسس\" معاك على طول. وكل أعضاء النادي ليهم خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
+    "fm.sub":"لما تنضم قبل الافتتاح، بتاخد شارة \"عضو مؤسس\" معاك على طول، ونقط دبل في أول شهر بعد الافتتاح. وكل أعضاء النادي ليهم خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
     "join.title":"يلا بينا", "join.lead":"اسمك ورقمك وتاريخ ميلادك، وتبقى عضو مؤسس في نادي LJ's.",
     "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.d":"اليوم","join.m":"الشهر","join.y":"السنة","a.sound":"الصوت","a.play":"تشغيل","doc.title":"LJ's Burger & Fried Chicken — انضم لنادي LJ's","join.submit":"انضم للنادي","join.offers":"ابعتولي عروض LJ's","join.consent":"بالانضمام انت موافق على <a href='/privacy/'>سياسة الخصوصية</a> و<a href='/terms/'>شروط نادي LJ's</a>.",
     "join.okTitle":"أهلاً بيك في النادي","join.okSub":"انت دلوقتي عضو مؤسس. رقم عضويتك:","join.okNote":"مستنيك خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
@@ -359,6 +391,9 @@ var I18N = {
     "foot.copy":"© ٢٠٢٦ إل جيز برجر وفراخ مقلية · الإسكندرية، مصر"
   },
   en: {
+    "mn.eyebrow":"The menu", "mn.title":"Launch prices", "mn.lead":"Launch prices from 14 January to 13 April 2027. The crossed-out price is the regular price. In Egyptian pounds.",
+    "wh.title":"Where?", "wh.place":"El Mahrousa Food Court, Alexandria · opening 14 January 2027 · open with the food court's hours", "wh.map":"Open the map", "wh.app":"Order in the app",
+    "wh.android":"On Android? Open ljsburger.com/app and choose \"Add to Home screen\": it works like an app.",
     brandname: "LJ's Burger & Fried Chicken",
     "h.eyebrow":"Opening soon in Alexandria", "h.title":"Created in London.<br>Smashed in <b>Alexandria.</b>",
     "h.sub":"Smash burgers and hot chicken. Join LJ's Club now and lock in your first-order discount before we open.",
@@ -369,13 +404,13 @@ var I18N = {
     "how.n2":"2","how.c2b":"Climb","how.c2p":"Order more, unlock higher tiers",
     "how.n3":"3","how.c3b":"Redeem","how.c3p":"Every reward costs its menu price ÷ 5 in points. Swap any time",
     "tiers.eyebrow":"Tiers", "tiers.title":"The more you eat, the more you get",
-    "tiers.lead":"Your tier follows what you've spent with us, and it never goes down. Rewards cost the same for everyone.",
-    "t1.name":"Smash","t1.unlock":"From your first order","t1.rate":"1 pt / 100 EGP","t1.perks":"20% off your first order over EGP 300 · a free Signature Smash in your birthday month · every points reward",
-    "t2.name":"Hot","t2.unlock":"From 1,500 EGP spent","t2.rate":"1.25 pts / 100 EGP","t2.perks":"Everything above, plus: a free dip with every order",
-    "t3.name":"Gold","t3.unlock":"From 5,000 EGP spent","t3.rate":"1.5 pts / 100 EGP","t3.perks":"Everything above, plus: early access to limited drops · 10% off LJ's merch",
-    "bday.title":"On your birthday...", "bday.sub":"<b>A free Signature Smash.</b> In your birthday month, at every tier.",
+    "tiers.lead":"Your tier follows what you've spent with us in the last 12 months, and once you reach a tier it's yours for at least a year. Rewards cost the same for everyone.",
+    "t1.name":"Smash","t1.unlock":"From your first order","t1.rate":"1 pt / 100 EGP","t1.perks":"20% off your first order over EGP 300 (up to EGP 150) · a free Signature Smash in your birthday week · every points reward",
+    "t2.name":"Hot","t2.unlock":"From 1,500 EGP a year","t2.rate":"1.25 pts / 100 EGP","t2.perks":"Everything above, plus: a free dip once a week",
+    "t3.name":"Gold","t3.unlock":"From 5,000 EGP a year","t3.rate":"1.5 pts / 100 EGP","t3.perks":"Everything above, plus: a free dip with every order · early access to limited drops · 10% off LJ's merch",
+    "bday.title":"On your birthday...", "bday.sub":"<b>A free Signature Smash.</b> In your birthday week, at every tier.",
     "fm.tag":"Founding Member · before opening only", "fm.title":"Join now, before we open",
-    "fm.sub":"Join before we open and the Founding Member badge is yours for good. And every member gets 20% off their first order over EGP 300.",
+    "fm.sub":"Join before we open and the Founding Member badge is yours for good, plus double points in our first month. And every member gets 20% off their first order over EGP 300.",
     "join.title":"Let's do this", "join.lead":"Your name, number, and birthday — and you're a Founding Member of LJ's Club.",
     "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.d":"Day","join.m":"Month","join.y":"Year","a.sound":"Sound","a.play":"Play","doc.title":"LJ's Burger & Fried Chicken — Join LJ's Club","join.submit":"Join the club","join.offers":"Send me LJ's offers","join.consent":"By joining, you agree to our <a href='/privacy/'>privacy policy</a> and <a href='/terms/'>LJ's Club terms</a>.",
     "join.okTitle":"Welcome to the club","join.okSub":"You're a Founding Member now. Your membership number:","join.okNote":"20% off your first order over EGP 300 is waiting for you.",
