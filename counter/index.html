@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F04E23">
+<title>LJ's Counter</title>
+<style>
+:root{--o:#F04E23;--ink:#1F1A17;--mute:#7A6F66;--bg:#FBF6EE;--card:#fff;--ok:#1E9E5A;--bad:#D23A18;--line:#E8DED0}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);-webkit-tap-highlight-color:transparent;font-size:18px}
+button{font:inherit;border:0;cursor:pointer;color:inherit;background:none}
+header{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--o);color:#fff}
+header b{font-size:22px;flex:1}
+header small{opacity:.9;font-size:14px}
+main{padding:18px;max-width:720px;margin:0 auto}
+.en{display:block;font-size:.72em;opacity:.7;direction:ltr;font-weight:500}
+.big{display:block;width:100%;padding:22px;border-radius:22px;font-size:26px;font-weight:800;text-align:center;margin-top:14px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.go{background:var(--o);color:#fff}
+.ok{background:var(--ok);color:#fff}
+.bad{background:var(--bad);color:#fff}
+.soft{background:var(--card);color:var(--ink);border:2px solid var(--line)}
+.card{background:var(--card);border-radius:22px;padding:20px;margin-top:14px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.who{display:flex;align-items:center;gap:14px}
+.who .av{width:64px;height:64px;border-radius:18px;background:var(--o);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:800}
+.who b{font-size:28px;display:block}
+.tier{display:inline-block;padding:4px 12px;border-radius:999px;font-weight:800;font-size:15px;background:#F3E7C9;color:#7a5a10}
+.tier.BLACK{background:#111;color:#E8C15A}.tier.HOT{background:#FCD9CC;color:#a3300f}
+input.amt{width:100%;font-size:44px;font-weight:800;text-align:center;padding:16px;border-radius:18px;border:3px solid var(--line);margin-top:10px;direction:ltr}
+input.amt:focus{outline:none;border-color:var(--o)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:20px}
+.row:last-child{border-bottom:0}
+.pay{font-size:54px;font-weight:900;text-align:center;margin:8px 0;direction:ltr}
+.mute{color:var(--mute);font-size:15px}
+.tick{width:120px;height:120px;border-radius:50%;margin:10px auto;display:grid;place-items:center;font-size:72px;color:#fff}
+.center{text-align:center}
+video{width:100%;border-radius:22px;background:#000;max-height:52vh;object-fit:cover}
+.tog{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:start;padding:16px;border-radius:18px;background:var(--card);border:2px solid var(--line);margin-top:12px}
+.tog i{width:56px;height:32px;border-radius:999px;background:#ccc;position:relative;flex:none}
+.tog i:after{content:"";position:absolute;top:3px;right:3px;width:26px;height:26px;border-radius:50%;background:#fff;transition:.2s}
+.tog.on{border-color:var(--ok)}.tog.on i{background:var(--ok)}.tog.on i:after{right:27px}
+.tabs{display:flex;gap:10px;margin-top:4px}
+.tabs button{flex:1;padding:14px;border-radius:16px;background:var(--card);border:2px solid var(--line);font-weight:800}
+.tabs button.on{border-color:var(--o);color:var(--o)}
+.ord{border-inline-start:8px solid var(--o)}
+.ord.paid{border-color:#FFB703}.ord.ready{border-color:var(--ok)}
+.ord h3{font-size:30px;direction:ltr;text-align:end}
+.ord ul{list-style:none;padding:0;margin:8px 0}
+.ord li{padding:4px 0;font-size:19px}
+.btns{display:flex;gap:10px}.btns .big{margin-top:10px;font-size:21px;padding:18px}
+.badge{display:inline-block;min-width:28px;padding:2px 8px;border-radius:999px;background:var(--o);color:#fff;font-size:15px;margin-inline-start:6px}
+.err{color:var(--bad);font-weight:700;margin-top:10px;text-align:center}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header><b>LJ’s · الكاونتر</b><small id="hdr"></small></header>
+<main id="m"></main>
+<script src="jsQR.js"></script>
+<script>
+/* LJ's counter page: scan the Club card, type the bill total, done. Paired once per tablet by the owner (link with #k=...). */
+const API = (() => { try { const q = new URLSearchParams(location.search).get('api'); if (q && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(q)) return q; } catch (e) {} return 'https://ljs-api.said-3bf.workers.dev'; })();
+const $ = s => document.querySelector(s), m = $('#m');
+let KEY = '';
+try { const h = new URLSearchParams(location.hash.slice(1)); if (h.get('k')) { localStorage.setItem('ljctr', h.get('k')); history.replaceState(null, '', location.pathname); } KEY = localStorage.getItem('ljctr') || ''; } catch (e) {}
+const egp = n => 'EGP ' + Number(n || 0).toLocaleString('en-US');
+const T = (ar, en) => `${ar}<span class="en">${en}</span>`;
+async function api(path, body) {
+  try {
+    const r = await fetch(API + path, { method: body ? 'POST' : 'GET', headers: { 'Content-Type': 'application/json', 'X-Counter': KEY }, body: body ? JSON.stringify(body) : undefined });
+    return await r.json();
+  } catch (e) { return { ok: false, error: 'offline' }; }
+}
+const ERR = { offline: ['مفيش إنترنت. جرّب تاني', 'No internet. Try again'], counter: ['الجهاز ده مش متسجّل. كلّم المدير', 'This tablet is not paired. Ask the owner'],
+  card: ['الكارت ده مش صحيح', 'This card is not valid'], total: ['اكتب المبلغ صح', 'Type the bill total'], same_again: ['', ''], too_late: ['عدّى أكتر من ١٠ دقايق', 'More than 10 minutes ago'],
+  used: ['اتستخدمت قبل كده', 'Already used'], expired: ['انتهت', 'Expired'], unknown: ['مش موجود', 'Not found'], status: ['الطلب اتحرّك خلاص', 'Order already moved on'], wait: ['استنى دقيقة', 'Wait a minute'] };
+const errHTML = e => { const x = ERR[e] || ['حصل غلط. جرّب تاني', 'Something went wrong. Try again']; return `<p class="err">${T(x[0], x[1])}</p>`; };
+
+/* ---------- screens ---------- */
+let tab = 'scan', orders = [], cam = null, raf = 0;
+function home() {
+  stopCam();
+  if (!KEY) { m.innerHTML = `<div class="card center"><p style="font-size:22px">${T('الجهاز ده لسه مش متسجّل', 'This tablet is not paired yet')}</p><p class="mute" style="margin-top:10px">${T('افتح لينك الكاونتر اللي بعتهولك المدير مرة واحدة على الجهاز ده', 'Open the counter link from the owner once on this tablet')}</p></div>`; return; }
+  const n = orders.filter(o => o.status === 'new').length;
+  m.innerHTML = `<div class="tabs"><button class="${tab === 'scan' ? 'on' : ''}" data-t="scan">${T('امسح', 'Scan')}</button><button class="${tab === 'orders' ? 'on' : ''}" data-t="orders">${T('طلبات الأبلكيشن', 'App orders')}${n ? `<span class="badge">${n}</span>` : ''}</button></div><div id="body"></div>`;
+  m.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { tab = b.dataset.t; home(); });
+  tab === 'scan' ? scanScreen() : ordersScreen();
+}
+function scanScreen() {
+  $('#body').innerHTML = `<div class="card center"><p style="font-size:20px;font-weight:700">${T('وجّه الكاميرا على كود الـQR', 'Point the camera at the QR code')}</p>
+    <video id="v" playsinline muted style="margin-top:12px"></video>
+    <p class="mute" style="margin-top:10px">${T('كارت النادي، أو مكافأة، أو طلب من الأبلكيشن', 'Club card, a reward, or an app order')}</p></div>
+    <button class="big soft" id="typeBtn">${T('اكتب الكود بإيدك', 'Type the code instead')}</button>`;
+  $('#typeBtn').onclick = typeScreen;
+  startCam();
+}
+function typeScreen() {
+  stopCam();
+  $('#body').innerHTML = `<div class="card"><p style="font-weight:700">${T('اكتب الكود اللي تحت الـQR', 'Type the code under the QR')}</p>
+    <input class="amt" id="code" placeholder="LJM-0042-XXXXXX" autocapitalize="characters" autocomplete="off" style="font-size:26px"></div>
+    <button class="big go" id="goCode">${T('تمام', 'OK')}</button><button class="big soft" id="backB">${T('رجوع', 'Back')}</button>`;
+  $('#code').focus();
+  $('#goCode').onclick = () => look($('#code').value);
+  $('#backB').onclick = home;
+}
+async function startCam() {
+  const v = $('#v'); if (!v) return;
+  try { cam = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }); }
+  catch (e) { v.replaceWith(Object.assign(document.createElement('p'), { className: 'err', innerHTML: T('الكاميرا مقفولة. اسمح للكاميرا أو اكتب الكود', 'Camera is blocked. Allow it, or type the code') })); return; }
+  v.srcObject = cam; await v.play().catch(() => {});
+  const c = document.createElement('canvas'), g = c.getContext('2d', { willReadFrequently: true });
+  const tick = () => {
+    if (!cam || !v.isConnected) return;
+    if (v.readyState >= 2) {
+      const w = 480, h = Math.round(v.videoHeight / v.videoWidth * w) || 360; c.width = w; c.height = h; g.drawImage(v, 0, 0, w, h);
+      const q = jsQR(g.getImageData(0, 0, w, h).data, w, h, { inversionAttempts: 'dontInvert' });
+      if (q && /^LJ[MRO]-/.test(q.data)) { navigator.vibrate && navigator.vibrate(60); look(q.data); return; }
+    }
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+}
+function stopCam() { cancelAnimationFrame(raf); if (cam) { cam.getTracks().forEach(t => t.stop()); cam = null; } }
+
+async function look(raw) {
+  stopCam();
+  const qr = String(raw || '').trim().toUpperCase();
+  m.innerHTML = `<div class="card center"><p>${T('لحظة…', 'One moment…')}</p></div>`;
+  const r = await api('/counter/look', { qr });
+  if (!r.ok) { m.innerHTML = errHTML(r.error) + `<button class="big go" id="h">${T('رجوع', 'Back')}</button>`; $('#h').onclick = home; return; }
+  if (r.type === 'member') memberScreen(r.card, r.member);
+  else if (r.type === 'reward') rewardScreen(r);
+  else if (r.type === 'order' && r.order) orderScreen(r.order, r.member);
+  else { m.innerHTML = `<div class="card center"><div class="tick" style="background:var(--bad)">✕</div><p style="font-size:24px;font-weight:800">${T('الكود ده مش من LJ’s', 'Not an LJ’s code')}</p></div><button class="big go" id="h">${T('امسح تاني', 'Scan again')}</button>`; $('#h').onclick = home; }
+}
+const whoHTML = mb => `<div class="card who"><span class="av">${(mb.name || '?')[0]}</span><span style="flex:1"><b>${esc(mb.name)}</b><span class="tier ${mb.tier}">${mb.tier}</span> <span class="mute" style="direction:ltr;display:inline-block">${mb.tag} · ${mb.points} pts</span></span></div>`;
+const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const studentDay = () => { const d = new Date(Date.now() + 2 * 3600e3).getUTCDay(); return d >= 1 && d <= 4; };
+
+function memberScreen(card, mb, err) {
+  let student = false;
+  m.innerHTML = `${whoHTML(mb)}
+    ${mb.bdayNow ? `<div class="card" style="background:#FFF3C4">🎂 ${T('أسبوع عيد ميلاده! السيجنتشر سماش ببلاش لو طلبها من الأبلكيشن', 'Birthday week! The free Signature Smash is claimed in the app')}</div>` : ''}
+    <div class="card"><p style="font-weight:700">${T('اكتب إجمالي الفاتورة', 'Type the bill total')}</p>
+    <input class="amt" id="amt" inputmode="numeric" pattern="[0-9]*" placeholder="0"></div>
+    ${studentDay() ? `<button class="tog" id="stu"><span>${T('طالب ومعاه كارنيه، أكل هنا', 'Student with ID, dine-in')}</span><i></i></button>` : ''}
+    ${err ? errHTML(err) : ''}
+    <button class="big go" id="next">${T('التالي', 'Next')}</button><button class="big soft" id="h">${T('إلغاء', 'Cancel')}</button>`;
+  $('#amt').focus();
+  const st = $('#stu'); if (st) st.onclick = () => { student = !student; st.classList.toggle('on', student); };
+  $('#h').onclick = home;
+  $('#next').onclick = async () => {
+    const total = Math.round(Number($('#amt').value));
+    if (!(total > 0)) { memberScreen(card, mb, 'total'); return; }
+    const q = await api('/counter/quote', { card, total, student });
+    if (!q.ok) { memberScreen(card, mb, q.error); return; }
+    confirmScreen(card, mb, total, student, q);
+  };
+}
+function confirmScreen(card, mb, total, student, q) {
+  m.innerHTML = `${whoHTML(mb)}<div class="card">
+    <div class="row"><span>${T('الفاتورة', 'Bill')}</span><b style="direction:ltr">${egp(total)}</b></div>
+    ${q.deal ? `<div class="row" style="color:var(--ok)"><span>${T('خصم', 'Discount')}: ${esc(q.deal.label)}</span><b style="direction:ltr">− ${egp(q.deal.disc)}</b></div>` : `<div class="row mute"><span>${T('مفيش خصم', 'No discount')}</span><span></span></div>`}
+    <p class="center" style="margin-top:12px;font-weight:700">${T('العميل يدفع', 'Customer pays')}</p><div class="pay">${egp(q.pay)}</div>
+    <div class="row"><span>${T('نقط', 'Points')}</span><b style="color:var(--o)">+${q.pts}</b></div>
+    ${q.dip ? `<div class="row" style="color:var(--o)"><span>🥣 ${T('اديله صوص ببلاش', 'Give a free dip')}</span><b>✓</b></div>` : ''}
+    </div>
+    <button class="big ok" id="yes">${T('تم الدفع ✓', 'Paid ✓')}</button><button class="big soft" id="h">${T('رجوع', 'Back')}</button>`;
+  $('#h').onclick = () => memberScreen(card, mb);
+  $('#yes').onclick = async () => {
+    $('#yes').disabled = true;
+    let r = await api('/counter/earn', { card, total, student });
+    if (!r.ok && r.error === 'same_again') {
+      if (!confirm('نفس العميل اتسجّل من أقل من ٣ دقايق. تسجّل تاني؟\nSame member less than 3 minutes ago. Add again?')) { home(); return; }
+      r = await api('/counter/earn', { card, total, student, again: true });
+    }
+    if (!r.ok) { m.insertAdjacentHTML('beforeend', errHTML(r.error)); $('#yes').disabled = false; return; }
+    doneScreen(r);
+  };
+}
+function doneScreen(r) {
+  m.innerHTML = `<div class="card center"><div class="tick" style="background:var(--ok)">✓</div>
+    <p style="font-size:28px;font-weight:900">+${r.pts} ${T('نقطة', 'points')}</p>
+    <p class="mute">${esc(r.name)} · ${r.points} pts · ${r.tierAfter}</p>
+    ${r.tierAfter !== r.tier ? `<p style="font-size:22px;font-weight:800;color:var(--o);margin-top:8px">🎉 ${T('طلع ' + r.tierAfter + '!', 'Now ' + r.tierAfter + '!')}</p>` : ''}</div>
+    <button class="big go" id="h">${T('العميل اللي بعده', 'Next customer')}</button>
+    <button class="big soft" id="undo">${T('غلطت؟ الغِ (١٠ دقايق)', 'Mistake? Undo (10 min)')}</button>`;
+  $('#h').onclick = home;
+  $('#undo').onclick = async () => { const u = await api('/counter/undo', { id: r.id }); if (!u.ok) { m.insertAdjacentHTML('beforeend', errHTML(u.error)); return; } m.innerHTML = `<div class="card center"><p style="font-size:24px;font-weight:800">${T('اتلغت', 'Undone')}</p></div><button class="big go" id="h2">${T('رجوع', 'Back')}</button>`; $('#h2').onclick = home; };
+}
+function rewardScreen(r) {
+  const good = r.status === 'valid';
+  const label = { valid: ['صالحة', 'VALID'], used: ['اتستخدمت قبل كده', 'ALREADY USED'], expired: ['انتهت', 'EXPIRED'], unknown: ['مش موجودة', 'NOT FOUND'] }[r.status] || ['?', '?'];
+  m.innerHTML = `<div class="card center"><div class="tick" style="background:${good ? 'var(--ok)' : 'var(--bad)'}">${good ? '✓' : '✕'}</div>
+    <p style="font-size:30px;font-weight:900">${T(label[0], label[1])}</p>
+    ${r.label ? `<p style="font-size:24px;margin-top:8px">${esc(r.label)}</p>` : ''}${r.name ? `<p class="mute">${esc(r.name)} · <span style="direction:ltr">${esc(r.code)}</span></p>` : ''}</div>
+    ${good ? `<button class="big ok" id="give">${T('اديله المكافأة ✓', 'Give it ✓')}</button>` : ''}
+    <button class="big soft" id="h">${T('رجوع', 'Back')}</button>`;
+  $('#h').onclick = home;
+  if (good) $('#give').onclick = async () => { const x = await api('/counter/redeem', { code: r.code }); if (!x.ok) { rewardScreen({ ...r, status: x.error }); return; } m.innerHTML = `<div class="card center"><div class="tick" style="background:var(--ok)">✓</div><p style="font-size:26px;font-weight:900">${T('تمام! اديله ' , 'Done! Hand over ')}${esc(r.label)}</p></div><button class="big go" id="h3">${T('العميل اللي بعده', 'Next customer')}</button>`; $('#h3').onclick = home; };
+}
+
+/* ---------- app orders: pay at the counter ---------- */
+const ST = { new: ['مستني يدفع', 'Waiting to pay'], paid: ['اتدفع · في المطبخ', 'Paid · cooking'], ready: ['جاهز', 'Ready'] };
+async function loadOrders() { const r = await api('/counter/orders'); if (r.ok) { orders = r.orders; } return r; }
+function ordHTML(o) {
+  const mins = Math.max(0, Math.round((Date.now() - o.created) / 60000));
+  return `<div class="card ord ${o.status}"><div style="display:flex;justify-content:space-between;align-items:center"><span><b style="font-size:22px">${esc(o.name)}</b> <span class="mute" style="direction:ltr;display:inline-block">${o.tag} · ${mins} min</span><br><span class="tier">${T(ST[o.status][0], ST[o.status][1])}</span></span><h3>${o.id}</h3></div>
+    <ul>${o.items.map(i => `<li>${i.qty} × ${esc(i.n)}${i.opt ? ` <span class="mute">(${esc(i.opt)})</span>` : ''}${i.reward ? ' 🎁' : ''}</li>`).join('')}</ul>
+    <div class="row"><span>${T('الإجمالي', 'Total')}${o.deal ? ` <span class="mute">(${esc(o.deal)} −${o.disc})</span>` : ''}</span><b style="direction:ltr">${egp(o.total)}</b></div>
+    <div class="btns">${o.status === 'new' ? `<button class="big ok" data-a="paid" data-id="${o.id}">${T('دفع ✓', 'Paid ✓')}</button><button class="big soft" data-a="cancelled" data-id="${o.id}">${T('إلغاء', 'Cancel')}</button>`
+      : o.status === 'paid' ? `<button class="big go" data-a="ready" data-id="${o.id}">${T('جاهز', 'Ready')}</button>` : `<button class="big ok" data-a="collected" data-id="${o.id}">${T('استلم', 'Collected')}</button>`}</div></div>`;
+}
+async function ordersScreen() {
+  const b = $('#body'); if (!b) return;
+  const r = await loadOrders();
+  if (tab !== 'orders' || !$('#body')) return;
+  if (!r.ok) { $('#body').innerHTML = errHTML(r.error); return; }
+  $('#body').innerHTML = orders.length ? orders.map(ordHTML).join('') : `<div class="card center mute">${T('مفيش طلبات دلوقتي', 'No app orders right now')}</div>`;
+  $('#body').onclick = async e => {
+    const x = e.target.closest('[data-a]'); if (!x) return;
+    if (x.dataset.a === 'cancelled' && !confirm('تلغي الطلب ده؟ / Cancel this order?')) return;
+    x.disabled = true;
+    const res = await api('/counter/order', { id: x.dataset.id, status: x.dataset.a });
+    if (!res.ok) { x.insertAdjacentHTML('afterend', errHTML(res.error)); return; }
+    if (x.dataset.a === 'paid' && res.earned) navigator.vibrate && navigator.vibrate(60);
+    ordersScreen();
+  };
+}
+function orderScreen(o, mb) { tab = 'orders'; home(); }
+setInterval(async () => { if (!KEY || document.hidden) return; const before = orders.filter(o => o.status === 'new').length; await loadOrders(); const n = orders.filter(o => o.status === 'new').length;
+  if (tab === 'orders' && $('#body') && !document.querySelector('[data-a][disabled]')) ordersScreen(); else if (tab === 'scan' && n !== before && $('.tabs')) { const t = document.querySelector('[data-t="orders"]'); if (t) t.innerHTML = T('طلبات الأبلكيشن', 'App orders') + (n ? `<span class="badge">${n}</span>` : ''); }
+  if (n > before) try { new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=').play(); } catch (e) {} }, 15000);
+(async () => { if (KEY) { const p = await api('/counter/ping'); $('#hdr').textContent = p.ok ? p.name : ''; if (!p.ok && p.error === 'counter') { KEY = ''; } await loadOrders(); } home(); })();
+</script>
+</body>
+</html>
