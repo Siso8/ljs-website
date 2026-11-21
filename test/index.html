@@ -301,10 +301,10 @@ var I18N = {
     "t2.name":"هوت","t2.unlock":"من ١٬٥٠٠ جنيه","t2.rate":"١٫٢٥ نقطة / ١٠٠ جنيه","t2.perks":"كل اللي فات، وكمان: صوص ببلاش مع كل طلب",
     "t3.name":"جولد","t3.unlock":"من ٥٬٠٠٠ جنيه","t3.rate":"١٫٥ نقطة / ١٠٠ جنيه","t3.perks":"كل اللي فات، وكمان: تجرّب الإصدارات المحدودة قبل الناس · خصم ١٠٪ على منتجات LJ's",
     "bday.title":"في عيد ميلادك...", "bday.sub":"<b>سيجنتشر سماش ببلاش.</b> في شهر عيد ميلادك، في كل الدرجات.",
-    "fm.tag":"عرض الافتتاح فقط", "fm.title":"انضم دلوقتي، قبل ما نفتح",
-    "fm.sub":"لما تنضم قبل الافتتاح، بتاخد شارة \"عضو مؤسس\" معاك على طول، وخصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
+    "fm.tag":"عضو مؤسس · قبل الافتتاح بس", "fm.title":"انضم دلوقتي، قبل ما نفتح",
+    "fm.sub":"لما تنضم قبل الافتتاح، بتاخد شارة \"عضو مؤسس\" معاك على طول. وكل أعضاء النادي ليهم خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
     "join.title":"يلا بينا", "join.lead":"اسمك ورقمك وتاريخ ميلادك، وتبقى عضو مؤسس في نادي LJ's.",
-    "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.submit":"انضم للنادي","join.offers":"ابعتولي عروض LJ's","join.consent":"بالانضمام انت موافق على <a href='/privacy/'>سياسة الخصوصية</a>.",
+    "join.name":"الاسم","join.namePh":"اسمك بالكامل","join.phone":"رقم الموبايل","join.bday":"تاريخ الميلاد","join.submit":"انضم للنادي","join.offers":"ابعتولي عروض LJ's","join.consent":"بالانضمام انت موافق على <a href='/privacy/'>سياسة الخصوصية</a> و<a href='/terms/'>شروط نادي LJ's</a>.",
     "join.okTitle":"أهلاً بيك في النادي","join.okSub":"انت دلوقتي عضو مؤسس. رقم عضويتك:","join.okNote":"مستنيك خصم ٢٠٪ على أول طلب فوق ٣٠٠ جنيه.",
     "join.note":"بياناتك محفوظة عندنا بس، مش هنبعتلك غير رسايل عن LJ's.",
     "foot.copy":"© ٢٠٢٦ إل جيز برجر وفراخ مقلية · الإسكندرية، مصر"
@@ -325,10 +325,10 @@ var I18N = {
     "t2.name":"Hot","t2.unlock":"From 1,500 EGP spent","t2.rate":"1.25 pts / 100 EGP","t2.perks":"Everything above, plus: a free dip with every order",
     "t3.name":"Gold","t3.unlock":"From 5,000 EGP spent","t3.rate":"1.5 pts / 100 EGP","t3.perks":"Everything above, plus: early access to limited drops · 10% off LJ's merch",
     "bday.title":"On your birthday...", "bday.sub":"<b>A free Signature Smash.</b> In your birthday month, at every tier.",
-    "fm.tag":"Opening offer only", "fm.title":"Join now, before we open",
-    "fm.sub":"Anyone who joins before opening gets a permanent Founding Member badge, plus 20% off your first order over EGP 300.",
+    "fm.tag":"Founding Member · before opening only", "fm.title":"Join now, before we open",
+    "fm.sub":"Join before we open and the Founding Member badge is yours for good. And every member gets 20% off their first order over EGP 300.",
     "join.title":"Let's do this", "join.lead":"Your name, number, and birthday — and you're a Founding Member of LJ's Club.",
-    "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.submit":"Join the club","join.offers":"Send me LJ's offers","join.consent":"By joining, you agree to our <a href='/privacy/'>privacy policy</a>.",
+    "join.name":"Name","join.namePh":"Your full name","join.phone":"Phone number","join.bday":"Birthday","join.submit":"Join the club","join.offers":"Send me LJ's offers","join.consent":"By joining, you agree to our <a href='/privacy/'>privacy policy</a> and <a href='/terms/'>LJ's Club terms</a>.",
     "join.okTitle":"Welcome to the club","join.okSub":"You're a Founding Member now. Your membership number:","join.okNote":"20% off your first order over EGP 300 is waiting for you.",
     "join.note":"Your details stay with us — we'll only ever message you about LJ's.",
     "foot.copy":"© 2026 LJ's Burger & Fried Chicken · Alexandria, Egypt"
@@ -351,19 +351,19 @@ var X = {
 Object.assign(I18N.ar, X.ar); Object.assign(I18N.en, X.en);
 I18N.en.brandname = "LJ's Burger & Fried Chicken";
 var MENU = [
-  {en:"Signature Smash", ar:"سيجنتشر سماش", p:315, den:"Seasoned double beef patties, American cheese, grilled onions, crispy shallots, pickled cucumber, jalapeños & LJ's secret sauce. Potato bun.", dar:"قطعتين لحم متبلين، جبنة أمريكي، بصل مشوي، شالوت مقرمش، خيار مخلل، هالبينو وصوص إل جيز السري. عيش بوتيتو بن."},
-  {en:"Steak House Smash", ar:"ستيك هاوس سماش", p:345, den:"Double beef patties, blue cheese, fried onions, pickled cucumber, BBQ sauce & truffle mayo. Potato bun.", dar:"قطعتين لحم، بلو تشيز، بصل مقلي، خيار مخلل، صوص باربكيو ومايونيز بالترافل. عيش بوتيتو بن."},
-  {en:"Smokey Buffalo Chicken Smash", ar:"سموكي بافلو تشيكن سماش", p:295, den:"Double chicken patties, smoked cheddar, smoked mayo, spicy buffalo sauce, fried onions, pickled cucumber.", dar:"قطعتين فراخ، شيدر مدخن، مايونيز مدخن، صوص بافلو حار، بصل مقلي، خيار مخلل."},
-  {en:"LJ's Smash Burger", ar:"إل جيز سماش برجر", p:285, den:"Double beef patties, grilled onions, crispy shallots, pickled cucumber, jalapeños & LJ's secret sauce.", dar:"قطعتين لحم، بصل مشوي، شالوت مقرمش، خيار مخلل، هالبينو وصوص إل جيز السري."},
-  {en:"Fried Chicken Burger", ar:"فرايد تشيكن برجر", p:275, den:"", dar:""},
-  {en:"Loaded Beef Fries", ar:"لوديد بيف فرايز", p:185, den:"", dar:""}
+  {en:"Signature Smash", ar:"سيجنتشر سماش", p:275, was:315, den:"Seasoned double beef patties, American cheese, grilled onions, crispy shallots, pickled cucumber, jalapeños & LJ's secret sauce. Potato bun.", dar:"قطعتين لحم متبلين، جبنة أمريكي، بصل مشوي، شالوت مقرمش، خيار مخلل، هالبينو وصوص إل جيز السري. عيش بوتيتو بن."},
+  {en:"Steak House Smash", ar:"ستيك هاوس سماش", p:300, was:345, den:"Double beef patties, blue cheese, fried onions, pickled cucumber, BBQ sauce & truffle mayo. Potato bun.", dar:"قطعتين لحم، بلو تشيز، بصل مقلي، خيار مخلل، صوص باربكيو ومايونيز بالترافل. عيش بوتيتو بن."},
+  {en:"Smokey Buffalo Chicken Smash", ar:"سموكي بافلو تشيكن سماش", p:225, was:295, den:"Double chicken patties, smoked cheddar, smoked mayo, spicy buffalo sauce, fried onions, pickled cucumber.", dar:"قطعتين فراخ، شيدر مدخن، مايونيز مدخن، صوص بافلو حار، بصل مقلي، خيار مخلل."},
+  {en:"LJ's Smash Burger", ar:"إل جيز سماش برجر", p:235, was:285, den:"Double beef patties, grilled onions, crispy shallots, pickled cucumber, jalapeños & LJ's secret sauce.", dar:"قطعتين لحم، بصل مشوي، شالوت مقرمش، خيار مخلل، هالبينو وصوص إل جيز السري."},
+  {en:"Fried Chicken Burger", ar:"فرايد تشيكن برجر", p:210, was:275, den:"", dar:""},
+  {en:"Loaded Beef Fries", ar:"لوديد بيف فرايز", p:170, was:185, den:"", dar:""}
 ];
 var LANG = 'ar';
 function egp(n){ return LANG==='ar' ? n.toLocaleString('ar-EG')+' جنيه' : 'EGP '+n.toLocaleString('en-US'); }
 function renderMenu(){
   document.getElementById('menu').innerHTML = MENU.map(function(m){
     var d = LANG==='ar'?m.dar:m.den;
-    return '<div class="dish"><b class="d">'+(LANG==='ar'?m.ar:m.en)+'</b>'+(d?'<p>'+d+'</p>':'')+'<span class="pr">'+egp(m.p)+'</span></div>';
+    return '<div class="dish"><b class="d">'+(LANG==='ar'?m.ar:m.en)+'</b>'+(d?'<p>'+d+'</p>':'')+'<span class="pr">'+(m.was?'<s style="opacity:.55;font-weight:400;margin-inline-end:6px">'+egp(m.was)+'</s>':'')+egp(m.p)+'</span></div>';
   }).join('');
 }
 function applyLang(l){
