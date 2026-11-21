@@ -206,6 +206,11 @@ html[lang=ar] [data-mc=en],html[lang=en] [data-mc=ar]{display:none}
 .where8{margin-top:18px;line-height:1.7}
 .where8 a{color:inherit;font-weight:700}
 .tip8{opacity:.8;font-size:14px}
+
+/* no selecting or long-press saving (forms still work) */
+html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+img,svg,video{-webkit-user-drag:none;user-drag:none}
 </style>
 </head>
 <body>
