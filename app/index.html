@@ -3946,7 +3946,7 @@ function renderMe() {
       <button class="li" id="signOut">${I('back')}<span>Sign out<small>${S.keep ? 'You stay signed in on this phone. Signing in on another phone signs you out here.' : 'You’ll be signed out when you close the app'}</small></span></button>
       <button class="li danger" id="delAcct">${I('trash')}<span>Delete account<small>Removes your name, number and points</small></span></button>` : ''}
     </div>
-    <p class="fine">LJ’s Burger &amp; Fried Chicken · version 1.0${TEST_BUILD ? ' (test)' : ''}</p>`;
+    <p class="fine">LJ’s Burger &amp; Hot Chicken · version 1.0${TEST_BUILD ? ' (test)' : ''}</p>`;
   $('#themeRow').onclick = toggleLook;
   if ($('#mapRow')) $('#mapRow').onclick = async () => { if (store.get('mapOn', false)) { store.set('mapOn', false); S.me = null; S.meLL = null; await api('/map/ping', { off: true }); loadMap(); renderMe(); toast('You’re off the Smash Map', 'pin'); } else { mapPing(true); setTimeout(renderMe, 1500); } };
   $('#replayIntro').onclick = () => startIntro(true);
@@ -4235,7 +4235,7 @@ function confirmPay() {
   if (!S.signedIn || !S.cart.length) return;
   if (S.pay === 'counter') { placeOrder(); return; }
   openSheet(`<div style="text-align:center;padding:10px 0 4px"><div style="width:72px;height:72px;margin:6px auto 12px;border-radius:22px;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center" id="fid">${I('user')}</div>
-    <h3>Confirm ${egp(total())}</h3><p>${PAYS.find(p => p[0] === S.pay)[1]} · LJ’s Burger &amp; Fried Chicken</p>${TEST_BUILD ? '<p style="font-size:12px;margin-top:-6px">Test version: no money is taken.</p>' : ''}
+    <h3>Confirm ${egp(total())}</h3><p>${PAYS.find(p => p[0] === S.pay)[1]} · LJ’s Burger &amp; Hot Chicken</p>${TEST_BUILD ? '<p style="font-size:12px;margin-top:-6px">Test version: no money is taken.</p>' : ''}
     <div class="bar" style="margin:6px 30px 4px"><i id="payBar" style="width:0"></i></div><p id="payTx" style="margin-top:10px">Authorising…</p></div>`);
   setTimeout(() => { const b = $('#payBar'); if (b) b.style.width = '100%'; }, 60);
   setTimeout(() => { const f = $('#fid'); if (f) { f.innerHTML = I('check'); f.style.background = 'var(--ok)'; f.style.color = '#fff'; $('#payTx').textContent = 'Paid'; haptic(25); } }, 1100);

@@ -1,5 +1,5 @@
 {
-  "name": "LJ's Burger & Chicken",
+  "name": "LJ's Burger & Hot Chicken",
   "short_name": "LJ's",
   "description": "Order ahead, skip the queue and earn points at LJ's El Mahrousa Food Court, Alexandria.",
   "start_url": "/app/?source=homescreen",
@@ -9,7 +9,17 @@
   "background_color": "#F04E23",
   "theme_color": "#F04E23",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
