@@ -200,6 +200,10 @@ footer{position:relative;z-index:1;background:var(--char);color:rgba(244,235,217
 .pill.off{display:inline-block;padding:12px 18px;border-radius:999px;border:2px solid rgba(244,235,217,.35);font-weight:700;opacity:.8}
 .hint2{font-size:14px;opacity:.7;max-width:560px}
 .xs p{text-wrap:pretty}
+/* no selecting or long-press saving (forms still work) */
+html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+img,svg,video{-webkit-user-drag:none;user-drag:none}
 @media (max-width:600px){.tees{grid-template-columns:repeat(3,1fr);gap:8px}.xs{padding:56px 18px}}
 </style>
 </head>
