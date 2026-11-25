@@ -111,7 +111,9 @@ html[lang=ar] .track span{direction:rtl;unicode-bidi:isolate}html[lang=ar] .trac
 .tag{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:1px 6px;margin-inline-start:6px;vertical-align:2px;background:var(--bur);color:#fff}
 .tag.vg{background:#3f7a35}
 .ticket{position:sticky;top:84px;perspective:900px}
-.card{background:var(--bur);color:#fff;border-radius:28px;padding:22px 24px 24px;transform-origin:50% 0;box-shadow:0 18px 40px rgba(107,22,56,.25)}
+.card{position:relative;background:var(--bur);color:#fff;border-radius:28px;padding:34px 24px 24px;transform-origin:50% 0;box-shadow:0 5px 0 -2px #58102D,0 10px 0 -4px #4a0d26,0 22px 40px rgba(107,22,56,.25)}
+.card::before{content:"";position:absolute;left:28px;right:28px;top:12px;height:10px;background:radial-gradient(circle,rgba(0,0,0,.38) 3.5px,transparent 4px) 0 0/24px 10px repeat-x;pointer-events:none}
+.card.page{position:absolute;left:0;top:0;margin:0;z-index:3;pointer-events:none;transform-origin:18% 0;box-shadow:0 14px 30px rgba(0,0,0,.25);backface-visibility:hidden}
 .card .art{background:var(--blush);border-radius:20px;display:grid;place-items:center;padding:10px;position:relative}
 .card .art svg{width:100%;max-width:300px;height:auto}
 .card .mascot{position:absolute;inset-inline-end:10px;top:10px;width:62px;background:#fff;border-radius:50%;padding:7px 4px;transform:rotate(10deg);box-shadow:0 4px 0 rgba(0,0,0,.12)}
@@ -126,7 +128,7 @@ html[lang=ar] .track span{direction:rtl;unicode-bidi:isolate}html[lang=ar] .trac
 .meal small{display:block;font-weight:400;color:#f1dfe5;font-size:13px}
 .vat{font-size:13px;color:#f1dfe5;margin:8px 0 0}
 @media(max-width:900px){.build{grid-template-columns:minmax(0,1fr)}.ticket{order:-1;top:72px;z-index:5}
-.card{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 14px;padding:14px;border-radius:22px}
+.card{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 14px;padding:26px 14px 14px;border-radius:22px}.card::before{top:9px;left:20px;right:20px}
 .card .art{grid-row:span 3;padding:4px;align-self:start}.card .mascot,.card .desc,.card .line{display:none}
 .card h3{margin:2px 0 0;font-size:24px}.total{font-size:40px}.meal{grid-column:1/-1;margin:8px 0 0;min-height:44px;padding:6px 12px}.vat{display:none}
 .card .row .btn{min-height:44px;padding:0 14px;font-size:14px}}
@@ -467,7 +469,17 @@ function renderCard(){
 function fold(fn){
  const c=$('#card');
  if(RM||!c.animate){fn();return}
- c.animate([{transform:'rotateX(0)'},{transform:'rotateX(-88deg)'}],{duration:160,easing:'ease-in'}).onfinish=()=>{fn();c.animate([{transform:'rotateX(88deg)'},{transform:'rotateX(0)'}],{duration:260,easing:'cubic-bezier(.3,1.5,.5,1)'})};
+ const r=c.getBoundingClientRect(), g=c.cloneNode(true);
+ g.removeAttribute('id');g.removeAttribute('aria-live');g.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));
+ g.classList.add('page');g.setAttribute('aria-hidden','true');g.style.width=r.width+'px';g.style.height=r.height+'px';
+ c.parentNode.appendChild(g);
+ fn();
+ g.animate([
+  {transform:'rotateX(0deg) rotateZ(0deg) translateY(0)',opacity:1,offset:0},
+  {transform:'rotateX(-10deg) rotateZ(-1deg) translateY(-3px)',opacity:1,offset:.3,easing:'ease-in-out'},
+  {transform:'rotateX(-12deg) rotateZ(-3deg) translateY(-6px)',opacity:1,offset:.45,easing:'cubic-bezier(.5,0,.75,0)'},
+  {transform:'rotateX(70deg) rotateZ(-10deg) translateY(85%)',opacity:0,offset:1}
+ ],{duration:1150,fill:'forwards'}).onfinish=()=>g.remove();
 }
 function pick(f,l,anim=true){
  if(f!=null)fi=f; if(l!=null)ff=l;
