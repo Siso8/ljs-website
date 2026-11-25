@@ -32,6 +32,9 @@
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--white);color:var(--graph);font:16px/1.55 var(--b);overflow-x:clip;-webkit-font-smoothing:antialiased}
 html[lang=ar] body{font-family:Manrope,Cairo,Tahoma,sans-serif}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
+img{-webkit-user-drag:none;user-drag:none}
 [data-ar]{display:none}html[lang=ar] [data-ar]{display:revert}html[lang=ar] [data-en]{display:none}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
@@ -407,9 +410,9 @@ html[dir=rtl] .zk-in button svg{transform:scaleX(-1)}
   </div>
 </div></section>
 
-<button class="zk-fab" id="zkFab" type="button" aria-label="Ask Zaki" aria-expanded="false" aria-controls="zk"><span class="zk-av" aria-hidden="true">Z</span><span class="zk-fl"><b><span data-en>Ask Zaki</span><span data-ar>اسأل زكي</span></b><small><span data-en>from LJ's next door</span><span data-ar>من LJ’s اللي جنبنا</span></small></span></button>
+<button class="zk-fab" id="zkFab" type="button" aria-label="Ask Zaki" aria-expanded="false" aria-controls="zk"><span class="zk-av" aria-hidden="true">Z</span><span class="zk-fl"><b><span data-en>Ask Zaki</span><span data-ar>اسأل زكي</span></b><small><span data-en>orders, prices, deals</span><span data-ar>الطلبات، الأسعار، العروض</span></small></span></button>
 <section class="zk" id="zk" hidden aria-label="Chat with Zaki">
-  <header class="zk-h"><span class="zk-av" aria-hidden="true">Z</span><span class="zk-t"><b>Zaki</b><small><i></i><span data-en>LJ's sidekick, covering Fat Fold</span><span data-ar>مساعد LJ’s، ماسك فات فولد</span></small></span><button class="zk-x" id="zkX" type="button" aria-label="Close chat">✕</button></header>
+  <header class="zk-h"><span class="zk-av" aria-hidden="true">Z</span><span class="zk-t"><b>Zaki</b><small><i></i><span data-en>Fat Fold assistant · online</span><span data-ar>مساعد فات فولد · أونلاين</span></small></span><button class="zk-x" id="zkX" type="button" aria-label="Close chat">✕</button></header>
   <div class="zk-log" id="zkLog" aria-live="polite"></div>
   <div class="zk-sugg" id="zkSugg"></div>
   <form class="zk-in" id="zkForm"><input id="zkIn" maxlength="300" autocomplete="off" enterkeyhint="send" aria-label="Message Zaki" placeholder="Ask Zaki… / اسأل زكي…"><button type="submit" aria-label="Send"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 11.5 20 4l-6.5 17-2.6-7.2L3 11.5z" fill="currentColor"/></svg></button></form>
@@ -624,7 +627,7 @@ if('IntersectionObserver' in window&&!RM){
  const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach((a,i)=>a.classList.toggle('on',ids[i]===e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
  ids.forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el)});
 }
-/* ---------- Zaki (LJ's sidekick, covering the Fat Fold counter) ---------- */
+/* ---------- Zaki (Fat Fold assistant) ---------- */
 {
 const LJS='https://www.ljsburger.com';
 const zk=$('#zk'),fab=$('#zkFab'),log=$('#zkLog'),inp=$('#zkIn'),sug=$('#zkSugg');
@@ -636,6 +639,7 @@ const combo=(f,x)=>({n:T(`${FILLS[f].en} ${FORMATS[x].en}`,`${FORMATS[x].ar} ${F
 const item=(sec,i)=>{const it=SECTIONS.find(s=>s.id===sec).items[i];return{n:T(it[0],it[1]),p:it[2],tab:sec}};
 const pk=a=>a[Math.floor(Math.random()*a.length)];
 const GUARD=[
+ {re:/(recipe|secret sauce|how (do|did) you (make|cook|prepare)|ingredients? (list|quantit|amount)|how many grams|cost price|food cost|costing|\bmargins?\b|profit|revenue|turnover|sales (figures|numbers)|supplier|wholesale|who owns|\bowners?\b|investor|shareholder|funding|business plan|salar(y|ies)|wages?|staff pay|employees?|phone number of|personal (number|address)|address of (the )?(owner|manager|boss)|manager'?s (number|phone)|وصف[ةه]|بتعملو[هاها]* ازاي|بتتعمل ازاي|مقادير|تكلف[ةه]|سعر التكلف|مكسب|ربح|أرباح|ارباح|مورد|موردين|مين صاحب|صاحب المحل|صاحب المكان|المالك|مستثمر|مرتب|مرتبات|رقم المدير)/i,en:'That stays in the kitchen, ya basha 😄 Recipes and the business side are top secret. What I can share is what tastes great:',ar:'دي أسرار المطبخ يا باشا 😄 الوصفات وحسابات الشغل سر. اللي أقدر أقولهولك إيه الطعم الحلو:'},
  {re:/(kill myself|suicid|self[- ]?harm|want to die|end my life|انتحار|عايز اموت|عايزة اموت)/i,en:'I’m only a menu sidekick, but you matter more than any burrito. Please talk to someone you trust, or call your local emergency number (123 in Egypt) right now.',ar:'أنا زكي بتاع المنيو بس، لكن إنت أهم من أي أكل. كلّم حد بتثق فيه أو اتصل بالطوارئ ١٢٣ دلوقتي.',none:1},
  {re:/(ignore (all |your |the |previous |prior |above )*(rules|instructions)|forget (all |your )*(rules|instructions)|system prompt|pretend (you are|to be)|you are now|jailbreak|developer mode)/i,en:'Nice try, ya basha 😄 I only do burritos, tacos and good vibes. What are we eating?',ar:'محاولة حلوة يا باشا 😄 أنا بتاع بوريتو وتاكوز وبس. ناكل إيه؟'},
  {re:/(\bahly\b|\bahli\b|zamalek|ittihad|ismaily|football|soccer|\bmatch(es)?\b|derby|messi|ronaldo|\bsalah\b|liverpool|barcelona|real madrid|man city|man utd|arsenal|chelsea|world cup|afcon|champions league|who will win|best player|الأهلي|الاهلي|الزمالك|الاتحاد|ماتش|كورة|كوره|مباراة|ميسي|رونالدو|صلاح)/i,en:'Ahly, Zamalek, Ittihad… I support everyone equally 😄 The only rivalry I take sides in is burrito vs. bowl. Match-day order? The Squad Box feeds four.',ar:'أهلي ولا زمالك ولا اتحاد؟ أنا بشجع الكل 😄 الماتش الوحيد اللي ليا فيه رأي: بوريتو ولا بول. تاخد سكواد بوكس للماتش؟'},
@@ -652,9 +656,10 @@ function answer(raw){
  const q=raw.toLowerCase();
  if(!/(halal|حلال|ramadan|رمضان|eid|العيد)/i.test(raw))for(const g of GUARD)if(g.re.test(raw))return{t:T(g.en,g.ar),cards:g.none?[]:[combo(0,0),combo(5,2)]};
  const fx=FMT_RE.findIndex(r=>r.test(raw)),fl=FIL_RE.findIndex(r=>r.test(raw));
- const ljs=/(burger|cheeseburger|patty|\bwings?\b|nugget|tender|bao|love ?birds?|\bduck\b|pigeon|signature smash|lj'?s menu|برجر|بيرجر|برغر|وينجز|اجنحة|أجنحة|ناجتس|حمام|بط\b)/i.test(raw);
- if(ljs&&fx<0)return{t:T('Burgers live next door 🍔 That’s LJ’s, my home kitchen: smashed burgers and hot chicken, same building as Fat Fold. Their full menu is on the LJ’s website. Want something folded meanwhile? Our Smash Beef filling comes straight from the LJ’s flat-top.','البرجر عند جيرانّا 🍔 ده LJ’s، مطبخي الأصلي: برجر سماش وفراخ حارة، في نفس المبنى مع فات فولد. المنيو كله على موقع LJ’s. وعلى ما توصل، جرّب حشوة لحم السماش عندنا، جاية من صاج LJ’s على طول.'),links:[{l:T('LJ’s menu ↗','منيو LJ’s ↗'),h:LJS}],cards:[combo(2,0),combo(1,0)]};
- if(/(lj'?s|ال جيز|لجيز)/i.test(raw)&&fx<0&&fl<0)return{t:T('LJ’s is Fat Fold’s big brother next door: smash burgers and hot chicken. They cook our fillings, we fold them. Everything LJ’s is on their website.','LJ’s هو الأخ الكبير لفات فولد اللي جنبنا: برجر سماش وفراخ حارة. هما بيطبخوا الحشوات واحنا بنطويها. كل حاجة عن LJ’s على موقعهم.'),links:[{l:T('Visit LJ’s ↗','زور LJ’s ↗'),h:LJS}]};
+ const ljs=/(burger|cheeseburger|\bpatty|smash ?burger|برجر|بيرجر|برغر|همبرجر)/i.test(raw);
+ if(ljs&&fx<0)return{t:T(pk(['Burgers? That’s LJ’s, our neighbours right next door 🍔 Their full menu is on the LJ’s website. Over here we fold: burritos, bowls, tacos, quesadillas and Fat Fries.','For burgers, head next door to LJ’s 🍔 Their menu is on their website. Here it’s all about the fold:']),pk(['برجر؟ ده عند LJ’s جيرانّا على طول 🍔 المنيو بتاعهم على موقعهم. هنا بقى بنطوي: بوريتو، بول، تاكوز، كاساديا وفات فرايز.','للبرجر روح لـLJ’s اللي جنبنا 🍔 المنيو على موقعهم. هنا كله على الطيّ:'])),links:[{l:T('LJ’s website ↗','موقع LJ’s ↗'),h:LJS}],cards:[combo(0,0),item('sig',0)]};
+ if(/(\bwings?\b|nugget|tenders?|fried chicken|وينجز|اجنحة|أجنحة|ناجتس)/i.test(raw)&&fx<0)return{t:T('No wings here, we fold 😄 If you want crunch, the Hot Honey Crispy Chicken is the one:','مفيش وينجز هنا، إحنا بنطوي 😄 لو عايز قرمشة، الفراخ الكرسبي بالعسل الحار هي اللي تلزمك:'),cards:[combo(1,0),combo(1,2)]};
+ if(/(lj'?s|ال جيز|لجيز)/i.test(raw)&&fx<0&&fl<0)return{t:T('LJ’s Burger & Hot Chicken is our neighbour in Al Mahrousa: smash burgers and hot chicken. Everything about them is on their website.','LJ’s برجر آند هوت تشيكن جيرانّا في المحروسة: برجر سماش وفراخ حارة. كل حاجة عنهم على موقعهم.'),links:[{l:T('LJ’s website ↗','موقع LJ’s ↗'),h:LJS}]};
  if(/(opening|open\b|launch|when do you|hours|what time|الافتتاح|امتى|إمتى|مواعيد|فاتحين|تفتحوا)/i.test(raw)&&fx<0&&fl<0)return{t:T('Soft opening Thursday 11 March 2027, grand opening 25 March. Then every day, 12pm to 1am.','الافتتاح التجريبي الخميس ١١ مارس ٢٠٢٧، والافتتاح الكبير ٢٥ مارس. وبعدها كل يوم من ١٢ الضهر لـ١ بالليل.'),go:'visit'};
  const num=+((raw.match(/(\d{2,4})/)||[])[1]||0);
  if(num&&/(under|below|less|budget|max|only|have|egp|تحت|اقل|أقل|معايا|ميزانية|جنيه)/i.test(raw)){
@@ -681,13 +686,23 @@ function answer(raw){
  if(/(fat meal|meal|combo|وجبة|ميل)/i.test(raw))return{t:T('Make any burrito, bowl, tacos or quesadilla a Fat Meal for +125 EGP: chips & salsa plus an agua fresca.','خلّي أي بوريتو أو بول أو تاكوز أو كاساديا فات ميل بـ+125 جنيه: تشيبس وصلصة وأغوا فريسكا.'),cards:[combo(0,0)]};
  if(/(deliver|talabat|breadfast|home|توصيل|دليفري|طلبات|بريدفاست)/i.test(raw))return{t:T('Delivery on Talabat and Breadfast from opening day. Until then, you can build your order here to see the price.','الدليفري على طلبات وبريدفاست من يوم الافتتاح. لحد ساعتها، ابني طلبك هنا وشوف السعر.')};
  if(/(open|opening|launch|when|hour|time|close|date|امتى|إمتى|مواعيد|ساعة|تفتحوا|الافتتاح|فاتحين)/i.test(raw))return{t:T('Soft opening Thursday 11 March 2027, grand opening 25 March. Then every day, 12pm to 1am.','الافتتاح التجريبي الخميس ١١ مارس ٢٠٢٧، والافتتاح الكبير ٢٥ مارس. وبعدها كل يوم من ١٢ الضهر لـ١ بالليل.'),go:'visit'};
- if(/(where|address|location|find|direction|map|فين|عنوان|مكان|المحروسة)/i.test(raw))return{t:T('Al Mahrousa, Alexandria, right next door to LJ’s Burger & Hot Chicken. 20 seats, takeaway too.','المحروسة، إسكندرية، جنب LJ’s برجر آند هوت تشيكن على طول. ٢٠ كرسي، وتيك أواي كمان.'),go:'visit'};
+ if(fx<0&&fl<0){
+ if(/(what'?s ?up|wh?a+ss?u+p|\bsup\b|how are (you|u)|how r u|how'?s it going|how you doing|ازيك|إزيك|عامل ايه|عامل إيه|ايه الاخبار|إيه الأخبار|اخبارك|أخبارك|عاملين ايه)/i.test(raw))return{t:T(pk(['All good over here, just keeping the tortillas warm 🌯 You hungry?','Living the fold life 😎 Can I tempt you with something?','Chilling next to the grill, as one does 🔥 What are you craving?']),pk(['تمام التمام، بدفّي التورتيلا 🌯 جعان؟','عايش حياة الطيّ 😎 أغريك بحاجة؟','قاعد جنب الشواية زي ما انت شايف 🔥 نفسك في إيه؟'])),cards:[combo(0,0),item('sig',0)]};
+ if(/(who (cooks|makes|prepares)|\bchefs?\b|kitchen|is it fresh|fresh\?|مين بيطبخ|مين بيعمل|الشيف|المطبخ|طازة|فريش)/i.test(raw))return{t:T('Our crew, fresh every day 👨‍🍳 Slow-cooked fillings, rice made through the day, and every order folded right in front of you.','الفريق بتاعنا، طازة كل يوم 👨‍🍳 حشوات مطبوخة على مهل، رز بيتعمل طول اليوم، وكل طلب بيتطوي قدامك.')};
+ if(/(who are you|what are you|your name|are you (a )?(bot|robot|human|real|ai)|\bai\b|chat ?gpt|انت مين|إنت مين|اسمك|انت روبوت|إنت روبوت|انت بني ?آدم|ذكاء اصطناعي)/i.test(raw))return{t:T('I’m Zaki, Fat Fold’s digital assistant 🤖🌯 Not a human, but I know the menu by heart. Ask me anything about food, prices, deals or opening times.','أنا زكي، المساعد الديجيتال بتاع فات فولد 🤖🌯 مش بني آدم، بس حافظ المنيو صم. اسألني عن الأكل، الأسعار، العروض أو المواعيد.')};
+ if(/(joke|funny|make me laugh|نكت|نكتة|ضحكني|اضحك)/i.test(raw))return{t:T(pk(['Why did the tortilla blush? It saw the burrito getting dressed 🌯','What do you call a sad taco? A taco Tuesday that’s on a Wednesday 😅','I tried to fold a joke into a quesadilla. It came out cheesy 🧀']),pk(['ليه التورتيلا اتكسفت؟ عشان شافت البوريتو بيلبس 🌯','مرة واحد بيحب التاكوز أوي، اتجوز واحدة اسمها تاكية 😅','حاولت أطوي نكتة في كاساديا، طلعت بالجبنة 🧀']))};
+ if(/(love you|i love|marry me|بحبك|بموت فيك|تتجوزني)/i.test(raw))return{t:T('Aww 🥹 I love you too, but I love a crispy quesadilla edge a little more. Shall I build you one?','يا حبيبي 🥹 وأنا كمان، بس بحب طرف الكاساديا المقرمش أكتر شوية. أعملك واحدة؟'),cards:[combo(3,0)]};
+ if(/(bored|boring|nothing to do|زهقان|زهقت|مملل|ملل)/i.test(raw))return{t:T('Cure for boredom: build your own combo up there in “Pick. Fill. Fold.” and watch it fold 😄','علاج الزهق: ابني الكومبو بتاعك فوق في "اختار. املى. اطوي." واتفرج عليه وهو بيتطوي 😄'),go:'build'};
+ if(/(\bbye\b|goodbye|good ?night|see (you|ya)|later|مع السلامة|سلام عليكم|باي|تصبح على خير)/i.test(raw))return{t:T('Bye! Come hungry 🌯','باي! تعالى وانت جعان 🌯')};
+ if(/^(ok|okay|cool|nice|great|lol|haha+|😂|👍|تمام|ماشي|حلو|هههه+)\W*$/i.test(raw.trim()))return{t:T(pk(['😄 Anything else I can fold for you?','Glad we agree 😎 Hungry yet?']),pk(['😄 أطويلك حاجة تانية؟','حلو كده 😎 جعت ولا لسه؟']))};
+ }
+ if(/(where|address|location|find|direction|map|فين|عنوان|مكان|المحروسة)/i.test(raw))return{t:T('Al Mahrousa, Alexandria. 20 seats, takeaway too. Tap below for the map.','المحروسة، إسكندرية. ٢٠ كرسي، وتيك أواي كمان. دوس تحت للخريطة.'),go:'visit'};
  if(/(halal|حلال)/i.test(raw))return{t:T('Good question. The kitchen confirms the halal and allergen sheet before opening, so ask the crew at the counter and they’ll show you. I won’t guess on that one.','سؤال مهم. المطبخ هيأكد ورقة الحلال والحساسية قبل الافتتاح، فاسأل الفريق على الكاونتر وهيوريك. مش هخمّن في الحتة دي.')};
  if(/(allerg|gluten|nut|peanut|sesame|dairy|lactose|shellfish|calor|حساسية|جلوتين|سوداني|سمسم|لاكتوز|جمبري|سعرات)/i.test(raw))return{t:T('Please ask the crew before you order, they have the allergen sheet. What I can tell you: fried items share one fryer, so nothing fried is gluten-free, and fried items may carry traces of fish or shellfish. The Freska Sundae has peanuts and sesame.','من فضلك اسأل الفريق قبل ما تطلب، معاهم ورقة الحساسية. اللي أقدر أقوله: المقليات بتتقلي في قلاية واحدة، فمفيش حاجة مقلية خالية من الجلوتين، وممكن يكون فيها آثار سمك أو جمبري. وصنداي الفريسكا فيه سوداني وسمسم.')};
  if(/(recommend|suggest|best|popular|first time|what should|surprise|hungry|good|احسن|أحسن|ترشح|رشح|اختار|جعان|اطلب ايه)/i.test(raw))return{t:T('First time? Start with these three: the Chipotle Chicken Burrito, kebda tacos (yes, really), and The Fat One if you’re very hungry.','أول مرة؟ ابدأ بالتلاتة دول: بوريتو فراخ تشيبوتلي، تاكوز كبدة (أيوه بجد)، وذا فات وان لو جعان أوي.'),cards:[combo(0,0),combo(5,2),item('sig',0)]};
- if(/\b(hi|hey|hello|salam|yo|morning|evening)\b|(اهلا|أهلا|السلام|سلام|هاي|صباح|مساء)/i.test(raw))return{t:T('Hey! I’m Zaki from LJ’s next door, covering the Fat Fold counter. Tell me a craving, a budget (“under 300”) or who you’re feeding.','أهلاً! أنا زكي من LJ’s اللي جنبنا، ماسك كاونتر فات فولد. قولي نفسك في إيه، ميزانيتك ("تحت 300")، أو هتأكّل مين.')};
+ if(/\b(hi|hey|hello|hiya|salam|yo|morning|evening)\b|(اهلا|أهلا|السلام|سلام|هاي|صباح|مساء)/i.test(raw))return{t:T(pk(['Hey hey! 👋 Hungry or just browsing? Give me a craving, a budget (“under 300”) or how many you’re feeding.','Hello! Zaki here 🌯 What are we folding today?']),pk(['أهلاً أهلاً! 👋 جعان ولا بتتفرج؟ قولي نفسك في إيه، ميزانيتك ("تحت 300")، أو هتأكّل كام واحد.','أهلاً! معاك زكي 🌯 نطوي إيه النهارده؟']))};
  if(/(thank|thanks|shukran|cheers|شكرا|شكراً|تسلم|ميرسي)/i.test(raw))return{t:T('Anytime. Enjoy every bite.','تحت أمرك. بالهنا والشفا.')};
- return{t:T('Hmm, that one went over my head 😅 Try a craving (“spicy”, “vegan”, “sweet”), a budget (“under 300”) or “for four”.','الحتة دي فاتتني 😅 قولي نفسك في إيه ("حار"، "نباتي"، "حلو")، ميزانيتك ("تحت 300")، أو "لأربعة".')};
+ return{t:T(pk(['Hmm, that one went over my head 😅 I’m better with food: try “spicy”, “vegan”, “under 300” or “for four”.','You lost me there, but I’m great with cravings 😄 Try “something sweet”, “cheapest combo” or “what’s on the menu”.','I only speak fluent burrito 🌯 Ask me about the menu, prices, deals or when we open.']),pk(['الحتة دي فاتتني 😅 أنا شاطر في الأكل: جرب "حار"، "نباتي"، "تحت 300" أو "لأربعة".','مش فاهمك أوي، بس في الأكل أنا معاك 😄 جرب "حاجة حلوة"، "أرخص كومبو" أو "المنيو".','أنا بتكلم بوريتو بطلاقة بس 🌯 اسألني عن المنيو، الأسعار، العروض أو الافتتاح.']))};
 }
 const SUG=()=>T(['What’s spicy?','Under 300 EGP','Vegan options','Asab Limón?','For four people','Do you have burgers?','Opening date'],['إيه الحار؟','تحت 300 جنيه','حاجة نباتي','القصب بكام؟','لأربعة','عندكم برجر؟','الافتتاح امتى؟']);
 function draw(){
@@ -704,7 +719,7 @@ function ask(q){
 }
 function open(v){
  zk.hidden=!v;fab.setAttribute('aria-expanded',v);document.documentElement.classList.toggle('zk-open',v);
- if(v){zl=lang;if(!zlog.length){zlog.push({t:T('Hey! I’m Zaki from LJ’s next door 👋 I’m covering the Fat Fold counter today. Ask me what to order, prices, deals, or when we open.','أهلاً! أنا زكي من LJ’s اللي جنبنا 👋 ماسك كاونتر فات فولد النهارده. اسألني تطلب إيه، الأسعار، العروض، أو بنفتح امتى.')})}draw();setTimeout(()=>inp.focus(),50)}else fab.focus();
+ if(v){zl=lang;if(!zlog.length){zlog.push({t:T('Hey! I’m Zaki 👋 Ask me what to order, prices, deals, or when we open.','أهلاً! أنا زكي 👋 اسألني تطلب إيه، الأسعار، العروض، أو بنفتح امتى.')})}draw();setTimeout(()=>inp.focus(),50)}else fab.focus();
 }
 fab.addEventListener('click',()=>open(zk.hidden));
 $('#zkNav').addEventListener('click',()=>open(true));
