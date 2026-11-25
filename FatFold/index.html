@@ -637,7 +637,7 @@ const AR=s=>/[؀-ۿ]/.test(s);
 const egp=n=>T(n.toLocaleString('en-US')+' EGP',n.toLocaleString('en-US')+' جنيه');
 const combo=(f,x)=>({n:T(`${FILLS[f].en} ${FORMATS[x].en}`,`${FORMATS[x].ar} ${FILLS[f].ar}`),p:FILLS[f].p[x],build:[x,f]});
 const item=(sec,i)=>{const it=SECTIONS.find(s=>s.id===sec).items[i];return{n:T(it[0],it[1]),p:it[2],tab:sec}};
-const pk=a=>a[Math.floor(Math.random()*a.length)];
+const PKM={};const pk=(a,seq)=>{const k=a[0];let i=PKM[k];i=i==null?(seq?0:Math.floor(Math.random()*a.length)):(i+1)%a.length;PKM[k]=i;return a[i]};
 const GUARD=[
  {re:/(recipe|secret sauce|how (do|did) you (make|cook|prepare)|ingredients? (list|quantit|amount)|how many grams|cost price|food cost|costing|\bmargins?\b|profit|revenue|turnover|sales (figures|numbers)|supplier|wholesale|who owns|\bowners?\b|investor|shareholder|funding|business plan|salar(y|ies)|wages?|staff pay|employees?|phone number of|personal (number|address)|address of (the )?(owner|manager|boss)|manager'?s (number|phone)|وصف[ةه]|بتعملو[هاها]* ازاي|بتتعمل ازاي|مقادير|تكلف[ةه]|سعر التكلف|مكسب|ربح|أرباح|ارباح|مورد|موردين|مين صاحب|صاحب المحل|صاحب المكان|المالك|مستثمر|مرتب|مرتبات|رقم المدير)/i,en:'That stays in the kitchen, ya basha 😄 Recipes and the business side are top secret. What I can share is what tastes great:',ar:'دي أسرار المطبخ يا باشا 😄 الوصفات وحسابات الشغل سر. اللي أقدر أقولهولك إيه الطعم الحلو:'},
  {re:/(kill myself|suicid|self[- ]?harm|want to die|end my life|انتحار|عايز اموت|عايزة اموت)/i,en:'I’m only a menu sidekick, but you matter more than any burrito. Please talk to someone you trust, or call your local emergency number (123 in Egypt) right now.',ar:'أنا زكي بتاع المنيو بس، لكن إنت أهم من أي أكل. كلّم حد بتثق فيه أو اتصل بالطوارئ ١٢٣ دلوقتي.',none:1},
@@ -691,7 +691,7 @@ function answer(raw){
  if(/(who (cooks|makes|prepares)|\bchefs?\b|kitchen|is it fresh|fresh\?|مين بيطبخ|مين بيعمل|الشيف|المطبخ|طازة|فريش)/i.test(raw))return{t:T('Our crew, fresh every day 👨‍🍳 Slow-cooked fillings, rice made through the day, and every order folded right in front of you.','الفريق بتاعنا، طازة كل يوم 👨‍🍳 حشوات مطبوخة على مهل، رز بيتعمل طول اليوم، وكل طلب بيتطوي قدامك.')};
  if(/(who are you|what are you|your name|are you (a )?(bot|robot|human|real|ai)|\bai\b|chat ?gpt|انت مين|إنت مين|اسمك|انت روبوت|إنت روبوت|انت بني ?آدم|ذكاء اصطناعي)/i.test(raw))return{t:T('I’m Zaki, Fat Fold’s digital assistant 🤖🌯 Not a human, but I know the menu by heart. Ask me anything about food, prices, deals or opening times.','أنا زكي، المساعد الديجيتال بتاع فات فولد 🤖🌯 مش بني آدم، بس حافظ المنيو صم. اسألني عن الأكل، الأسعار، العروض أو المواعيد.')};
  if(/(joke|funny|make me laugh|نكت|نكتة|ضحكني|اضحك)/i.test(raw))return{t:T(pk(['Why did the tortilla blush? It saw the burrito getting dressed 🌯','What do you call a sad taco? A taco Tuesday that’s on a Wednesday 😅','I tried to fold a joke into a quesadilla. It came out cheesy 🧀']),pk(['ليه التورتيلا اتكسفت؟ عشان شافت البوريتو بيلبس 🌯','مرة واحد بيحب التاكوز أوي، اتجوز واحدة اسمها تاكية 😅','حاولت أطوي نكتة في كاساديا، طلعت بالجبنة 🧀']))};
- if(/(love you|i love|marry me|بحبك|بموت فيك|تتجوزني)/i.test(raw))return{t:T('Aww 🥹 I love you too, but I love a crispy quesadilla edge a little more. Shall I build you one?','يا حبيبي 🥹 وأنا كمان، بس بحب طرف الكاساديا المقرمش أكتر شوية. أعملك واحدة؟'),cards:[combo(3,0)]};
+ if(/(love you|i love|luv u|marry me|بحبك|بموت فيك|تتجوزني)/i.test(raw))return{t:T(pk(['Aww 🥹 I love you too, but I love a crispy quesadilla edge a little more. Shall I build you one?','Careful, I’m a chatbot and I blush in pixels 😳 Let’s seal it with a burrito.','Love is love 💛 But have you met the Beef Barbacoa? Slow-cooked, just like real romance.','Okay okay, I heard you the first time 🙈 Feelings noted. Order noted?'],1),pk(['يا حبيبي 🥹 وأنا كمان، بس بحب طرف الكاساديا المقرمش أكتر شوية. أعملك واحدة؟','براحة عليّ، أنا شات بوت وبتكسف بالبيكسل 😳 نختمها ببوريتو.','الحب حلو 💛 بس جربت البارباكوا؟ مطبوخة على مهل زي الحب الحقيقي.','خلاص خلاص سمعتك 🙈 المشاعر وصلت. والطلب؟'],1)),cards:[combo(3,0)]};
  if(/(bored|boring|nothing to do|زهقان|زهقت|مملل|ملل)/i.test(raw))return{t:T('Cure for boredom: build your own combo up there in “Pick. Fill. Fold.” and watch it fold 😄','علاج الزهق: ابني الكومبو بتاعك فوق في "اختار. املى. اطوي." واتفرج عليه وهو بيتطوي 😄'),go:'build'};
  if(/(\bbye\b|goodbye|good ?night|see (you|ya)|later|مع السلامة|سلام عليكم|باي|تصبح على خير)/i.test(raw))return{t:T('Bye! Come hungry 🌯','باي! تعالى وانت جعان 🌯')};
  if(/^(ok|okay|cool|nice|great|lol|haha+|😂|👍|تمام|ماشي|حلو|هههه+)\W*$/i.test(raw.trim()))return{t:T(pk(['😄 Anything else I can fold for you?','Glad we agree 😎 Hungry yet?']),pk(['😄 أطويلك حاجة تانية؟','حلو كده 😎 جعت ولا لسه؟']))};
@@ -712,9 +712,13 @@ function draw(){
  inp.placeholder=lang==='ar'?'اسأل زكي…':'Ask Zaki…';
  sug.innerHTML=sg.map(s=>`<button type="button" data-ask="${esc(s)}">${esc(s)}</button>`).join('');
 }
+let lastQ='',rptN=0;
 function ask(q){
+ const nq=q.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();rptN=nq&&nq===lastQ?rptN+1:0;lastQ=nq;
  zlog.push({me:1,t:q});zlog.push({typing:1});draw();
- const r=answer(q);r.zl=zl;
+ let r=answer(q);
+ if(rptN>=3&&!r.cards&&!r.links)r={t:T(pk(['Déjà vu 😄 You’ve said that a few times now. Want me to just pick something for you?','Same message, same Zaki 😅 Let me make it easy: start with one of these.','I’m starting to think you mean it 😄 How about we talk food?']),pk(['ديجافو 😄 قلتها كذا مرة. أختارلك أنا؟','نفس الرسالة ونفس زكي 😅 خليني أسهّلها: ابدأ بواحدة من دول.','شكلك بتتكلم جد 😄 طب ما نتكلم في الأكل؟'])),cards:[combo(0,0),combo(5,2)]};
+ r.zl=zl;
  setTimeout(()=>{zlog.pop();zlog.push(r);draw()},RM?0:500+Math.random()*400);
 }
 function open(v){
