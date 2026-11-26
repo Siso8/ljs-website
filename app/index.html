@@ -833,6 +833,9 @@ body{background:#1F1F1F}
 .scrim{background:rgba(31,31,31,.45)!important}
 /* errors in brand orange */
 .danger,.err{color:var(--orange)!important}
+
+/* BUILD14_ZAKI: Zaki back in the top bar */
+#semTop{display:grid!important;position:relative;color:var(--orange)}
 </style>
 
 </head>
@@ -4462,14 +4465,25 @@ function drawQR(c, text) {
 /* ---------- SEMSEM (assistant) ---------- */
 const chatLog = [];
 const SUGG = ['What’s spicy?', 'Meal under 400 EGP', 'Something for two', 'Plant-based options', 'What’s new?', 'Opening hours', 'My points'];
+const ZAKI_OPEN = () => {
+  const when = S.isEvening ? 'tonight' : 'today', nm = S.signedIn && S.name ? ' ' + esc(S.name.trim().split(/\s+/)[0]) : '';
+  return pick([
+    { t: `Yalla${nm}! Don’t know what to order? Let me help. Chicken or burger ${when}?`, c: ['Chicken', 'Burger', 'Something spicy', 'Surprise me'] },
+    { t: `Hey${nm}, I’m Zaki 👋 What are we craving ${when}? Chicken or burger?`, c: ['Chicken', 'Burger', 'Something sweet', 'Surprise me'] },
+    { t: `Hey${nm}! Got a budget in mind for ${when}? Tell me and I’ll build the meal.`, c: ['Under 300 EGP', 'Under 400 EGP', 'Under 600 EGP', 'No budget, surprise me'] },
+    { t: `Hey${nm}, I’m Zaki 👋 Who are we feeding ${when}? Just you, the two of you, or the whole crew?`, c: ['Just me', 'For two', 'For the crew', 'Surprise me'] },
+  ]);
+};
 function pageSemsem() {
   openPage(`<div class="chat"><div class="pnav"><button class="tbtn" data-back aria-label="Back">${I('back')}</button>
       <div class="semhead" style="flex:1"><span class="av">${I('seed', 'ic-s')}</span><span><b>Zaki</b><small><i class="dot-live"></i>Here 24/7</small></span></div><span style="width:40px"></span></div>
     <div class="chatlog" id="chatlog"></div>
-    <div class="sugg" id="sugg">${SUGG.map(s => `<button data-ask="${s}">${s}</button>`).join('')}</div>
+    <div class="sugg" id="sugg"></div>
     <form class="composer" id="composer"><input id="chatIn" placeholder="Ask Zaki anything about LJ’s" autocomplete="off" enterkeyhint="send"><button type="submit" aria-label="Send">${I('send')}</button></form></div>`);
   $('#page').style.overflow = 'hidden';
-  if (!chatLog.length) botSay(`Hey${S.signedIn ? ' ' + S.name : ''}, I’m Zaki, LJ’s sidekick. Tell me what you’re craving, your budget, or who you’re feeding, and I’ll build it.`, []);
+  const op = !chatLog.length ? ZAKI_OPEN() : null;
+  $('#sugg').innerHTML = (op ? op.c : SUGG).map(s => `<button data-ask="${s}">${s}</button>`).join('');
+  if (op) { $('#sugg').dataset.open = '1'; botSay(op.t, []); }
   else drawChat();
   $('#composer').onsubmit = e => { e.preventDefault(); const v = $('#chatIn').value.trim(); if (v) { ask(v); $('#chatIn').value = ''; } };
 }
@@ -4496,6 +4510,7 @@ async function semServer(q, local, hint) {
   } catch (e) { return null; } finally { clearTimeout(to); }
 }
 async function ask(q) {
+  const sg = $('#sugg'); if (sg && sg.dataset.open) { delete sg.dataset.open; sg.innerHTML = SUGG.map(s => `<button data-ask="${s}">${s}</button>`).join(''); }
   chatLog.push({ me: 1, t: esc(q) }); chatLog.push({ typing: 1 }); drawChat();
   const t0 = Date.now(), loc = answer(q);
   const how = loc.guard ? 'guard' : loc.local === 'none' ? 'none' : 'local';
@@ -4550,11 +4565,45 @@ const SEM_OPEN = ['Yalla! ', 'Tamam! ', 'Mashy! ', 'Ahlan! '];
 const SEM_CLOSE = [' Bel hana wel shefa!', ' Trust me on this one.'];
 function semFlavour(r) {
   if (!r || !r.items || !r.items.length || r.guard || Math.random() > 0.3) return r;
-  return Object.assign({}, r, { t: (Math.random() < 0.5 ? pick(SEM_OPEN) : '') + r.t + (Math.random() < 0.5 ? pick(SEM_CLOSE) : '') });
+  return Object.assign({}, r, { t: (Math.random() < 0.5 ? pick(SEM_OPEN) : '') + r.t + (!/:\s*$/.test(r.t) && Math.random() < 0.5 ? pick(SEM_CLOSE) : '') });
 }
+/* BUILD14_SMALLTALK: everyday chat, answered warmly, always back to food */
+const SEM_SMALL = [
+  { re: /^(how ?(are|r) ?(you|u|ya)|how('?s| is) (it going|everything|life|your day)|how are things|what'?s up|wh?at'?s good|wassup|sup|how do you do)\b/,
+    t: ['Hungry, as always 😄 How about you? Tell me what you’re craving and I’ll sort it.', 'All good on the flat-top, thanks for asking! Smashing patties all day. What are we eating?', 'Living my best life between the fries and the sauces 😄 And you? Hungry?'] },
+  { re: /(\bi (love|luv) (you|u|ya|zaki)\b|^love (you|u|ya)\b|\bily\b|marry me|be my (girlfriend|boyfriend|valentine|wife|husband)|you'?re (so )?(cute|sweet|handsome|beautiful|the best)|\bi like you\b)/,
+    t: ['Aww, I love you too ❤️ But I love you even more with a Signature Smash in your hands:', 'Careful, I’m just a sidekick, not a date 😄 But I can set up the perfect date for two:'],
+    items: [['signature', 'lfries'], ['lbbox']] },
+  { re: /(who (are|r) (you|u)|what (are|r) (you|u)\b|your name|are (you|u) (a )?(bot|robot|real|human|ai|person|chatgpt)|is this a (bot|robot|person))/,
+    t: ['I’m Zaki, LJ’s sidekick: a bot with very good taste 😄 I know the menu, the prices, your points and your order. Ask me anything food.'] },
+  { re: /(what can (you|u) do|how (does|do) (this|you) work|^help\b|can you help|what do you do)/,
+    t: ['I can pick a meal for your budget (“under 400”), find something spicy, sweet or for two, check your points and tell you where your order is. Try me!'] },
+  { re: /(joke|make me laugh|something funny|tell me something)/,
+    t: ['Why did the burger go to the gym? To get better buns 😄', 'What do you call a chicken that tells jokes? A comedi-hen 🐔 I’ll see myself out.', 'I told the fries a secret. Now they won’t stop spreading it… like our sauce 😄'] },
+  { re: /(\bbored\b|\bsad\b|\btired\b|bad day|stress|\bupset\b|\blonely\b|\bdown\b today|not (feeling )?(good|great|well))/,
+    t: ['Sounds like a comfort-food day. This always helps 🧡', 'Sending you a virtual hug and a very real Signature Smash 🧡'],
+    items: [['signature', 'lfries'], ['signature', 'wings']] },
+  { re: /(how old are (you|u)|your age|where are (you|u) from|where do you come from)/,
+    t: ['Born in London, raised in Alexandria, opening 14 January. So… brand new 😄'] },
+  { re: /(your fav(ou?rite)?|what do (you|u) (like|recommend most)|what would (you|u) (eat|order|get))/,
+    t: ['Signature Smash, every single time. Two patties, smashed to order. Trust me:'], items: [['signature', 'lfries', 'm1']] },
+  { re: /^(bye|goodbye|good ?night|see (you|ya|u)|later|cya|gtg|got to go)\b/,
+    t: ['Bye for now! I’ll be right here when the craving hits 🍔', 'See you soon! Your Signature Smash will be waiting 😄'] },
+  { re: /^(ok(ay)?|k|cool|nice|great|good|fine|awesome|perfect|lol|haha+|hehe|wow|yes|yeah|yep|sure|no|nope|nah|hmm+|👍|😂|😄|❤️|🔥)[ !.]*$/,
+    t: ['Love that 😄 So… what are we eating? Try “something spicy” or “meal under 400”.', 'Tell me a craving (“chicken”), a budget (“under 350”) or who you’re feeding (“for two”), and I’ll pick for you.'] },
+];
+function semSmall(q) {
+  const s = q.trim().replace(/[?!.,]+$/g, '');
+  for (const m of SEM_SMALL) if (m.re.test(s)) { const i = Math.floor(Math.random() * m.t.length); const it = m.items ? m.items[Math.min(i, m.items.length - 1)] : []; return { t: m.t[i], items: (it || []).filter(id => ITEMS[id]), guard: 'small' }; }
+  return null;
+}
+const SEM_DUNNO = ['I didn’t quite catch that 😅 I’m best at food: try “something spicy”, “meal under 400” or “something for two”.',
+  'That one’s off my menu 😄 Ask me about burgers, chicken, prices, your points or your order.',
+  'Hmm, not sure about that one. But if you tell me what you’re craving, I’ll find it in seconds 🍔'];
 function answer(raw) {
   const q = raw.toLowerCase(), by = tag => Object.values(ITEMS).filter(i => (i.t || []).includes(tag)).map(i => i.id);
   const g = semGuard(raw); if (g) return g;
+  const sm = semSmall(q); if (sm) return sm;
   if (/[؀-ۿ]/.test(raw)) return { t: 'زكي لسه بيتعلم عربي 😄 اكتبلي بالإنجليزي دلوقتي وأنا أظبطك. Ask me in English for now and I’ll sort you out.', local: 'none' };
   const num = (q.match(/(\d{2,4})/) || [])[1];
   if (num && /(under|below|less|budget|egp|max|only|have)/.test(q)) {
@@ -4582,10 +4631,11 @@ function answer(raw) {
   if (/halal/.test(q)) return { t: 'Yes, everything we serve is halal.' };
   if (/(allerg|gluten|nut|dairy|lactose|calor)/.test(q)) return { t: 'Allergen and calorie details are coming from the kitchen before launch. Until then, please ask the team at the counter. I won’t guess with your health.' };
   if (/(pay|card|cash|apple pay|wallet|instapay|valu|meeza)/.test(q)) return { t: 'You can pay with card, Apple Pay, Google Pay, Meeza, mobile wallets, InstaPay or ValU, or pay at the counter.' };
-  if (/(hungry|recommend|suggest|best|popular|what should|surprise|good)/.test(q)) return { t: 'First time? Start with the crowd favourites. The Signature Smash is the one everyone talks about:', items: ['signature', 'wings', 'duck'] };
+  if (/(just me|for me|myself|solo|alone|only me)/.test(q)) return { t: 'Table for one, coming up 😄 A full meal (burger, fries and a drink) is the move. My picks:', items: ['signature', 'buffalo', 'ljsmash'], meal: 1 };
+  if (/(hungry|recommend|suggest|best|popular|what should|surprise|good|choose|decide|don.?t know|no idea|not sure|help me)/.test(q)) return { t: 'First time? Start with the crowd favourites. The Signature Smash is the one everyone talks about:', items: ['signature', 'wings', 'duck'] };
   if (/\b(hi|hey|hello|salam|yo|morning|evening)\b/.test(q)) return { t: `Hey${S.signedIn ? ' ' + S.name : ''}! What are we eating? Try “meal under 400” or “something spicy”.` };
   if (/(thank|thanks|shukran|cheers)/.test(q)) return { t: 'Anytime. Enjoy every bite.' };
-  return { local: 'none', t: 'Hmm, that one went over my head 😅 Tell me your budget (“under 350”), a craving (“spicy”, “chicken”, “sweet”) or who you’re feeding (“for two”) and I’ll sort you out.' };
+  return { local: 'none', t: pick(SEM_DUNNO) };
 }
 
 function goCat(id) {
@@ -4888,7 +4938,7 @@ function playSound(k) {
   a.play().catch(() => { const once = () => { a.play().catch(() => {}); off(); }, off = () => document.removeEventListener('pointerdown', once, true); document.addEventListener('pointerdown', once, true); setTimeout(off, 2500); });
 }
 /* ---------- splash: LJ’s sound + logo, then "Hello El Ekbal" on the very first open, then Home ---------- */
-const GREET = { en: 'Hello El Ekbal', ar: 'أهلاً بالإقبال' };
+const GREET = { en: 'Hello El Ekbal', ar: 'هلا بالإقبال' };
 function startSplash() {
   const sp = $('#splash'), first = !store.get('greeted', 0);
   S.introAt = Date.now(); sess.set('introAt', S.introAt);
