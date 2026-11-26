@@ -776,6 +776,63 @@ h1,h2,h3,.mb b,.ofc b,.clubban b,.popup h2,.popup .bx b,.card b{text-wrap:balanc
 .nextrw .bar{display:block;height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:6px}
 .nextrw .bar i{display:block;height:100%;border-radius:99px;background:var(--orange)}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* BUILD12_BRAND: brand colours only */
+:root{--orange:#F04E23;--orange-2:#F04E23;--cream:#F4EBD9;--char:#1F1F1F;
+  --bg:#F4EBD9;--surface:#FFFFFF;--surface-2:#EBE0CA;--ink:#1F1F1F;--mute:#69665F;--ok:#F04E23}
+.evening{--bg:#1F1F1F;--surface:#2A2A2A;--surface-2:#353535;--ink:#F4EBD9;--mute:#A39D93}
+body{background:#1F1F1F}
+.intro{background:#1F1F1F}
+.evening .tile{background:#2A2A2A}
+/* orange surfaces: flat Spicy Orange */
+.hero,.splash,.wipe,.slide.orange,.bigt.o,.clubban,.mb.mem{background:var(--orange)!important}
+/* dark surfaces: flat Smoke Charcoal */
+.bigt.k,.mb.pts,.mb.cal,.evening .live{background:var(--char)!important}
+.bigt.k .bi{color:var(--orange)}
+.bigt .bi{background:rgba(244,235,217,.2)}
+/* students: no more navy */
+.mb.stu{background:var(--cream)!important;color:var(--char);border-color:var(--char)!important}
+.mb.stu .mk2{color:var(--orange);opacity:1}
+.evening .mb.stu{border-color:var(--cream)!important}
+.card.stu .jic{background:var(--orange);color:#fff}
+.stuhero,.evening .stuhero{color:var(--orange)}
+/* Join banner coin */
+.clubban .coin{background:var(--cream);color:var(--char);border:3px dashed rgba(31,31,31,.35)}
+/* founding member + Black cards: no gold */
+.founder{background:var(--char)!important;color:var(--cream)!important}
+.founder b{color:var(--orange)}
+.card.founder.blackc{background:var(--char)!important;color:var(--cream)!important;box-shadow:inset 0 0 0 1.5px rgba(244,235,217,.45)}
+.card.founder.blackc b{color:var(--cream)}.card.founder.blackc small{color:rgba(244,235,217,.75)}
+/* Club card: one flat brand colour per tier, no rainbow foil */
+.member{background:var(--char)!important;color:var(--cream)}
+.member .bar{background:rgba(244,235,217,.22)}
+.member .bar i{background:var(--cream)}
+.member .shimmer{background:none!important;-webkit-background-clip:border-box;background-clip:border-box;color:inherit!important;animation:none}
+.member.holo .sheen{background:radial-gradient(circle at var(--hx,30%) var(--hy,20%),rgba(255,255,255,.35),transparent 42%)!important;mix-blend-mode:soft-light;animation:none}
+.member.t-smash{background:var(--cream)!important;color:var(--char);box-shadow:inset 0 0 0 2px var(--char)}
+.member.t-smash .mk{color:var(--orange)}
+.member.t-smash .bar{background:rgba(31,31,31,.14)}.member.t-smash .bar i{background:var(--orange)}
+.member.t-smash .scanbtn{background:var(--char);color:var(--cream)}
+.member.t-hot{background:var(--orange)!important;color:#fff}
+.member.t-hot .mk{color:var(--cream)}
+.member.t-gold .tier{color:var(--orange)!important}
+.member.t-gold .bar i{background:var(--orange)}
+.member.black{background:var(--char)!important;color:var(--cream)!important;box-shadow:inset 0 0 0 1.5px rgba(244,235,217,.5)}
+.member.black .tier{color:var(--cream)!important}
+.rung .sw{box-shadow:inset 0 0 0 1.5px rgba(31,31,31,.25)}
+/* map: brand colours on the pins and the heat legend */
+.mapwrap{background:var(--cream)}.evening .mapwrap{background:#2A2A2A}
+.mlwrap{background:var(--cream)}
+.mlhen.crew{color:var(--char)}
+.mlhen.at{color:var(--char)}
+.mlme{background:var(--char);box-shadow:0 0 0 6px rgba(31,31,31,.2)}
+.evening .mlme{background:var(--cream);border-color:var(--char);box-shadow:0 0 0 6px rgba(244,235,217,.25)}
+.legend .lg-heat{background:linear-gradient(90deg,#F4EBD9,#F04E23,#1F1F1F)}
+/* links and dimmed backgrounds */
+.shell a:not([class]){color:var(--orange)}
+.scrim{background:rgba(31,31,31,.45)!important}
+/* errors in brand orange */
+.danger,.err{color:var(--orange)!important}
 </style>
 
 </head>
@@ -3310,9 +3367,9 @@ const PREMIUM_DRINKS = ['t1', 't2', 't3', 't4', 't5'];
    A reward costs its menu price ÷ 5 in points, so the give-back is 5% / 6.25% / 7.5% (always under 8%).
    Two balances: tier points (1 per EGP 100 spent, never boosted) only go up; points to spend go down when you claim. */ /* BUILD7_APPLIED */
 const TIERS = [
-  { n: 'SMASH', min: 0, rate: 1, back: '5% back', perks: ['1 point for every EGP 100', '20% off your first order over EGP 300', 'Free Signature Smash in your birthday week'], bg: 'linear-gradient(135deg,#E9D7B5,#C9A877)' },
-  { n: 'HOT', min: 15, rate: 1.25, back: '6.25% back', perks: ['1.25 points for every EGP 100', 'A free dip once a week', 'Free Signature Smash in your birthday week'], bg: 'linear-gradient(135deg,#7a2a10,#F04E23)' },
-  { n: 'GOLD', min: 50, rate: 1.5, back: '7.5% back', perks: ['1.5 points for every EGP 100', 'A free dip with every order', 'Free Signature Smash in your birthday week', 'Early access to limited drops'], bg: 'linear-gradient(135deg,#8C6A1C,#E8C15A)' },
+  { n: 'SMASH', min: 0, rate: 1, back: '5% back', perks: ['1 point for every EGP 100', '20% off your first order over EGP 300', 'Free Signature Smash in your birthday week'], bg: '#F4EBD9' },
+  { n: 'HOT', min: 15, rate: 1.25, back: '6.25% back', perks: ['1.25 points for every EGP 100', 'A free dip once a week', 'Free Signature Smash in your birthday week'], bg: '#F04E23' },
+  { n: 'GOLD', min: 50, rate: 1.5, back: '7.5% back', perks: ['1.5 points for every EGP 100', 'A free dip with every order', 'Free Signature Smash in your birthday week', 'Early access to limited drops'], bg: '#1F1F1F' },
 ];
 const tierIx = () => S.club && S.signedIn ? Math.min(2, S.club.tier) : TIERS.reduce((k, t, i) => (S.tierPts >= t.min ? i : k), 0);
 const isBlack = () => !!(S.signedIn && S.club && S.club.black);
@@ -3382,7 +3439,7 @@ function applyTheme() {
   const ev = (man ? man.look : autoLook()) === 'evening';
   const changed = S.isEvening !== undefined && S.isEvening !== ev;
   app.classList.toggle('evening', ev); S.isEvening = ev;
-  const tc = document.querySelector('meta[name=theme-color]'); if (tc) tc.content = ev ? '#141211' : '#F7F2EA';
+  const tc = document.querySelector('meta[name=theme-color]'); if (tc) tc.content = ev ? '#1F1F1F' : '#F4EBD9';
   const tb = $('#lookBtn'); if (tb) { if (changed) { tb.classList.remove('turn'); void tb.offsetWidth; tb.classList.add('turn'); } tb.innerHTML = `<span class="lk">${I(ev ? 'moon' : 'sun')}</span><span class="lt">${ev ? 'Night' : 'Day'}</span>`; tb.setAttribute('aria-label', ev ? 'Night look. Tap for the day look' : 'Day look. Tap for the night look'); }
   return changed;
 }
@@ -3780,8 +3837,29 @@ async function mountMap() {
   }
 }
 /* a food brand's map: no country names or borders (Egypt stays in view: the map can't leave it) */
+function mlBrand() {   // BUILD12_BRAND: cream / charcoal map, no blue water or green parks
+  if (!ML || !ML.isStyleLoaded()) return;
+  const key = (ML.__st || '') + (S.isEvening ? 'e' : 'd'); if (ML.__brand === key) return; ML.__brand = key;
+  const C = S.isEvening ? { land: '#1F1F1F', water: '#2A2A2A', green: '#242424', road: '#3A3A3A', casing: '#2A2A2A', bld: '#303030', text: '#F4EBD9', halo: '#1F1F1F' }
+                        : { land: '#F4EBD9', water: '#E2D5BA', green: '#ECE1CB', road: '#FFFFFF', casing: '#E2D5BA', bld: '#E6D9BF', text: '#1F1F1F', halo: '#F4EBD9' };
+  const set = (id, k, v) => { try { ML.setPaintProperty(id, k, v); } catch (e) {} };
+  ML.getStyle().layers.forEach(l => {
+    const id = l.id;
+    if (l.type === 'background') set(id, 'background-color', C.land);
+    else if (l.type === 'fill') {
+      const c = /water|ocean|sea|lake/i.test(id) ? C.water : /building/i.test(id) ? C.bld : /park|wood|grass|forest|landcover|landuse|natural|cemetery|pitch|golf|sand|beach|farm|scrub|wetland|ice|aeroway|zoo/i.test(id) ? C.green : null;
+      if (c) set(id, 'fill-color', c);
+    } else if (l.type === 'fill-extrusion') set(id, 'fill-extrusion-color', C.bld);
+    else if (l.type === 'line') {
+      if (/water|river|stream|canal|drain/i.test(id)) set(id, 'line-color', C.water);
+      else if (/casing|outline/i.test(id)) set(id, 'line-color', C.casing);
+      else if (/road|highway|street|bridge|tunnel|path|track|motorway|trunk|primary|secondary|tertiary|minor|service|link|pedestrian|rail|transit|aeroway/i.test(id)) set(id, 'line-color', C.road);
+    } else if (l.type === 'symbol') { set(id, 'text-color', C.text); set(id, 'text-halo-color', C.halo); }
+  });
+}
 function mlTidy() {
   if (!ML || !ML.getStyle()) return;
+  mlBrand();
   ML.getStyle().layers.forEach(l => { if (/country|boundary|admin/i.test(l.id) && ML.getLayoutProperty(l.id, 'visibility') !== 'none') { try { ML.setLayoutProperty(l.id, 'visibility', 'none'); } catch (e) {} } });
 }
 function mlHeat() {
@@ -3790,7 +3868,7 @@ function mlHeat() {
   if (ML.getSource('heat')) { ML.getSource('heat').setData(data); return; }
   ML.addSource('heat', { type: 'geojson', data });
   ML.addLayer({ id: 'heat', type: 'heatmap', source: 'heat', paint: { 'heatmap-weight': ['min', 1, ['/', ['get', 'n'], 6]], 'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 5, 18, 15, 60],
-    'heatmap-color': ['interpolate', ['linear'], ['heatmap-density'], 0, 'rgba(255,214,70,0)', .3, 'rgba(255,183,3,.55)', .6, 'rgba(240,78,35,.75)', 1, 'rgba(200,30,20,.9)'], 'heatmap-opacity': .85 } });
+    'heatmap-color': ['interpolate', ['linear'], ['heatmap-density'], 0, 'rgba(244,235,217,0)', .3, 'rgba(240,78,35,.45)', .6, 'rgba(240,78,35,.8)', 1, 'rgba(31,31,31,.85)'], 'heatmap-opacity': .85 } });
 }
 function mlDraw() {
   if (!ML) return;
@@ -3826,7 +3904,7 @@ function crewMember(i) {
 /* ---------- CLUB ---------- */
 function memberCard() {
   const t = tier(), n = nextTier(), blk = isBlack(), c = S.club;
-  return `<div class="member holo ${blk ? 'black' : ''}" id="mcard" style="--tierbg:${t.bg}"><i class="sheen"></i><span class="mk">${LJ(52)}</span><div class="t">${blk ? 'LJ’S BLACK' : 'LJ’S CLUB' + (S.founding ? ' · FOUNDING MEMBER' : '')}</div><div class="tier shimmer">${blk ? 'BLACK' : t.n}</div>
+  return `<div class="member holo ${blk ? 'black' : 't-' + t.n.toLowerCase()}" id="mcard" style="--tierbg:${t.bg}"><i class="sheen"></i><span class="mk">${LJ(52)}</span><div class="t">${blk ? 'LJ’S BLACK' : 'LJ’S CLUB' + (S.founding ? ' · FOUNDING MEMBER' : '')}</div><div class="tier shimmer">${blk ? 'BLACK' : t.n}</div>
       <div class="row2"><span>${fmt(S.points)} pts to spend</span><span>${n ? `${egp(c && c.next ? c.next.toGo : (n.min - S.tierPts) * 100)} to ${title(n.n)}` : blk ? '2 pts / EGP 100' : 'Top tier'}</span></div>
       <div class="bar"><i style="width:${blk ? 100 : tierPct()}%"></i></div>
       <div class="foot"><span>${esc((S.name || 'LJ’s member').toUpperCase())} · ${memberTag()}</span><button class="scanbtn" data-scan>${I('qr', 'ic-s')}Scan at counter</button></div></div>`;
@@ -3984,7 +4062,7 @@ function renderMe() {
   if ($('#linkRow')) $('#linkRow').onclick = linkSheet;
   if ($('#offersRow')) $('#offersRow').onclick = async () => { const on = !S.offers, r = await api('/me', { name: S.name || 'Member', offers: on }); if (!r.ok) { toast(errText(r.error), 'close'); return; } S.offers = !!r.user.offers; saveAccount(); renderMe(); toast(S.offers ? 'LJ’s offers on' : 'LJ’s offers off', 'bell'); };
   if ($('#delAcct')) $('#delAcct').onclick = () => {
-    openSheet(`<h3>Delete your account?</h3><p>Your name, number, points and order history are removed. Offers you already used stay used. This can’t be undone.</p><button class="btn full" id="delYes" style="background:#D23A18;color:#fff">Delete my account</button><button class="linkbtn" data-close>Keep my account</button>`);
+    openSheet(`<h3>Delete your account?</h3><p>Your name, number, points and order history are removed. Offers you already used stay used. This can’t be undone.</p><button class="btn full" id="delYes" style="background:var(--orange);color:#fff">Delete my account</button><button class="linkbtn" data-close>Keep my account</button>`);
     $('#delYes').onclick = async () => { const r = await api('/me/delete', {}); if (!r.ok) { toast(errText(r.error), 'close'); return; } try { localStorage.removeItem('lj.' + acctKey()); } catch (e) {} closeSheet(); signOut(); toast('Account deleted'); };
   };
 }
@@ -4719,7 +4797,7 @@ function celebrate() {
   playSound('club');
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const box = document.createElement('div'); box.className = 'confetti'; box.setAttribute('aria-hidden', 'true');
-  const cols = ['#F04E23', '#FF8A5B', '#F4EBD9', '#1F1F1F', '#FFB089'];
+  const cols = ['#F04E23', '#F4EBD9', '#1F1F1F', '#FFFFFF', '#F04E23'];
   box.innerHTML = Array.from({ length: 70 }, (_, i) => `<i style="left:${(Math.random() * 100).toFixed(1)}%;background:${cols[i % cols.length]};animation-delay:${(Math.random() * .5).toFixed(2)}s;animation-duration:${(1.8 + Math.random() * 1.4).toFixed(2)}s;--dx:${(Math.random() * 120 - 60).toFixed(0)}px;--r:${(Math.random() * 720).toFixed(0)}deg"></i>`).join('');
   app.appendChild(box); setTimeout(() => box.remove(), 3800);
 }
